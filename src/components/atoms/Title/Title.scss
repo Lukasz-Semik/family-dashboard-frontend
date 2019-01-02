@@ -1,3 +1,19 @@
 .title {
-  color: $test-color;
+  color: $main-blue;
+
+  &.is-orange {
+    color: $main-orange;
+  }
+
+  &.is-small {
+    font-size: 1.3rem;
+  }
+
+  &.is-uppercased {
+    text-transform: uppercase;
+  }
+
+  &.is-centered {
+    text-align: center;
+  }
 }

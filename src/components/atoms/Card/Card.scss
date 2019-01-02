@@ -1,0 +1,11 @@
+.card {
+  max-width: 100%;
+  background-color: $white;
+  border-radius: 5px;
+  box-shadow: $main-shadow;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: $blue-shadow;
+  }
+}
