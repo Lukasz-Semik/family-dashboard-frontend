@@ -23,8 +23,6 @@
         hasCenteredText
       />
     </FormRow>
-
-    <button>Sign In</button>
   </Form>
 </template>
 

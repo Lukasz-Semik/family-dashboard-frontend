@@ -1,16 +1,22 @@
 <template>
   <form @submit.prevent="handleSubmit" :class="[$style.form]">
     <slot></slot>
+
+    <Button type="submit" translationPath="forms.shared.submit"/>
   </form>
 </template>
 
 <script>
+import Button from '@/components/atoms/Button/Button.vue';
+
 export default {
-  name: 'Form',
   methods: {
     handleSubmit(event) {
       this.$emit('onSubmit', event);
     },
+  },
+  components: {
+    Button,
   },
 };
 </script>
