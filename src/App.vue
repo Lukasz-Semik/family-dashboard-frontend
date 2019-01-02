@@ -1,5 +1,5 @@
 <template>
-  <Title></Title>
+  <Title translationPath="general.title"></Title>
 </template>
 
 <script>
