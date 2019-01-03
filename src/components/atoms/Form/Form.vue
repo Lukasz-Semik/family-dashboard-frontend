@@ -2,7 +2,9 @@
   <form @submit.prevent="handleSubmit" :class="[$style.form]">
     <slot></slot>
 
-    <Button type="submit" translationPath="forms.shared.submit"/>
+    <div :class="[$style['button-container']]">
+      <Button type="submit" translationPath="forms.shared.submit" hasBlueTheme/>
+    </div>
   </form>
 </template>
 
