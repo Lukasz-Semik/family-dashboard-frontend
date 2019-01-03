@@ -11,7 +11,7 @@
     </div>
 
     <div :class="[$style['card-wrapper']]">
-      <Card>
+      <Card isHoverable>
         <div :class="[$style['form-wrapper']]">
           <SignInForm/>
         </div>

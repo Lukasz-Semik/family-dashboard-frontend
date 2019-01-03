@@ -1,5 +1,5 @@
 <template>
-  <h1 :class="[$style.title, classNames]">{{ translatedText || $t(translationPath) }}</h1>
+  <h1 :class="[$style['title'], classNames]">{{ translatedText || $t(translationPath) }}</h1>
 </template>
 
 <script>
