@@ -18,7 +18,9 @@
       @mouseleave="isHovered = false"
     >
     <div :class="[$style['input-border']]"/>
-    <div :class="[$style['input-border-focused'], innerStateClassNames]"/>
+    <div
+      :class="[$style['input-border'], $style['input-border-focus-indicator'], innerStateClassNames]"
+    />
   </div>
 </template>
 
