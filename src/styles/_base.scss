@@ -12,3 +12,14 @@ html {
 body {
   background-color: $main-green;
 }
+
+a {
+  text-decoration: none;
+  color: $black;
+
+  &:hover,
+  &:focus,
+  &:visited {
+    color: $black;
+  }
+}

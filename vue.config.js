@@ -5,6 +5,7 @@ module.exports = {
         data: `
           @import "~@/styles/_colors";
           @import "~@/styles/_base";
+          @import "~@/styles/_mixins";
           `,
       },
     },

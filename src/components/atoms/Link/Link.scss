@@ -1,0 +1,25 @@
+.link {
+  position: relative;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $dark-green;
+  transition: color 0.3s ease-in-out;
+
+  &::after {
+    @include focus-hover-separator-base($dark-green);
+  }
+
+  &:visited {
+    color: $dark-green;
+  }
+
+  &:hover,
+  &:focus {
+    color: $medium-gray;
+
+    &::after {
+      background-color: $medium-gray;
+      transform: scaleX(1);
+    }
+  }
+}

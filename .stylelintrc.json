@@ -2,6 +2,7 @@
   "extends": ["stylelint-config-recommended"],
   "plugins": ["stylelint-scss", "stylelint-order"],
   "rules": {
+    "at-rule-no-unknown": null,
     "order/order": ["declarations", "custom-properties", "dollar-variables", "rules"],
 
     "order/properties-order": [
