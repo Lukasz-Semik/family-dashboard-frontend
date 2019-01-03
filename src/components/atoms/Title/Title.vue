@@ -1,5 +1,5 @@
 <template>
-  <h1 :class="[$style.title]">{{ translatedText || $t(translationPath) }}</h1>
+  <h1 :class="[$style.title, classNames]">{{ translatedText || $t(translationPath) }}</h1>
 </template>
 
 <script>
@@ -12,6 +12,34 @@ export default {
     translationPath: {
       type: String,
       default: '',
+    },
+    isOrange: {
+      type: Boolean,
+      default: false,
+    },
+    isSmall: {
+      type: Boolean,
+      default: false,
+    },
+    isUppercased: {
+      type: Boolean,
+      default: false,
+    },
+    isCentered: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    classNames() {
+      const { $style, isOrange, isSmall, isUppercased, isCentered } = this;
+
+      return {
+        [$style['is-orange']]: isOrange,
+        [$style['is-small']]: isSmall,
+        [$style['is-uppercased']]: isUppercased,
+        [$style['is-centered']]: isCentered,
+      };
     },
   },
 };
