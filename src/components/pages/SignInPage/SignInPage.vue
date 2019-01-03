@@ -1,34 +1,32 @@
 <template>
   <div>
-    <div :class="[$style['title-wrapper']]">
-      <Title translationPath="general.appTitle"></Title>
-    </div>
-
-    <div :class="[$style['card-wrapper']]">
+    <HomeCardWrapper>
       <Card>
         <Title translationPath="general.signIn" isOrange isSmall isUppercased isCentered></Title>
       </Card>
-    </div>
+    </HomeCardWrapper>
 
-    <div :class="[$style['card-wrapper']]">
+    <HomeCardWrapper>
       <Card isHoverable>
         <div :class="[$style['form-wrapper']]">
           <SignInForm/>
         </div>
       </Card>
-    </div>
+    </HomeCardWrapper>
   </div>
 </template>
 
 <script>
-import Title from '@/components/atoms/Title/Title.vue';
+import HomeCardWrapper from '@/components/atoms/Wrappers/HomeCardWrapper/HomeCardWrapper.vue';
 import Card from '@/components/atoms/Card/Card.vue';
+import Title from '@/components/atoms/Title/Title.vue';
 import SignInForm from '@/components/organisms/SignInForm/SignInForm';
 
 export default {
   components: {
-    Title,
+    HomeCardWrapper,
     Card,
+    Title,
     SignInForm,
   },
 };
