@@ -22,4 +22,12 @@
       transform: scaleX(1);
     }
   }
+
+  &.is-active {
+    color: $dark-gray;
+
+    &::after {
+      background-color: $medium-gray;
+    }
+  }
 }

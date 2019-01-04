@@ -10,3 +10,13 @@
   max-width: 100%;
   margin: 0 auto 1rem;
 }
+
+.toggle-view-leave-active,
+.toggle-view-enter-active {
+  transition: opacity 1s ease;
+}
+
+.toggle-view-leave,
+.toggle-view-enter {
+  opacity: 0;
+}

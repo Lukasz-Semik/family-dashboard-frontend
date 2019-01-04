@@ -9,7 +9,15 @@
       <Link :to="signUpRoute" translationPath="general.signUp"/>
     </div>
 
-    <router-view></router-view>
+    <transition
+      :leave-active-class="$style['toggle-view-leave-active']"
+      :leave-class="$style['toggle-view-leave']"
+      :enter-active-class="$style['toggle-view-enter-active']"
+      :enter-class="$style['toggle-view-enter']"
+      mode="out-in"
+    >
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -33,3 +41,4 @@ export default {
 </script>
 
 <style lang="scss" module src="./HomePage.scss" />
+

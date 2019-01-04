@@ -1,5 +1,9 @@
 <template>
-  <router-link :to="to" :class="[$style['link']]">{{ translatedText || $t(translationPath)}}</router-link>
+  <router-link
+    :to="to"
+    :class="[$style['link']]"
+    :exact-active-class="$style['is-active']"
+  >{{ translatedText || $t(translationPath)}}</router-link>
 </template>
 
 <script>
