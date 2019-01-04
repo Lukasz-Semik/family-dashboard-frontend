@@ -1,13 +1,17 @@
 <template>
-  <Title translationPath="general.testSignUpPage"></Title>
+  <UserSign titleTranslationPath="general.signUp">
+    <div :class="[$style['form-wrapper']]">SIGN UP PLACEHOLDER</div>
+  </UserSign>
 </template>
 
 <script>
-import Title from '@/components/atoms/Title/Title.vue';
+import UserSign from '@/components/molecules/UserSign/UserSign.vue';
 
 export default {
   components: {
-    Title,
+    UserSign,
   },
 };
 </script>
+
+<style lang="scss" module src="./SignUpPage.scss" />

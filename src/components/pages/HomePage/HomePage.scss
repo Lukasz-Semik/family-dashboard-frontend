@@ -1,0 +1,22 @@
+.title-wrapper {
+  margin: 0.3rem 0 2rem 1rem;
+}
+
+.links-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60rem;
+  max-width: 100%;
+  margin: 0 auto 1rem;
+}
+
+.toggle-view-leave-active,
+.toggle-view-enter-active {
+  transition: opacity 1s ease;
+}
+
+.toggle-view-leave,
+.toggle-view-enter {
+  opacity: 0;
+}

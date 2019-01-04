@@ -1,6 +1,6 @@
 <template>
-  <Form @onSubmit="onSubmit">
-    <FormRow>
+  <form @submit.prevent="handleSubmit" :class="[$style['form']]">
+    <div :class="[$style['form-row']]">
       <Input
         name="email"
         type="email"
@@ -10,9 +10,9 @@
         @onChange="onChange"
         hasCenteredText
       />
-    </FormRow>
+    </div>
 
-    <FormRow>
+    <div :class="[$style['form-row']]">
       <Input
         name="password"
         type="password"
@@ -22,14 +22,17 @@
         @onChange="onChange"
         hasCenteredText
       />
-    </FormRow>
-  </Form>
+    </div>
+
+    <div :class="[$style['button-container']]">
+      <Button type="submit" translationPath="forms.shared.submit" hasBlueTheme/>
+    </div>
+  </form>
 </template>
 
 <script>
 import Input from '@/components/atoms/Input/Input.vue';
-import Form from '@/components/atoms/Form/Form.vue';
-import FormRow from '@/components/atoms/Form/FormRow.vue';
+import Button from '@/components/atoms/Button/Button.vue';
 
 export default {
   data() {
@@ -39,7 +42,7 @@ export default {
     };
   },
   methods: {
-    onSubmit(event) {
+    handleSubmit(event) {
       console.log(event);
       console.log(this.email);
     },
@@ -51,8 +54,9 @@ export default {
   },
   components: {
     Input,
-    Form,
-    FormRow,
+    Button,
   },
 };
 </script>
+
+<style lang="scss" module src="./SignInForm.scss" />
