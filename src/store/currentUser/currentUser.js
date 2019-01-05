@@ -1,8 +1,12 @@
+import { getIsLoggedIn } from './names';
+
 const state = {
-  vuexTest: 'vuex-test',
+  isLoggedIn: true,
 };
 
-const getters = {};
+const getters = {
+  [getIsLoggedIn]: state => state.isLoggedIn,
+};
 
 const mutations = {};
 
