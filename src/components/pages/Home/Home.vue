@@ -40,5 +40,5 @@ export default {
 };
 </script>
 
-<style lang="scss" module src="./HomePage.scss" />
+<style lang="scss" module src="./Home.scss" />
 
