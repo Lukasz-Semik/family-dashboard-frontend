@@ -1,5 +1,5 @@
-export const getIsSignedIn = 'getIsSignedIn';
+export const isSignedIn = 'isSignedIn';
 
 export default {
-  [getIsSignedIn]: state => state.isLoggedIn,
+  [isSignedIn]: state => state.isSignedIn,
 };

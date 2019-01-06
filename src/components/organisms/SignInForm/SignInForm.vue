@@ -47,8 +47,6 @@ export default {
   },
   methods: {
     async handleSubmit(event) {
-      // console.log(event);
-      // console.log(this.email);
       const { email, password } = this;
 
       const { isAuthorized } = await this.signIn({ email, password });

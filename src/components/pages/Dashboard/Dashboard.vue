@@ -6,14 +6,14 @@
 import { mapGetters } from 'vuex';
 
 import { SIGN_IN_ROUTE } from '@/constants/routesNames';
-import { getIsSignedIn } from '@/store/currentUser/getters';
+import { isSignedIn } from '@/store/currentUser/getters';
 
 export default {
   created() {
-    if (!this.isLoggedIn) this.$router.push({ name: SIGN_IN_ROUTE });
+    if (!this.isSignedIn) this.$router.push({ name: SIGN_IN_ROUTE });
   },
   computed: mapGetters({
-    isLoggedIn: getIsSignedIn,
+    isSignedIn,
   }),
 };
 </script>
