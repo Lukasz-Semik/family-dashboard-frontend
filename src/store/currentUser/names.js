@@ -1,1 +1,2 @@
-export const getIsLoggedIn = 'getIsLoggedIn';
+// Mutations
+export const setIsSignedIn = 'setIsSignedIn';

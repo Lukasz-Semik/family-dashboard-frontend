@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import currentUser from './currentUser/currentUser';
+import currentUser from './currentUser';
 
 Vue.use(Vuex);
 
