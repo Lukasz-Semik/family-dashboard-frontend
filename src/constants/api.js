@@ -1,3 +1,6 @@
 const API = '/api';
 
-export const API_SIGN_IN = `${API}/user/sign-in`;
+// USER API
+const API_USER = `${API}/user`;
+export const API_SIGN_IN = `${API_USER}/sign-in`;
+export const API_CHECK_IS_SIGNED_IN = `${API_USER}/is-authorized`;
