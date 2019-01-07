@@ -58,5 +58,7 @@ export default {
       commit(setIsSignedIn, { isAuthorized: false });
       return false;
     }
+
+    return false;
   },
 };

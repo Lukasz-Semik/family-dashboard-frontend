@@ -1,14 +1,17 @@
 <template>
-  <form @submit.prevent="handleSubmit" :class="[$style['form']]">
+  <form
+    :class="[$style['form']]"
+    @submit.prevent="handleSubmit"
+  >
     <div :class="[$style['form-row']]">
       <Input
         name="email"
         type="email"
-        labelTranslationPath="forms.shared.email.label"
-        placeholderTranslationPath="forms.shared.email.placeholder"
+        label-translation-path="forms.shared.email.label"
+        placeholder-translation-path="forms.shared.email.placeholder"
         :value="email"
+        has-centered-text
         @onChange="onChange"
-        hasCenteredText
       />
     </div>
 
@@ -16,16 +19,20 @@
       <Input
         name="password"
         type="password"
-        labelTranslationPath="forms.shared.password.label"
-        placeholderTranslationPath="forms.shared.password.placeholder"
+        label-translation-path="forms.shared.password.label"
+        placeholder-translation-path="forms.shared.password.placeholder"
         :value="password"
+        has-centered-text
         @onChange="onChange"
-        hasCenteredText
       />
     </div>
 
     <div :class="[$style['button-container']]">
-      <Button type="submit" translationPath="forms.shared.submit" hasBlueTheme/>
+      <Button
+        type="submit"
+        translation-path="forms.shared.submit"
+        has-blue-theme
+      />
     </div>
   </form>
 </template>
@@ -39,6 +46,10 @@ import Input from '@/components/atoms/Input/Input.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 
 export default {
+  components: {
+    Input,
+    Button,
+  },
   data() {
     return {
       email: '',
@@ -46,7 +57,7 @@ export default {
     };
   },
   methods: {
-    async handleSubmit(event) {
+    async handleSubmit() {
       const { email, password } = this;
 
       const { isAuthorized } = await this.signIn({ email, password });
@@ -61,10 +72,6 @@ export default {
     ...mapActions({
       signIn,
     }),
-  },
-  components: {
-    Input,
-    Button,
   },
 };
 </script>

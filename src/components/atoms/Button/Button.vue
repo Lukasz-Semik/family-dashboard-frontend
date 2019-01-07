@@ -3,7 +3,9 @@
     :type="type"
     :class="[$style.button, classNames]"
     :onClick="handleClick"
-  >{{ translatedText || $t(translationPath) }}</button>
+  >
+    {{ translatedText || $t(translationPath) }}
+  </button>
 </template>
 
 <script>
@@ -26,11 +28,6 @@ export default {
       default: false,
     },
   },
-  methods: {
-    handleClick(event) {
-      this.$emit('onClick', event);
-    },
-  },
   computed: {
     classNames() {
       const { $style, hasBlueTheme } = this;
@@ -38,6 +35,11 @@ export default {
       return {
         [$style['has-blue-theme']]: hasBlueTheme,
       };
+    },
+  },
+  methods: {
+    handleClick(event) {
+      this.$emit('onClick', event);
     },
   },
 };

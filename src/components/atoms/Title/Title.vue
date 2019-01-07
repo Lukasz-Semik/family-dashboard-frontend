@@ -1,5 +1,7 @@
 <template>
-  <h1 :class="[$style['title'], classNames]">{{ translatedText || $t(translationPath) }}</h1>
+  <h1 :class="[$style['title'], classNames]">
+    {{ translatedText || $t(translationPath) }}
+  </h1>
 </template>
 
 <script>
@@ -32,7 +34,9 @@ export default {
   },
   computed: {
     classNames() {
-      const { $style, isOrange, isSmall, isUppercased, isCentered } = this;
+      const {
+        $style, isOrange, isSmall, isUppercased, isCentered,
+      } = this;
 
       return {
         [$style['is-orange']]: isOrange,

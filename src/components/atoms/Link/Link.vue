@@ -1,19 +1,15 @@
 <template>
-  <router-link
+  <RouterLink
     :to="to"
     :class="[$style['link']]"
     :exact-active-class="$style['is-active']"
-  >{{ translatedText || $t(translationPath)}}</router-link>
+  >
+    {{ translatedText || $t(translationPath) }}
+  </RouterLink>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      isFocused: false,
-      isHovered: false,
-    };
-  },
   props: {
     to: {
       type: Object,
@@ -27,6 +23,12 @@ export default {
       type: String,
       default: '',
     },
+  },
+  data() {
+    return {
+      isFocused: false,
+      isHovered: false,
+    };
   },
 };
 </script>

@@ -2,13 +2,19 @@
   <div>
     <HomeCardWrapper>
       <Card>
-        <Title :translationPath="titleTranslationPath" isOrange isSmall isUppercased isCentered></Title>
+        <Title
+          :translation-path="titleTranslationPath"
+          is-orange
+          is-small
+          is-uppercased
+          is-centered
+        />
       </Card>
     </HomeCardWrapper>
 
     <HomeCardWrapper>
-      <Card isHoverable>
-        <slot></slot>
+      <Card is-hoverable>
+        <slot />
       </Card>
     </HomeCardWrapper>
   </div>

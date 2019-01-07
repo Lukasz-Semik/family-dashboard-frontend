@@ -1,7 +1,7 @@
 <template>
-  <UserSign titleTranslationPath="general.signIn">
+  <UserSign title-translation-path="general.signIn">
     <div :class="[$style['form-wrapper']]">
-      <SignInForm/>
+      <SignInForm />
     </div>
   </UserSign>
 </template>
@@ -13,20 +13,20 @@ import { DASHBOARD_ROUTE } from '@/constants/routesNames';
 import { checkIsSignedIn } from '@/store/currentUser/actions';
 
 import UserSign from '@/components/molecules/UserSign/UserSign.vue';
-import SignInForm from '@/components/organisms/SignInForm/SignInForm';
+import SignInForm from '@/components/organisms/SignInForm/SignInForm.vue';
 
 export default {
-  methods: {
-    ...mapActions({ checkIsSignedIn }),
+  components: {
+    UserSign,
+    SignInForm,
   },
   async created() {
     if (await this.checkIsSignedIn()) {
       this.$router.push({ name: DASHBOARD_ROUTE });
     }
   },
-  components: {
-    UserSign,
-    SignInForm,
+  methods: {
+    ...mapActions({ checkIsSignedIn }),
   },
 };
 </script>

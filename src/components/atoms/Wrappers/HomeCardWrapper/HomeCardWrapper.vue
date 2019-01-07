@@ -1,6 +1,6 @@
 <template>
   <div :class="[$style['home-card-wrapper']]">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
