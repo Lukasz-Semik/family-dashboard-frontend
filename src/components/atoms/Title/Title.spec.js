@@ -43,7 +43,6 @@ describe('<Title>', () => {
       },
     });
 
-    // expect(wrapper.is('h1')).toBe(true);
     expect(wrapper.classes()).toContain('is-orange');
     expect(wrapper.text()).toBe('some-title');
   });

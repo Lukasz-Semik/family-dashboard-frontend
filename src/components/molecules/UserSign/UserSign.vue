@@ -4,6 +4,7 @@
       <Card>
         <Title
           tag="h2"
+          data-test="user-sign-title"
           :translationPath="titleTranslationPath"
           isOrange
           isSmall
