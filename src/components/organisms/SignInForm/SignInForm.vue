@@ -1,22 +1,17 @@
 <template>
-  <form
-    :class="[$style['form']]"
-    @submit.prevent="handleSubmit"
-  >
-    <EmailPasswordGroup
-      :on-change="onChange"
-      :email="email"
-      :password="password"
-    />
+  <div :class="[$style['form-wrapper']]">
+    <FormGroup @onSubmit="handleSubmit">
+      <template slot="fields-group">
+        <EmailPasswordGroup :on-change="onChange" :email="email" :password="password"/>
+      </template>
 
-    <div :class="[$style['button-container']]">
-      <ButtonElement
-        type="submit"
-        translation-path="forms.shared.submit"
-        has-blue-theme
-      />
-    </div>
-  </form>
+      <template slot="button-group">
+        <div :class="[$style['button-container']]">
+          <ButtonElement type="submit" translation-path="forms.shared.submit" has-blue-theme/>
+        </div>
+      </template>
+    </FormGroup>
+  </div>
 </template>
 
 <script>
@@ -24,11 +19,13 @@ import { mapActions } from 'vuex';
 
 import { DASHBOARD_ROUTE } from '@/constants/routesNames';
 import { signIn } from '@/store/currentUser/actions';
+import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import EmailPasswordGroup from '@/components/molecules/EmailPasswordGroup/EmailPasswordGroup.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 
 export default {
   components: {
+    FormGroup,
     EmailPasswordGroup,
     ButtonElement,
   },

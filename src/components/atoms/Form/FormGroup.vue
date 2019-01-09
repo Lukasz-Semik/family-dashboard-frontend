@@ -1,12 +1,17 @@
 <template>
-  <form
-    :class="[$style['form']]"
-    @submit.prevent="onSubmit"
-  >
-    <slot name="form-group" />
+  <form @submit.prevent="onSubmit">
+    <slot name="fields-group"/>
 
-    <slot name="button-group" />
+    <slot name="button-group"/>
   </form>
 </template>
 
-<style lang="scss" module src="./Form.scss" />
+<script>
+export default {
+  methods: {
+    onSubmit(event) {
+      this.$emit('onSubmit', event);
+    },
+  },
+};
+</script>
