@@ -2,7 +2,7 @@
   <div :class="[$style['form-wrapper']]">
     <FormGroup @onSubmit="handleSubmit">
       <template slot="fields-group">
-        <EmailPasswordGroup :on-change="onChange" :email="email" :password="password"/>
+        <UserSignFieldsGroup :fields="this.fields" :on-change="onChange"/>
       </template>
 
       <template slot="button-group">
@@ -18,15 +18,16 @@
 import { mapActions } from 'vuex';
 
 import { DASHBOARD_ROUTE } from '@/constants/routesNames';
+import { emailPasswordFields } from '@/constants/forms';
 import { signIn } from '@/store/currentUser/actions';
 import FormGroup from '@/components/atoms/Form/FormGroup.vue';
-import EmailPasswordGroup from '@/components/molecules/EmailPasswordGroup/EmailPasswordGroup.vue';
+import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 
 export default {
   components: {
     FormGroup,
-    EmailPasswordGroup,
+    UserSignFieldsGroup,
     ButtonElement,
   },
   data() {
@@ -34,6 +35,14 @@ export default {
       email: '',
       password: '',
     };
+  },
+  computed: {
+    fields() {
+      return emailPasswordFields.map(field => ({
+        ...field,
+        value: this[name],
+      }));
+    },
   },
   methods: {
     async handleSubmit() {

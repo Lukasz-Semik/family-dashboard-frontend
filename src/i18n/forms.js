@@ -1,6 +1,8 @@
 export default {
   shared: {
     submit: 'Submit',
+  },
+  userSign: {
     email: {
       label: 'E-mail',
       placeholder: 'E.g. john@gmail.com',

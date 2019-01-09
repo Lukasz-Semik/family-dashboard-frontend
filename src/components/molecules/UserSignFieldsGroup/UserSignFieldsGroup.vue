@@ -1,0 +1,45 @@
+<template>
+  <div>
+    <FormRow v-for="field in fields" :key="field.name">
+      <InputElement
+        :name="field.name"
+        :type="field.type || 'text'"
+        :label-translation-path="field.labelTranslationPath"
+        :placeholder-translation-path="field.placeholderTranslationPath"
+        :value="field.value || ''"
+        has-centered-text
+        @onChange="onChange"
+      />
+    </FormRow>
+  </div>
+</template>
+
+<script>
+import InputElement from '@/components/atoms/InputElement/InputElement.vue';
+import FormRow from '@/components/atoms/Form/FormRow.vue';
+
+export default {
+  components: {
+    InputElement,
+    FormRow,
+  },
+  props: {
+    email: {
+      type: String,
+      default: '',
+    },
+    password: {
+      type: String,
+      default: '',
+    },
+    fields: {
+      type: Array,
+      default: [],
+    },
+    onChange: {
+      type: Function,
+      default: null,
+    },
+  },
+};
+</script>
