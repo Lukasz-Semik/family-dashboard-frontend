@@ -10,10 +10,10 @@ describe('<Button/>', () => {
       },
     });
 
-    const button = wrapper.find('[data-test="button"]');
-    expect(button.text()).toBe('test-text');
+    const $button = wrapper.find('[data-test="button"]');
+    expect($button.text()).toBe('test-text');
 
-    button.trigger('click');
+    $button.trigger('click');
     expect(wrapper.emitted().onClick).toBeTruthy();
   });
 

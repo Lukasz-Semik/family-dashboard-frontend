@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home/> should render properly 1`] = `
+<div>
+  <div class="title-wrapper">
+    <title-stub tag="h1" translatedtext="" translationpath="general.appTitle"></title-stub>
+  </div>
+  <div class="links-wrapper">
+    <link-stub to="[object Object]" translatedtext="" translationpath="general.signIn"></link-stub>
+    <link-stub to="[object Object]" translatedtext="" translationpath="general.signUp"></link-stub>
+  </div>
+  <router-view-stub name="default" leave-active-class="toggle-view-leave-active" leave-class="toggle-view-leave" enter-active-class="toggle-view-enter-active" enter-class="toggle-view-enter" mode="out-in"></router-view-stub>
+</div>
+`;

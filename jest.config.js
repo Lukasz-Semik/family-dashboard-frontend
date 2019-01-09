@@ -18,5 +18,12 @@ module.exports = {
     },
   },
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.{js,vue}', '!src/main.js'],
+  collectCoverageFrom: [
+    'src/**/*.{js,vue}',
+    '!src/main.js',
+    '!src/constants/*.js',
+    '!src/i18n/*.js',
+    '!src/routes/*.js',
+    '!src/api/*.js',
+  ],
 };
