@@ -1,8 +1,9 @@
 <template>
   <button
+    data-test="button"
     :type="type"
     :class="[$style.button, classNames]"
-    :onClick="handleClick"
+    @click="handleClick"
   >{{ translatedText || $t(translationPath) }}</button>
 </template>
 
