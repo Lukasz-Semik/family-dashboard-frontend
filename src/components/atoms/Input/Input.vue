@@ -1,6 +1,7 @@
 <template>
   <div :class="[$style['input-wrapper']]">
     <label
+      data-test="label"
       :for="name"
       :class="[$style['label'], innerStateClassNames]"
     >
@@ -8,6 +9,7 @@
     </label>
     <input
       :id="name"
+      data-test="input"
       :class="[$style['input'], inputClassNames]"
       :name="name"
       :value="value"

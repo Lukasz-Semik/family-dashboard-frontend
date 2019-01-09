@@ -20,4 +20,16 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
   },
+  overrides: [
+    {
+      files: ['**/*.spec.js'],
+      globals: {
+        mount: true,
+        shallowMount: true,
+        describe: true,
+        it: true,
+        expect: true,
+      },
+    },
+  ],
 };

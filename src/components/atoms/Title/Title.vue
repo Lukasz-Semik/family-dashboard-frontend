@@ -1,12 +1,19 @@
 <template>
-  <h1 :class="[$style['title'], classNames]">
+  <Component
+    :is="tag"
+    :class="[$style['title'], classNames]"
+  >
     {{ translatedText || $t(translationPath) }}
-  </h1>
+  </Component>
 </template>
 
 <script>
 export default {
   props: {
+    tag: {
+      type: String,
+      default: 'h1',
+    },
     translatedText: {
       type: String,
       default: '',

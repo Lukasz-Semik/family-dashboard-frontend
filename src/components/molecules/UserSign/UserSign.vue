@@ -3,6 +3,8 @@
     <HomeCardWrapper>
       <Card>
         <Title
+          tag="h2"
+          data-test="user-sign-title"
           :translation-path="titleTranslationPath"
           is-orange
           is-small
