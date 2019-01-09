@@ -1,18 +1,12 @@
 <template>
   <div>
     <div :class="[$style['title-wrapper']]">
-      <Title translation-path="general.appTitle" />
+      <TitleElement translation-path="general.appTitle"/>
     </div>
 
     <div :class="[$style['links-wrapper']]">
-      <Link
-        :to="signInRoute"
-        translation-path="general.signIn"
-      />
-      <Link
-        :to="signUpRoute"
-        translation-path="general.signUp"
-      />
+      <Link :to="signInRoute" translation-path="general.signIn"/>
+      <Link :to="signUpRoute" translation-path="general.signUp"/>
     </div>
 
     <Transition
@@ -22,19 +16,19 @@
       :enter-class="$style['toggle-view-enter']"
       mode="out-in"
     >
-      <RouterView />
+      <RouterView/>
     </Transition>
   </div>
 </template>
 
 <script>
-import Title from '@/components/atoms/Title/Title.vue';
+import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 import Link from '@/components/atoms/Link/Link.vue';
 import { SIGN_IN_ROUTE, SIGN_UP_ROUTE } from '@/constants/routesNames';
 
 export default {
   components: {
-    Title,
+    TitleElement,
     Link,
   },
   data() {
@@ -46,4 +40,4 @@ export default {
 };
 </script>
 
-<style lang="scss" module src="./Home.scss" />
+<style lang="scss" module src="./HomeElement.scss" />

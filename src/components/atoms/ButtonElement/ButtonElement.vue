@@ -4,9 +4,7 @@
     :type="type"
     :class="[$style.button, classNames]"
     @click="handleClick"
-  >
-    {{ translatedText || $t(translationPath) }}
-  </button>
+  >{{ translatedText || $t(translationPath) }}</button>
 </template>
 
 <script>
@@ -46,4 +44,4 @@ export default {
 };
 </script>
 
-<style lang="scss" module src="./Button.scss" />
+<style lang="scss" module src="./ButtonElement.scss" />

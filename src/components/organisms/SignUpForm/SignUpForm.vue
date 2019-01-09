@@ -25,6 +25,7 @@ export default {
     return {
       email: '',
       password: '',
+      currentStepIndex: 0,
     };
   },
   methods: {
@@ -47,4 +48,4 @@ export default {
 };
 </script>
 
-<style lang="scss" module src="./SignInForm.scss" />
+<style lang="scss" module src="./SignUpForm.scss" />

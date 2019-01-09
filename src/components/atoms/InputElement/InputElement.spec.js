@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
 
-import Input from './Input.vue';
+import InputElement from './InputElement.vue';
 
-describe('<Input/>', () => {
+describe('<InputElement/>', () => {
   it('should render correctly with translated props', () => {
-    const wrapper = shallowMount(Input, {
+    const wrapper = shallowMount(InputElement, {
       propsData: {
         name: 'test-name',
         value: 'test-value',
@@ -29,7 +29,7 @@ describe('<Input/>', () => {
   });
 
   it('should render correctly with translation paths as props', () => {
-    const wrapper = shallowMount(Input, {
+    const wrapper = shallowMount(InputElement, {
       propsData: {
         name: 'test-name',
         value: 'test-value',
@@ -57,7 +57,7 @@ describe('<Input/>', () => {
   });
 
   it('should handle on input event properly', () => {
-    const wrapper = shallowMount(Input, {
+    const wrapper = shallowMount(InputElement, {
       propsData: {
         name: 'test-name',
         value: 'test-value',

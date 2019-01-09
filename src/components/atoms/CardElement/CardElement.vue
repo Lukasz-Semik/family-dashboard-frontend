@@ -1,6 +1,6 @@
 <template>
   <div :class="[$style['card'], classNames]">
-    <slot />
+    <slot/>
   </div>
 </template>
 
@@ -25,4 +25,4 @@ export default {
 </script>
 
 
-<style lang="scss" module src="./Card.scss" />
+<style lang="scss" module src="./CardElement.scss" />

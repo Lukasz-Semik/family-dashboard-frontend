@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Home/> should render properly 1`] = `
+exports[`<HomeElement/> should render properly 1`] = `
 <div>
   <div class="title-wrapper">
     <title-stub tag="h1" translatedtext="" translationpath="general.appTitle"></title-stub>
