@@ -1,8 +1,11 @@
 <template>
-  <form :class="[$style['form']]" @submit.prevent="onSubmit">
-    <slot name="form-group"></slot>
+  <form
+    :class="[$style['form']]"
+    @submit.prevent="onSubmit"
+  >
+    <slot name="form-group" />
 
-    <slot name="button-group"></slot>
+    <slot name="button-group" />
   </form>
 </template>
 

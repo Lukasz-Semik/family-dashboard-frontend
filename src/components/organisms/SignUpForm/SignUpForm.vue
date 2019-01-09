@@ -1,9 +1,20 @@
 <template>
-  <form :class="[$style['form']]" @submit.prevent="handleSubmit">
-    <EmailPasswordGroup :onChange="onChange" :email="email" :password="password"/>
+  <form
+    :class="[$style['form']]"
+    @submit.prevent="handleSubmit"
+  >
+    <EmailPasswordGroup
+      :on-change="onChange"
+      :email="email"
+      :password="password"
+    />
 
     <div :class="[$style['button-container']]">
-      <ButtonElement type="submit" translation-path="forms.shared.submit" has-blue-theme/>
+      <ButtonElement
+        type="submit"
+        translation-path="forms.shared.submit"
+        has-blue-theme
+      />
     </div>
   </form>
 </template>

@@ -1,12 +1,18 @@
 <template>
   <div>
     <div :class="[$style['title-wrapper']]">
-      <TitleElement translation-path="general.appTitle"/>
+      <TitleElement translation-path="general.appTitle" />
     </div>
 
     <div :class="[$style['links-wrapper']]">
-      <Link :to="signInRoute" translation-path="general.signIn"/>
-      <Link :to="signUpRoute" translation-path="general.signUp"/>
+      <Link
+        :to="signInRoute"
+        translation-path="general.signIn"
+      />
+      <Link
+        :to="signUpRoute"
+        translation-path="general.signUp"
+      />
     </div>
 
     <Transition
@@ -16,7 +22,7 @@
       :enter-class="$style['toggle-view-enter']"
       mode="out-in"
     >
-      <RouterView/>
+      <RouterView />
     </Transition>
   </div>
 </template>

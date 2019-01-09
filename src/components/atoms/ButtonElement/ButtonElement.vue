@@ -4,7 +4,9 @@
     :type="type"
     :class="[$style.button, classNames]"
     @click="handleClick"
-  >{{ translatedText || $t(translationPath) }}</button>
+  >
+    {{ translatedText || $t(translationPath) }}
+  </button>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div :class="[$style['card'], classNames]">
-    <slot/>
+    <slot />
   </div>
 </template>
 

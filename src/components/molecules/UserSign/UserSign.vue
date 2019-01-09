@@ -16,7 +16,7 @@
 
     <HomeCardWrapper>
       <CardElement is-hoverable>
-        <slot/>
+        <slot />
       </CardElement>
     </HomeCardWrapper>
   </div>
