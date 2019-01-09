@@ -1,6 +1,8 @@
 <template>
-  <UserSign titleTranslationPath="general.signUp">
-    <div :class="[$style['form-wrapper']]">SIGN UP PLACEHOLDER</div>
+  <UserSign title-translation-path="general.signUp">
+    <div :class="[$style['form-wrapper']]">
+      SIGN UP PLACEHOLDER
+    </div>
   </UserSign>
 </template>
 

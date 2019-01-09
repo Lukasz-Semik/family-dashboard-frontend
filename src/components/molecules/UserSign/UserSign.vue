@@ -5,18 +5,18 @@
         <Title
           tag="h2"
           data-test="user-sign-title"
-          :translationPath="titleTranslationPath"
-          isOrange
-          isSmall
-          isUppercased
-          isCentered
-        ></Title>
+          :translation-path="titleTranslationPath"
+          is-orange
+          is-small
+          is-uppercased
+          is-centered
+        />
       </Card>
     </HomeCardWrapper>
 
     <HomeCardWrapper>
-      <Card isHoverable>
-        <slot></slot>
+      <Card is-hoverable>
+        <slot />
       </Card>
     </HomeCardWrapper>
   </div>

@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 
-import Title from './Title';
+import Title from './Title.vue';
 
 describe('<Title>', () => {
   it('should render correctly as h1 with provided translated text', () => {

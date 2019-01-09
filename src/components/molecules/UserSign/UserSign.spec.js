@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 
-import UserSign from './UserSign';
+import UserSign from './UserSign.vue';
 
 describe('<UserSign>', () => {
   it('should render proper html elements', () => {

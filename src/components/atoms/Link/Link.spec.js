@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Link from './Link';
+import Link from './Link.vue';
 
 Vue.use(VueRouter);
 

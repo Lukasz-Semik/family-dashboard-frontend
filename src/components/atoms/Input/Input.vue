@@ -4,12 +4,14 @@
       data-test="label"
       :for="name"
       :class="[$style['label'], innerStateClassNames]"
-    >{{ labelTranslatedText || $t(labelTranslationPath) }}</label>
+    >
+      {{ labelTranslatedText || $t(labelTranslationPath) }}
+    </label>
     <input
+      :id="name"
       data-test="input"
       :class="[$style['input'], inputClassNames]"
       :name="name"
-      :id="name"
       :value="value"
       :type="type"
       :placeholder="translatedPlaceholder"
@@ -19,21 +21,17 @@
       @mouseenter="isHovered = true"
       @mouseleave="isHovered = false"
     >
-    <div :class="[$style['input-border']]"/>
+    <div :class="[$style['input-border']]" />
+    <!-- eslint-disable max-len -->
     <div
       :class="[$style['input-border'], $style['input-border-focus-indicator'], innerStateClassNames]"
     />
+    <!-- esling-enalbe -->
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      isFocused: false,
-      isHovered: false,
-    };
-  },
   props: {
     name: {
       type: String,
@@ -68,15 +66,11 @@ export default {
       default: false,
     },
   },
-  methods: {
-    handleChange(event) {
-      const { value } = event.target;
-
-      this.$emit('onChange', {
-        value,
-        name: this.name,
-      });
-    },
+  data() {
+    return {
+      isFocused: false,
+      isHovered: false,
+    };
   },
   computed: {
     innerStateClassNames() {
@@ -97,6 +91,16 @@ export default {
       const { placeholderTranslatedText, placeholderTranslationPath } = this;
 
       return placeholderTranslatedText || this.$t(placeholderTranslationPath);
+    },
+  },
+  methods: {
+    handleChange(event) {
+      const { value } = event.target;
+
+      this.$emit('onChange', {
+        value,
+        name: this.name,
+      });
     },
   },
 };

@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 
-import Card from './Card';
+import Card from './Card.vue';
 
 describe('<Card>', () => {
   it('should render proper html', () => {

@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 
-import SignInPage from './SignInPage';
+import SignInPage from './SignInPage.vue';
 
 describe('<SignInPage/>', () => {
   it('should render properly', () => {

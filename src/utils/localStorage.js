@@ -4,7 +4,7 @@ export const setLocalStorageItem = (key, value) => {
   return localStorage.setItem(key, JSON.stringify(value));
 };
 
-export const getLocalStorageItem = key => {
+export const getLocalStorageItem = (key) => {
   if (!localStorage) return null;
 
   const value = localStorage.getItem(key);
@@ -12,7 +12,7 @@ export const getLocalStorageItem = key => {
   return value ? JSON.parse(value) : null;
 };
 
-export const removeLocalStorageItem = key => {
+export const removeLocalStorageItem = (key) => {
   if (!localStorage) return null;
 
   return localStorage.removeItem(key);

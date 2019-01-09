@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 
-import Input from './Input';
+import Input from './Input.vue';
 
 describe('<Input/>', () => {
   it('should render correctly with translated props', () => {

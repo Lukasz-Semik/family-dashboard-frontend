@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 
-import HomeCardWrapper from './HomeCardWrapper';
+import HomeCardWrapper from './HomeCardWrapper.vue';
 
 describe('<HomeCardWrapper>', () => {
   it('should render proper html', () => {

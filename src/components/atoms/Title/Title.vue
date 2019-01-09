@@ -1,8 +1,10 @@
 <template>
-  <component
+  <Component
     :is="tag"
     :class="[$style['title'], classNames]"
-  >{{ translatedText || $t(translationPath) }}</component>
+  >
+    {{ translatedText || $t(translationPath) }}
+  </Component>
 </template>
 
 <script>
@@ -39,7 +41,9 @@ export default {
   },
   computed: {
     classNames() {
-      const { $style, isOrange, isSmall, isUppercased, isCentered } = this;
+      const {
+        $style, isOrange, isSmall, isUppercased, isCentered,
+      } = this;
 
       return {
         [$style['is-orange']]: isOrange,

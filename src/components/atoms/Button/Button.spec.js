@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 
-import Button from './Button';
+import Button from './Button.vue';
 
 describe('<Button/>', () => {
   it('should properly handle click and render translated text', () => {
