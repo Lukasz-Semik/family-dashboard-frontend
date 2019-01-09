@@ -3,7 +3,7 @@
 exports[`<HomeElement/> should render properly 1`] = `
 <div>
   <div class="title-wrapper">
-    <title-stub tag="h1" translatedtext="" translationpath="general.appTitle"></title-stub>
+    <titleelement-stub tag="h1" translatedtext="" translationpath="general.appTitle"></titleelement-stub>
   </div>
   <div class="links-wrapper">
     <link-stub to="[object Object]" translatedtext="" translationpath="general.signIn"></link-stub>
