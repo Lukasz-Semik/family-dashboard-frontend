@@ -2,7 +2,17 @@
   <div :class="[$style['form-wrapper']]">
     <FormGroup @onSubmit="handleSubmit">
       <template slot="fields-group">
-        <UserSignFieldsGroup :fields="this.fields" :on-change="onChange"/>
+        <UserSignFieldsGroup
+          v-if="currentStepIndex === 0"
+          :fields="this.namesFields"
+          :on-change="onChange"
+        />
+
+        <UserSignFieldsGroup
+          v-if="currentStepIndex === 1"
+          :fields="this.accountFields"
+          :on-change="onChange"
+        />
       </template>
 
       <template slot="button-group">
@@ -18,7 +28,7 @@
 import { mapActions } from 'vuex';
 
 import { DASHBOARD_ROUTE } from '@/constants/routesNames';
-import { emailPasswordFields } from '@/constants/forms';
+import { emailPasswordFields, userNamesFields } from '@/constants/forms';
 import { signIn } from '@/store/currentUser/actions';
 import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
@@ -32,21 +42,28 @@ export default {
   },
   data() {
     return {
+      currentStepIndex: 0,
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
     };
   },
   computed: {
-    fields() {
-      return emailPasswordFields.map(field => ({
-        ...field,
-        value: this[name],
-      }));
+    namesFields() {
+      return this.generateFields(userNamesFields);
+    },
+    accountFields() {
+      return this.generateFields(emailPasswordFields);
     },
   },
   methods: {
     async handleSubmit() {
-      const { email, password } = this;
+      const { currentStepIndex, email, password } = this;
+
+      if (currentStepIndex < 2) {
+        return (this.currentStepIndex = +1);
+      }
 
       const { isAuthorized } = await this.signIn({ email, password });
 
@@ -56,6 +73,12 @@ export default {
       const { name, value } = payload;
 
       this[name] = value;
+    },
+    generateFields(fields) {
+      return fields.map(field => ({
+        ...field,
+        value: this[name],
+      }));
     },
     ...mapActions({
       signIn,

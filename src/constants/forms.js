@@ -12,3 +12,18 @@ export const emailPasswordFields = [
     placeholderTranslationPath: 'forms.userSign.password.placeholder',
   },
 ];
+
+export const userNamesFields = [
+  {
+    name: 'firstName',
+    type: 'text',
+    labelTranslationPath: 'forms.userSign.firstName.label',
+    placeholderTranslationPath: 'forms.userSign.firstName.placeholder',
+  },
+  {
+    name: 'lastName',
+    type: 'text',
+    labelTranslationPath: 'forms.userSign.lastName.label',
+    placeholderTranslationPath: 'forms.userSign.lastName.placeholder',
+  },
+];

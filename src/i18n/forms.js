@@ -11,5 +11,13 @@ export default {
       label: 'Password',
       placeholder: 'Your secret password',
     },
+    firstName: {
+      label: 'First name',
+      placeholder: 'E.g. Harry',
+    },
+    lastName: {
+      label: 'Last name',
+      placeholder: 'E.g. Potter',
+    },
   },
 };
