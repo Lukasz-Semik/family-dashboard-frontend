@@ -13,6 +13,16 @@
           :fields="this.accountFields"
           :on-change="onChange"
         />
+
+        <div v-if="currentStepIndex === 2">
+          <DatePicker
+            name="birthDate"
+            labelTranslationPath="forms.userSign.birthDate.label"
+            placeholderTranslationPath="forms.userSign.birthDate.placeholder"
+            @onChange="onChange"
+            hasCenteredText
+          />
+        </div>
       </template>
 
       <template slot="button-group">
@@ -33,20 +43,23 @@ import { signIn } from '@/store/currentUser/actions';
 import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
+import DatePicker from '@/components/atoms/DatePicker/DatePicker.vue';
 
 export default {
   components: {
     FormGroup,
     UserSignFieldsGroup,
     ButtonElement,
+    DatePicker,
   },
   data() {
     return {
-      currentStepIndex: 0,
+      currentStepIndex: 2,
       firstName: '',
       lastName: '',
       email: '',
       password: '',
+      birthDate: '',
     };
   },
   computed: {

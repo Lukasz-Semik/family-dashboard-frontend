@@ -19,5 +19,9 @@ export default {
       label: 'Last name',
       placeholder: 'E.g. Potter',
     },
+    birthDate: {
+      label: 'Birth date',
+      placeholder: 'E.g. 01.01.1990',
+    },
   },
 };
