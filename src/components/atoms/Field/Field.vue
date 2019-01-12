@@ -9,8 +9,23 @@
       :for="name"
       :class="[$style['label'], innerStateClassNames]"
     >{{ labelTranslatedText || $t(labelTranslationPath) }}</label>
+    
+    <input
+      v-if="fieldType === 'input'"
+      :id="name"
+      data-test="input"
+      :class="[$style['input'], inputClassNames]"
+      :name="name"
+      :value="value"
+      :type="type"
+      :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
+      @input="handleChange"
+      @focus="isFocused = true"
+      @blur="isFocused = false"
+    >
 
     <Datepicker
+      v-else-if="fieldType === 'datePicker'"
       :id="name"
       :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
       :input-class="[$style['input'], inputClassNames]"
@@ -39,6 +54,10 @@ export default {
     InputElement,
   },
   props: {
+    fieldType: {
+      type: String,
+      default: 'input',
+    },
     name: {
       type: String,
       required: true,
@@ -94,6 +113,14 @@ export default {
         name: this.name,
       });
     },
+    handleChange(event) {
+      const { value } = event.target;
+
+      this.$emit('onChange', {
+        value,
+        name: this.name,
+      });
+    },
   },
 };
 </script>
@@ -127,4 +154,4 @@ export default {
 }
 </style>
 
-<style lang="scss" module src="./DatePicker.scss" />
+<style lang="scss" module src="./Field.scss" />

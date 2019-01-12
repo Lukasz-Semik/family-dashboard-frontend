@@ -36,9 +36,10 @@ export default {
       type: Array,
       default: [],
     },
-    onChange: {
-      type: Function,
-      default: null,
+  },
+  methods: {
+    onChange(payload) {
+      this.$emit('onChange', payload);
     },
   },
 };

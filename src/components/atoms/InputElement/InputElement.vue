@@ -4,15 +4,12 @@
       data-test="label"
       :for="name"
       :class="[$style['label'], innerStateClassNames]"
-    >
-      {{ labelTranslatedText || $t(labelTranslationPath) }}
-    </label>
+    >{{ labelTranslatedText || $t(labelTranslationPath) }}</label>
     <input
       :id="name"
       data-test="input"
       :class="[$style['input'], inputClassNames]"
       :name="name"
-      :value="value"
       :type="type"
       :placeholder="translatedPlaceholder"
       @input="handleChange"
@@ -21,7 +18,7 @@
       @mouseenter="isHovered = true"
       @mouseleave="isHovered = false"
     >
-    <div :class="[$style['input-border']]" />
+    <div :class="[$style['input-border']]"/>
     <!-- eslint-disable max-len -->
     <div
       :class="[$style['input-border'], $style['input-border-focus-indicator'], innerStateClassNames]"

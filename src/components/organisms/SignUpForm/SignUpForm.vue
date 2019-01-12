@@ -5,17 +5,18 @@
         <UserSignFieldsGroup
           v-if="currentStepIndex === 0"
           :fields="this.namesFields"
-          :on-change="onChange"
+          @onChange="onChange"
         />
 
         <UserSignFieldsGroup
-          v-if="currentStepIndex === 1"
+          v-if="currentStepIndex === 2"
           :fields="this.accountFields"
-          :on-change="onChange"
+          @onChange="onChange"
         />
 
-        <div v-if="currentStepIndex === 2">
-          <DatePicker
+        <div v-if="currentStepIndex === 1">
+          <Field
+            fieldType="datePicker"
             name="birthDate"
             labelTranslationPath="forms.userSign.birthDate.label"
             placeholderTranslationPath="forms.userSign.birthDate.placeholder"
@@ -44,6 +45,7 @@ import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import DatePicker from '@/components/atoms/DatePicker/DatePicker.vue';
+import Field from '@/components/atoms/Field/Field.vue';
 
 export default {
   components: {
@@ -51,10 +53,11 @@ export default {
     UserSignFieldsGroup,
     ButtonElement,
     DatePicker,
+    Field,
   },
   data() {
     return {
-      currentStepIndex: 2,
+      currentStepIndex: 0,
       firstName: '',
       lastName: '',
       email: '',
@@ -72,15 +75,14 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      const { currentStepIndex, email, password } = this;
+      const { currentStepIndex, firstName, lastName, email, password, birthDate } = this;
 
       if (currentStepIndex < 2) {
-        return (this.currentStepIndex = +1);
+        this.currentStepIndex += 1;
+        return;
       }
 
-      const { isAuthorized } = await this.signIn({ email, password });
-
-      if (isAuthorized) return this.$router.push({ name: DASHBOARD_ROUTE });
+      console.log({ firstName, lastName, email, password, birthDate });
     },
     onChange(payload) {
       const { name, value } = payload;
