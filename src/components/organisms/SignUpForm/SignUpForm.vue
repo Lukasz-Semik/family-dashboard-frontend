@@ -8,14 +8,8 @@
           @onChange="onChange"
         />
 
-        <UserSignFieldsGroup
-          v-if="currentStepIndex === 2"
-          :fields="this.accountFields"
-          @onChange="onChange"
-        />
-
         <div v-if="currentStepIndex === 1">
-          <Field
+          <DatePicker
             fieldType="datePicker"
             name="birthDate"
             labelTranslationPath="forms.userSign.birthDate.label"
@@ -23,7 +17,15 @@
             @onChange="onChange"
             hasCenteredText
           />
+
+          <DropdownElement/>
         </div>
+
+        <UserSignFieldsGroup
+          v-if="currentStepIndex === 2"
+          :fields="this.accountFields"
+          @onChange="onChange"
+        />
       </template>
 
       <template slot="button-group">
@@ -45,7 +47,8 @@ import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import DatePicker from '@/components/atoms/DatePicker/DatePicker.vue';
-import Field from '@/components/atoms/Field/Field.vue';
+import DropdownElement from '@/components/atoms/DropdownElement/DropdownElement';
+// import Field from '@/components/atoms/Field/Field.vue';
 
 export default {
   components: {
@@ -53,11 +56,12 @@ export default {
     UserSignFieldsGroup,
     ButtonElement,
     DatePicker,
-    Field,
+    DropdownElement,
+    // Field,
   },
   data() {
     return {
-      currentStepIndex: 0,
+      currentStepIndex: 1,
       firstName: '',
       lastName: '',
       email: '',
@@ -92,7 +96,7 @@ export default {
     generateFields(fields) {
       return fields.map(field => ({
         ...field,
-        value: this[name],
+        value: this[field.name],
       }));
     },
     ...mapActions({
