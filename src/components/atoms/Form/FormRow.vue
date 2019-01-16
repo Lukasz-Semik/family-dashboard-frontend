@@ -1,6 +1,6 @@
 <template>
   <div :class="[$style['form-row']]">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 

@@ -2,7 +2,7 @@
   <div :class="[$style['form-wrapper']]">
     <FormGroup @onSubmit="handleSubmit">
       <template slot="fields-group">
-        <UserSignFieldsGroup :fields="this.fields" :on-change="onChange"/>
+        <UserSignFieldsGroup :fields="fields" @onChange="onChange"/>
       </template>
 
       <template slot="button-group">

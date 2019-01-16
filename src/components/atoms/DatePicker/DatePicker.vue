@@ -1,42 +1,31 @@
 <template>
-  <div
-    :class="[$style['date-picker-wrapper']]"
-    @mouseenter="isHovered = true"
-    @mouseleave="isHovered = false"
+  <WithLabelFieldWrapper
+    :name="name"
+    :label-translated-text="labelTranslatedText"
+    :label-translation-path="labelTranslationPath"
   >
-    <label
-      data-test="label"
-      :for="name"
-      :class="[$style['label'], innerStateClassNames]"
-    >{{ labelTranslatedText || $t(labelTranslationPath) }}</label>
-
     <Datepicker
       :id="name"
+      ref="datepicker"
       :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
       :input-class="[$style['input'], inputClassNames]"
       :calendar-class="[$style['calendar']]"
-      ref="datepicker"
       @selected="onSelectDate"
-    ></Datepicker>
-
-    <div :class="[$style['input-border']]"/>
-    <!-- eslint-disable max-len -->
-    <div
-      :class="[$style['input-border'], $style['input-border-focus-indicator'], innerStateClassNames]"
     />
-    <!-- esling-enalbe -->
-  </div>
+  </WithLabelFieldWrapper>
 </template>
 
 <script>
 import Datepicker from 'vuejs-datepicker';
 
 import InputElement from '@/components/atoms/InputElement/InputElement.vue';
+import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
 
 export default {
   components: {
     Datepicker,
     InputElement,
+    WithLabelFieldWrapper,
   },
   props: {
     name: {
@@ -61,7 +50,7 @@ export default {
     },
     hasCenteredText: {
       type: Boolean,
-      default: '',
+      default: false,
     },
   },
   data() {
@@ -72,13 +61,6 @@ export default {
     };
   },
   computed: {
-    innerStateClassNames() {
-      const { $style, isHovered, isFocused } = this;
-
-      return {
-        [$style['is-focused']]: isHovered || isFocused,
-      };
-    },
     inputClassNames() {
       const { $style, hasCenteredText } = this;
 

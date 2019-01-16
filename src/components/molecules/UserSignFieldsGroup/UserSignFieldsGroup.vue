@@ -1,12 +1,16 @@
 <template>
   <div>
-    <FormRow v-for="field in fields" :key="field.name">
+    <FormRow
+      v-for="field in fields"
+      :key="field.name"
+    >
       <InputElement
+        v-if="field.fieldType === 'input'"
         :name="field.name"
         :type="field.type || 'text'"
+        :value="field.value"
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
-        :value="field.value || ''"
         has-centered-text
         @onChange="onChange"
       />

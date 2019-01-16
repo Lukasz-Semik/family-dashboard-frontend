@@ -4,26 +4,28 @@
       <template slot="fields-group">
         <UserSignFieldsGroup
           v-if="currentStepIndex === 0"
-          :fields="this.namesFields"
+          :fields="namesFields"
           @onChange="onChange"
         />
 
         <div v-if="currentStepIndex === 1">
           <DatePicker
-            fieldType="datePicker"
             name="birthDate"
-            labelTranslationPath="forms.userSign.birthDate.label"
-            placeholderTranslationPath="forms.userSign.birthDate.placeholder"
+            label-translation-path="forms.userSign.birthDate.label"
+            placeholder-translation-path="forms.userSign.birthDate.placeholder"
             @onChange="onChange"
-            hasCenteredText
           />
-
-          <DropdownElement/>
+          <DropdownElement
+            label-translation-path="forms.userSign.gender.label"
+            name="birthDate"
+            placeholder-translation-path="forms.userSign.gender.placeholder"
+            :options="['Male', 'Female', 'Other']"
+          />
         </div>
 
         <UserSignFieldsGroup
           v-if="currentStepIndex === 2"
-          :fields="this.accountFields"
+          :fields="accountFields"
           @onChange="onChange"
         />
       </template>
@@ -61,7 +63,7 @@ export default {
   },
   data() {
     return {
-      currentStepIndex: 1,
+      currentStepIndex: 0,
       firstName: '',
       lastName: '',
       email: '',
@@ -86,7 +88,13 @@ export default {
         return;
       }
 
-      console.log({ firstName, lastName, email, password, birthDate });
+      console.log({
+        firstName,
+        lastName,
+        email,
+        password,
+        birthDate,
+      });
     },
     onChange(payload) {
       const { name, value } = payload;

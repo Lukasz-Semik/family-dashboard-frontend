@@ -23,5 +23,9 @@ export default {
       label: 'Birth date',
       placeholder: 'E.g. 01.01.1990',
     },
+    gender: {
+      label: 'Gender',
+      placeholder: 'E.g. Male',
+    },
   },
 };
