@@ -1,8 +1,8 @@
 <template>
   <div>
     <HomeCardWrapper>
-      <Card>
-        <Title
+      <CardElement>
+        <TitleElement
           tag="h2"
           data-test="user-sign-title"
           :translation-path="titleTranslationPath"
@@ -11,27 +11,27 @@
           is-uppercased
           is-centered
         />
-      </Card>
+      </CardElement>
     </HomeCardWrapper>
 
     <HomeCardWrapper>
-      <Card is-hoverable>
+      <CardElement is-hoverable>
         <slot />
-      </Card>
+      </CardElement>
     </HomeCardWrapper>
   </div>
 </template>
 
 <script>
 import HomeCardWrapper from '@/components/atoms/Wrappers/HomeCardWrapper/HomeCardWrapper.vue';
-import Card from '@/components/atoms/Card/Card.vue';
-import Title from '@/components/atoms/Title/Title.vue';
+import CardElement from '@/components/atoms/CardElement/CardElement.vue';
+import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 
 export default {
   components: {
     HomeCardWrapper,
-    Card,
-    Title,
+    CardElement,
+    TitleElement,
   },
   props: {
     titleTranslationPath: {

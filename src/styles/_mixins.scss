@@ -9,3 +9,31 @@
   transform: scaleX(0);
   transition: transform 0.3s ease-in-out;
 }
+
+@mixin input-orange-theme {
+  .input {
+    display: block;
+    padding: 0.32rem 0;
+    width: 100%;
+    font-size: 2rem;
+    outline: none;
+    border: 0;
+    color: $medium-gray;
+    transition: color 0.3s ease-in;
+
+    &.is-centered {
+      text-align: center;
+    }
+
+    &::placeholder {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: $light-gray;
+    }
+
+    &:hover,
+    &:focus {
+      color: $black;
+    }
+  }
+}

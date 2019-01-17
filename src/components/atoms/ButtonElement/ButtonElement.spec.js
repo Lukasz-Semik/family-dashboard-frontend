@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
 
-import Button from './Button.vue';
+import ButtonElement from './ButtonElement.vue';
 
-describe('<Button/>', () => {
+describe('<ButtonElement/>', () => {
   it('should properly handle click and render translated text', () => {
-    const wrapper = shallowMount(Button, {
+    const wrapper = shallowMount(ButtonElement, {
       propsData: {
         translatedText: 'test-text',
       },
@@ -18,7 +18,7 @@ describe('<Button/>', () => {
   });
 
   it('should assign theme and render translation path', () => {
-    const wrapper = shallowMount(Button, {
+    const wrapper = shallowMount(ButtonElement, {
       propsData: {
         translationPath: 'translation.path',
         hasBlueTheme: true,

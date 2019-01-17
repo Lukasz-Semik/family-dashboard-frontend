@@ -46,4 +46,4 @@ export default {
 };
 </script>
 
-<style lang="scss" module src="./Button.scss" />
+<style lang="scss" module src="./ButtonElement.scss" />

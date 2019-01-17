@@ -1,13 +1,13 @@
-import Home from '@/components/pages/Home/Home.vue';
-import SignInPage from '@/components/pages/Home/SignInPage/SignInPage.vue';
-import SignUpPage from '@/components/pages/Home/SignUpPage/SignUpPage.vue';
+import HomeElement from '@/components/pages/HomeElement/HomeElement.vue';
+import SignInPage from '@/components/pages/HomeElement/SignInPage/SignInPage.vue';
+import SignUpPage from '@/components/pages/HomeElement/SignUpPage/SignUpPage.vue';
 import Dashboard from '@/components/pages/Dashboard/Dashboard.vue';
 import { SIGN_IN_ROUTE, SIGN_UP_ROUTE, DASHBOARD_ROUTE } from '@/constants/routesNames';
 
 const homeRoute = {
   path: '/',
   components: {
-    default: Home,
+    default: HomeElement,
   },
   children: [
     {

@@ -56,4 +56,4 @@ export default {
 };
 </script>
 
-<style lang="scss" module src="./Title.scss" />
+<style lang="scss" module src="./TitleElement.scss" />

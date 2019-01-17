@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
 
-import Card from './Card.vue';
+import CardElement from './CardElement.vue';
 
-describe('<Card>', () => {
+describe('<CardElement>', () => {
   it('should render proper html', () => {
-    const wrapper = shallowMount(Card, {
+    const wrapper = shallowMount(CardElement, {
       slots: {
         default: '<div data-test="test-slot">Test slot</div>',
       },
@@ -15,7 +15,7 @@ describe('<Card>', () => {
   });
 
   it('should provide proper class according to props', () => {
-    const wrapper = shallowMount(Card, {
+    const wrapper = shallowMount(CardElement, {
       propsData: {
         isHoverable: true,
       },

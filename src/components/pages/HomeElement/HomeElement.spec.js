@@ -2,13 +2,13 @@ import { shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Home from './Home.vue';
+import HomeElement from './HomeElement.vue';
 
 Vue.use(VueRouter);
 
-describe('<Home/>', () => {
+describe('<HomeElement/>', () => {
   it('should render properly', () => {
-    const wrapper = shallowMount(Home);
+    const wrapper = shallowMount(HomeElement);
 
     expect(wrapper).toMatchSnapshot();
   });

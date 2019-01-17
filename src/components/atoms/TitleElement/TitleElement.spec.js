@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
 
-import Title from './Title.vue';
+import TitleElement from './TitleElement.vue';
 
-describe('<Title>', () => {
+describe('<TitleElement>', () => {
   it('should render correctly as h1 with provided translated text', () => {
-    const wrapper = shallowMount(Title, {
+    const wrapper = shallowMount(TitleElement, {
       propsData: {
         translatedText: 'some-title',
       },
@@ -18,7 +18,7 @@ describe('<Title>', () => {
   });
 
   it('should render correctly as tag given in props with provided translation path', () => {
-    const wrapper = shallowMount(Title, {
+    const wrapper = shallowMount(TitleElement, {
       propsData: {
         translationPath: 'translation.path',
         tag: 'h3',
@@ -33,7 +33,7 @@ describe('<Title>', () => {
   });
 
   it('should provide proper class according to props', () => {
-    const wrapper = shallowMount(Title, {
+    const wrapper = shallowMount(TitleElement, {
       propsData: {
         translatedText: 'some-title',
         isOrange: true,

@@ -1,60 +1,55 @@
 <template>
-  <form
-    :class="[$style['form']]"
-    @submit.prevent="handleSubmit"
-  >
-    <div :class="[$style['form-row']]">
-      <Input
-        name="email"
-        type="email"
-        label-translation-path="forms.shared.email.label"
-        placeholder-translation-path="forms.shared.email.placeholder"
-        :value="email"
-        has-centered-text
-        @onChange="onChange"
-      />
-    </div>
+  <div :class="[$style['form-wrapper']]">
+    <FormGroup @onSubmit="handleSubmit">
+      <template slot="fields-group">
+        <UserSignFieldsGroup
+          :fields="fields"
+          @onChange="onChange"
+        />
+      </template>
 
-    <div :class="[$style['form-row']]">
-      <Input
-        name="password"
-        type="password"
-        label-translation-path="forms.shared.password.label"
-        placeholder-translation-path="forms.shared.password.placeholder"
-        :value="password"
-        has-centered-text
-        @onChange="onChange"
-      />
-    </div>
-
-    <div :class="[$style['button-container']]">
-      <Button
-        type="submit"
-        translation-path="forms.shared.submit"
-        has-blue-theme
-      />
-    </div>
-  </form>
+      <template slot="button-group">
+        <div :class="[$style['button-container']]">
+          <ButtonElement
+            type="submit"
+            translation-path="forms.shared.submit"
+            has-blue-theme
+          />
+        </div>
+      </template>
+    </FormGroup>
+  </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 
 import { DASHBOARD_ROUTE } from '@/constants/routesNames';
+import { emailPasswordFields } from '@/constants/forms';
 import { signIn } from '@/store/currentUser/actions';
-import Input from '@/components/atoms/Input/Input.vue';
-import Button from '@/components/atoms/Button/Button.vue';
+import FormGroup from '@/components/atoms/Form/FormGroup.vue';
+import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
+import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 
 export default {
   components: {
-    Input,
-    Button,
+    FormGroup,
+    UserSignFieldsGroup,
+    ButtonElement,
   },
   data() {
     return {
       email: '',
       password: '',
     };
+  },
+  computed: {
+    fields() {
+      return emailPasswordFields.map(field => ({
+        ...field,
+        value: this[field.name],
+      }));
+    },
   },
   methods: {
     async handleSubmit() {

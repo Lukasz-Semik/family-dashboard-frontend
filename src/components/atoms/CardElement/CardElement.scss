@@ -3,7 +3,7 @@
   background-color: $white;
   border-radius: 5px;
   box-shadow: $main-shadow;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease-in-out;
 
   &.is-hoverable:hover {
     box-shadow: $blue-shadow;
