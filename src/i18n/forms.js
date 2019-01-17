@@ -26,6 +26,11 @@ export default {
     gender: {
       label: 'Gender',
       placeholder: 'E.g. Male',
+      options: {
+        male: 'Male',
+        female: 'Female',
+        other: 'Other',
+      },
     },
   },
 };

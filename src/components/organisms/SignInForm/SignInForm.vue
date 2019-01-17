@@ -2,12 +2,19 @@
   <div :class="[$style['form-wrapper']]">
     <FormGroup @onSubmit="handleSubmit">
       <template slot="fields-group">
-        <UserSignFieldsGroup :fields="fields" @onChange="onChange"/>
+        <UserSignFieldsGroup
+          :fields="fields"
+          @onChange="onChange"
+        />
       </template>
 
       <template slot="button-group">
         <div :class="[$style['button-container']]">
-          <ButtonElement type="submit" translation-path="forms.shared.submit" has-blue-theme/>
+          <ButtonElement
+            type="submit"
+            translation-path="forms.shared.submit"
+            has-blue-theme
+          />
         </div>
       </template>
     </FormGroup>

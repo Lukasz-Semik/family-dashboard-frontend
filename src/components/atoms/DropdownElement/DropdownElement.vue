@@ -7,7 +7,7 @@
   >
     <DropdownElement
       v-model="value"
-      :options="options"
+      :options="preparedOptions"
       :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
       @input="handleChange"
       @open="isFocused = true"
@@ -18,6 +18,7 @@
 
 <script>
 import DropdownElement from 'vue-multiselect';
+import { find, get } from 'lodash';
 
 import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
 
@@ -62,9 +63,21 @@ export default {
       isFocused: false,
     };
   },
+  computed: {
+    preparedOptions() {
+      return this.options.map(item => this.$t(item.label));
+    },
+  },
   methods: {
-    handleChange(e) {
-      console.log('changed', e);
+    handleChange(selectedOption) {
+      this.$emit('onChange', {
+        value: get(
+          find(this.options, option => this.$t(option.label) === selectedOption),
+          'value',
+          null
+        ),
+        name: this.name,
+      });
     },
   },
 };
@@ -73,75 +86,75 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style lang="scss">
-.multiselect__single {
-  padding-left: 0;
-  margin-bottom: 0;
-  min-height: 0;
-  font-size: 2rem;
-  line-height: 1;
-  vertical-align: middle;
-  color: $medium-gray;
-  transform: color 0.3s ease-in-out;
-}
-
 .multiselect {
   min-height: 0;
   font-size: 2rem;
 
-  &:hover .multiselect__single {
+  &__single {
+    padding-left: 0;
+    margin-bottom: 0;
+    min-height: 0;
+    font-size: 2rem;
+    line-height: 1;
+    vertical-align: middle;
+    color: $medium-gray;
+    transform: color 0.3s ease-in-out;
+  }
+
+  &:hover &__single {
     color: $black;
   }
-}
 
-.multiselect__select {
-  top: 8px;
-}
-
-.multiselect__tags {
-  margin-top: 0;
-  padding-left: 0;
-  padding-top: 2px;
-  min-height: 0;
-  font-size: 2rem;
-  border: 0;
-}
-
-.multiselect__input {
-  margin-bottom: 0;
-  line-height: 1;
-}
-
-.multiselect__placeholder {
-  margin-bottom: 2px;
-  font-size: 1.8rem;
-  font-weight: 300;
-  color: $light-gray;
-}
-
-.multiselect__content-wrapper,
-.multiselect--above .multiselect__content-wrapper {
-  border-top: 1px solid #e8e8e8;
-  border-bottom: 1px solid #e8e8e8;
-  border-radius: 5px;
-}
-
-.multiselect__option,
-.multiselect__element {
-  font-size: 1.8rem;
-  transition: background-color 0.3s ease-in-out;
-
-  &:hover {
-    background-color: $main-orange;
+  &__select {
+    top: 8px;
   }
-}
 
-.multiselect__option--highlight,
-.multiselect__option--highlight.multiselect__option--selected {
-  background-color: $main-orange;
-  transition: background-color 0.3s ease-in-out;
+  &__tags {
+    margin-top: 0;
+    padding-left: 0;
+    padding-top: 2px;
+    min-height: 0;
+    font-size: 2rem;
+    border: 0;
+  }
 
-  &::after {
-    display: none;
+  &__input {
+    margin-bottom: 0;
+    line-height: 1;
+  }
+
+  &__placeholder {
+    margin-bottom: 2px;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: $light-gray;
+  }
+
+  &__content-wrapper,
+  &--above &__content-wrapper {
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 5px;
+  }
+
+  &__option,
+  &__element {
+    font-size: 1.8rem;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover {
+      background-color: $main-orange;
+    }
+  }
+
+  &__option--highlight,
+  &__option--highlight.multiselect__option--selected {
+    background-color: $main-orange;
+    transition: background-color 0.3s ease-in-out;
+
+    &::after {
+      display: none;
+    }
   }
 }
 </style>

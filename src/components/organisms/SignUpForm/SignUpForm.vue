@@ -17,9 +17,23 @@
           />
           <DropdownElement
             label-translation-path="forms.userSign.gender.label"
-            name="birthDate"
+            name="gender"
             placeholder-translation-path="forms.userSign.gender.placeholder"
-            :options="['Male', 'Female', 'Other']"
+            @onChange="onChange"
+            :options="[
+              {
+                value: 'male',
+                label: 'forms.userSign.gender.options.male',
+              },
+              {
+                value: 'female',
+                label: 'forms.userSign.gender.options.female',
+              },
+              {
+                value: 'other',
+                label: 'forms.userSign.gender.options.other',
+              },
+            ]"
           />
         </div>
 
@@ -69,6 +83,7 @@ export default {
       email: '',
       password: '',
       birthDate: '',
+      gender: '',
     };
   },
   computed: {
@@ -81,7 +96,7 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      const { currentStepIndex, firstName, lastName, email, password, birthDate } = this;
+      const { currentStepIndex, firstName, lastName, birthDate, gender, email, password } = this;
 
       if (currentStepIndex < 2) {
         this.currentStepIndex += 1;
@@ -91,9 +106,10 @@ export default {
       console.log({
         firstName,
         lastName,
+        birthDate,
+        gender,
         email,
         password,
-        birthDate,
       });
     },
     onChange(payload) {
