@@ -71,7 +71,7 @@ export default {
   methods: {
     onSelectDate(value) {
       this.$emit('onChange', {
-        value: moment(value).format('MM-DD-YYYY'),
+        value,
         name: this.name,
       });
     },

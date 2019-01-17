@@ -23,11 +23,7 @@
 
       <template slot="button-group">
         <div :class="[$style['button-container']]">
-          <ButtonElement
-            type="submit"
-            translation-path="forms.shared.submit"
-            has-blue-theme
-          />
+          <ButtonElement type="submit" translation-path="forms.shared.submit" has-blue-theme/>
         </div>
       </template>
     </FormGroup>
@@ -35,10 +31,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
+import { apiSignUp } from '@/api';
 import { emailPasswordFields, userNamesFields, userDetailsFields } from '@/constants/forms';
-import { signIn } from '@/store/currentUser/actions';
 
 import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
@@ -74,23 +68,27 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      const {
-        currentStepIndex, firstName, lastName, birthDate, gender, email, password,
-      } = this;
+      const { currentStepIndex, firstName, lastName, birthDate, gender, email, password } = this;
 
       if (currentStepIndex < 2) {
         this.currentStepIndex += 1;
         return;
       }
 
-      console.log({
-        firstName,
-        lastName,
-        birthDate,
-        gender,
-        email,
-        password,
-      });
+      try {
+        const response = await apiSignUp({
+          currentStepIndex,
+          firstName,
+          lastName,
+          birthDate,
+          gender,
+          email,
+          password,
+        });
+      } catch (err) {
+        // TODO: handel errors
+        console.log(err);
+      }
     },
     onChange(payload) {
       const { name, value } = payload;
@@ -103,9 +101,6 @@ export default {
         value: this[field.name],
       }));
     },
-    ...mapActions({
-      signIn,
-    }),
   },
 };
 </script>
