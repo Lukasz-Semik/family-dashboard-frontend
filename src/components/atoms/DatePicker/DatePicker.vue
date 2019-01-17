@@ -19,13 +19,11 @@
 import Datepicker from 'vuejs-datepicker';
 import moment from 'moment';
 
-import InputElement from '@/components/atoms/InputElement/InputElement.vue';
 import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
 
 export default {
   components: {
     Datepicker,
-    InputElement,
     WithLabelFieldWrapper,
   },
   props: {

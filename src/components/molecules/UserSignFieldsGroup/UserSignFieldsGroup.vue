@@ -1,6 +1,9 @@
 <template>
   <div>
-    <FormRow v-for="field in fields" :key="field.name">
+    <FormRow
+      v-for="field in fields"
+      :key="field.name"
+    >
       <InputElement
         v-if="field.fieldType === 'input'"
         :name="field.name"
@@ -25,8 +28,8 @@
         :name="field.name"
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
-        @onChange="onChange"
         :options="field.options"
+        @onChange="onChange"
       />
     </FormRow>
   </div>
@@ -56,7 +59,7 @@ export default {
     },
     fields: {
       type: Array,
-      default: [],
+      default: () => [],
     },
   },
   methods: {

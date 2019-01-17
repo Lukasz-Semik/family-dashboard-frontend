@@ -34,7 +34,7 @@ export default {
     },
     options: {
       type: Array,
-      default: [],
+      default: () => [],
     },
     labelTranslatedText: {
       type: String,
@@ -74,7 +74,7 @@ export default {
         value: get(
           find(this.options, option => this.$t(option.label) === selectedOption),
           'value',
-          null
+          null,
         ),
         name: this.name,
       });
