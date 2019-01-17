@@ -8,34 +8,11 @@
           @onChange="onChange"
         />
 
-        <div v-if="currentStepIndex === 1">
-          <DatePicker
-            name="birthDate"
-            label-translation-path="forms.userSign.birthDate.label"
-            placeholder-translation-path="forms.userSign.birthDate.placeholder"
-            @onChange="onChange"
-          />
-          <DropdownElement
-            label-translation-path="forms.userSign.gender.label"
-            name="gender"
-            placeholder-translation-path="forms.userSign.gender.placeholder"
-            @onChange="onChange"
-            :options="[
-              {
-                value: 'male',
-                label: 'forms.userSign.gender.options.male',
-              },
-              {
-                value: 'female',
-                label: 'forms.userSign.gender.options.female',
-              },
-              {
-                value: 'other',
-                label: 'forms.userSign.gender.options.other',
-              },
-            ]"
-          />
-        </div>
+        <UserSignFieldsGroup
+          v-if="currentStepIndex === 1"
+          :fields="userDetails"
+          @onChange="onChange"
+        />
 
         <UserSignFieldsGroup
           v-if="currentStepIndex === 2"
@@ -57,14 +34,14 @@
 import { mapActions } from 'vuex';
 
 import { DASHBOARD_ROUTE } from '@/constants/routesNames';
-import { emailPasswordFields, userNamesFields } from '@/constants/forms';
+import { emailPasswordFields, userNamesFields, userDetailsFields } from '@/constants/forms';
 import { signIn } from '@/store/currentUser/actions';
+
 import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import DatePicker from '@/components/atoms/DatePicker/DatePicker.vue';
-import DropdownElement from '@/components/atoms/DropdownElement/DropdownElement';
-// import Field from '@/components/atoms/Field/Field.vue';
+import DropdownElement from '@/components/atoms/DropdownElement/DropdownElement.vue';
 
 export default {
   components: {
@@ -73,7 +50,6 @@ export default {
     ButtonElement,
     DatePicker,
     DropdownElement,
-    // Field,
   },
   data() {
     return {
@@ -92,6 +68,9 @@ export default {
     },
     accountFields() {
       return this.generateFields(emailPasswordFields);
+    },
+    userDetails() {
+      return this.generateFields(userDetailsFields);
     },
   },
   methods: {

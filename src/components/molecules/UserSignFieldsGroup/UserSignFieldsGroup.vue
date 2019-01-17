@@ -1,9 +1,6 @@
 <template>
   <div>
-    <FormRow
-      v-for="field in fields"
-      :key="field.name"
-    >
+    <FormRow v-for="field in fields" :key="field.name">
       <InputElement
         v-if="field.fieldType === 'input'"
         :name="field.name"
@@ -14,6 +11,23 @@
         has-centered-text
         @onChange="onChange"
       />
+
+      <DatePicker
+        v-if="field.fieldType === 'datePicker'"
+        :name="field.name"
+        :label-translation-path="field.labelTranslationPath"
+        :placeholder-translation-path="field.placeholderTranslationPath"
+        @onChange="onChange"
+      />
+
+      <DropdownElement
+        v-if="field.fieldType === 'dropdown'"
+        :name="field.name"
+        :label-translation-path="field.labelTranslationPath"
+        :placeholder-translation-path="field.placeholderTranslationPath"
+        @onChange="onChange"
+        :options="field.options"
+      />
     </FormRow>
   </div>
 </template>
@@ -21,11 +35,15 @@
 <script>
 import InputElement from '@/components/atoms/InputElement/InputElement.vue';
 import FormRow from '@/components/atoms/Form/FormRow.vue';
+import DatePicker from '@/components/atoms/DatePicker/DatePicker.vue';
+import DropdownElement from '@/components/atoms/DropdownElement/DropdownElement.vue';
 
 export default {
   components: {
     InputElement,
     FormRow,
+    DatePicker,
+    DropdownElement,
   },
   props: {
     email: {
