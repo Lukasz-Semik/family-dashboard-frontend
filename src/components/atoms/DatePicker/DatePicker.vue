@@ -17,6 +17,7 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker';
+import moment from 'moment';
 
 import InputElement from '@/components/atoms/InputElement/InputElement.vue';
 import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
@@ -72,7 +73,7 @@ export default {
   methods: {
     onSelectDate(value) {
       this.$emit('onChange', {
-        value,
+        value: moment(value).format('MM-DD-YYYY'),
         name: this.name,
       });
     },
