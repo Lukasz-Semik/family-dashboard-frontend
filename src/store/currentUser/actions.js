@@ -1,7 +1,6 @@
 import { get, isEmpty } from 'lodash';
 
 import { apiSignIn, apiCheckIsSignedIn } from '@/api';
-import { API_CHECK_IS_SIGNED_IN } from '@/constants/api';
 import { setLocalStorageItem, getLocalStorageItem } from '@/utils/localStorage';
 
 import { setIsSignedIn } from './mutations';

@@ -1,9 +1,6 @@
 <template>
   <div>
-    <FormRow
-      v-for="field in fields"
-      :key="field.name"
-    >
+    <FormRow v-for="field in fields" :key="field.name">
       <InputElement
         v-if="field.fieldType === 'input'"
         :name="field.name"
@@ -18,6 +15,7 @@
       <DatePicker
         v-if="field.fieldType === 'datePicker'"
         :name="field.name"
+        :value="field.value"
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
         @onChange="onChange"

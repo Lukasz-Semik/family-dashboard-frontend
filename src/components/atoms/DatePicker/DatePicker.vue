@@ -7,6 +7,7 @@
     <Datepicker
       :id="name"
       ref="datepicker"
+      :value="value"
       :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
       :input-class="[$style['input'], inputClassNames]"
       :calendar-class="[$style['calendar']]"
@@ -27,6 +28,10 @@ export default {
     WithLabelFieldWrapper,
   },
   props: {
+    value: {
+      type: Date,
+      default: null,
+    },
     name: {
       type: String,
       required: true,
@@ -54,7 +59,6 @@ export default {
   },
   data() {
     return {
-      selectedDate: '1',
       isOpen: false,
       isHovered: false,
     };

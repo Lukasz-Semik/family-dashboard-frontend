@@ -4,9 +4,7 @@
     :type="type"
     :class="[$style.button, classNames]"
     @click="handleClick"
-  >
-    {{ translatedText || $t(translationPath) }}
-  </button>
+  >{{ translatedText || $t(translationPath) }}</button>
 </template>
 
 <script>
@@ -28,13 +26,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    hasPreviousTheme: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classNames() {
-      const { $style, hasBlueTheme } = this;
+      const { $style, hasBlueTheme, hasPreviousTheme } = this;
 
       return {
         [$style['has-blue-theme']]: hasBlueTheme,
+        [$style['has-previous-theme']]: hasPreviousTheme,
       };
     },
   },

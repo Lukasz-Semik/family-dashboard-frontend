@@ -20,4 +20,22 @@
       box-shadow: $dark-grey-shadow;
     }
   }
+
+  &.has-previous-theme {
+    display: inline;
+    font-size: 1.4rem;
+    color: $main-blue;
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: $dark-green;
+    }
+
+    &::before {
+      content: '<-';
+      position: relative;
+      top: -2px;
+      display: inline-block;
+    }
+  }
 }

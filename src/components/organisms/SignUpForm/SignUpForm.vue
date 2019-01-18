@@ -1,5 +1,13 @@
 <template>
   <div :class="[$style['form-wrapper']]">
+    <div v-if="currentStepIndex > 0" :class="[$style['previous-wrapper']]">
+      <ButtonElement
+        @onClick="currentStepIndex > 0 ? currentStepIndex -= 1 : null"
+        translationPath="general.previous"
+        hasPreviousTheme
+      />
+    </div>
+
     <FormGroup @onSubmit="handleSubmit">
       <template slot="fields-group">
         <UserSignFieldsGroup
@@ -22,7 +30,7 @@
       </template>
 
       <template slot="button-group">
-        <div :class="[$style['button-container']]">
+        <div :class="[$style['button-wrapper']]">
           <ButtonElement type="submit" translation-path="forms.shared.submit" has-blue-theme/>
         </div>
       </template>
@@ -51,7 +59,7 @@ export default {
       lastName: '',
       email: '',
       password: '',
-      birthDate: '',
+      birthDate: null,
       gender: '',
     };
   },
