@@ -39,8 +39,12 @@
 </template>
 
 <script>
+import { get } from 'lodash';
+
 import { apiSignUp } from '@/api';
 import { emailPasswordFields, userNamesFields, userDetailsFields } from '@/constants/forms';
+import { serverMessages } from '@/constants/serverResponses';
+import { SIGN_IN_ROUTE } from '@/constants/routesNames';
 
 import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
@@ -85,7 +89,6 @@ export default {
 
       try {
         const response = await apiSignUp({
-          currentStepIndex,
           firstName,
           lastName,
           birthDate,
@@ -93,6 +96,10 @@ export default {
           email,
           password,
         });
+
+        if (get(response, 'data.account') === serverMessages.accountCreated) {
+          this.$router.push({ name: SIGN_IN_ROUTE });
+        }
       } catch (err) {
         // TODO: handel errors
         console.log(err);

@@ -6,7 +6,7 @@
     :is-focused="isFocused"
   >
     <DropdownElement
-      v-model="value"
+      v-model="selected"
       :options="preparedOptions"
       :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
       @input="handleChange"
@@ -18,7 +18,7 @@
 
 <script>
 import DropdownElement from 'vue-multiselect';
-import { find, get } from 'lodash';
+import { find, get, isEmpty } from 'lodash';
 
 import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
 
@@ -56,10 +56,21 @@ export default {
       type: Boolean,
       default: false,
     },
+    value: {
+      type: String,
+      default: '',
+    },
+  },
+  created() {
+    const foundValue = find(this.options, option => option.value === this.value);
+
+    if (!isEmpty(foundValue)) {
+      this.selected = this.$t(foundValue.label);
+    }
   },
   data() {
     return {
-      value: null,
+      selected: null,
       isFocused: false,
     };
   },

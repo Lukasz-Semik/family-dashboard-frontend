@@ -23,6 +23,7 @@
 
       <DropdownElement
         v-if="field.fieldType === 'dropdown'"
+        :value="field.value"
         :name="field.name"
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
