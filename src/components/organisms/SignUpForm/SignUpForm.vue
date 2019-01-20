@@ -1,5 +1,16 @@
 <template>
   <div :class="[$style['form-wrapper']]">
+    <div
+      v-if="currentStepIndex > 0"
+      :class="[$style['previous-wrapper']]"
+    >
+      <ButtonElement
+        translation-path="general.previous"
+        has-previous-theme
+        @onClick="currentStepIndex > 0 ? currentStepIndex -= 1 : null"
+      />
+    </div>
+
     <FormGroup @onSubmit="handleSubmit">
       <template slot="fields-group">
         <UserSignFieldsGroup
@@ -22,7 +33,7 @@
       </template>
 
       <template slot="button-group">
-        <div :class="[$style['button-container']]">
+        <div :class="[$style['button-wrapper']]">
           <ButtonElement
             type="submit"
             translation-path="forms.shared.submit"
@@ -35,10 +46,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { get } from 'lodash';
 
+import { apiSignUp } from '@/api';
 import { emailPasswordFields, userNamesFields, userDetailsFields } from '@/constants/forms';
-import { signIn } from '@/store/currentUser/actions';
+import { serverMessages } from '@/constants/serverResponses';
+import { SIGN_IN_ROUTE } from '@/constants/routesNames';
 
 import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
@@ -57,7 +70,7 @@ export default {
       lastName: '',
       email: '',
       password: '',
-      birthDate: '',
+      birthDate: null,
       gender: '',
     };
   },
@@ -83,14 +96,23 @@ export default {
         return;
       }
 
-      console.log({
-        firstName,
-        lastName,
-        birthDate,
-        gender,
-        email,
-        password,
-      });
+      try {
+        const response = await apiSignUp({
+          firstName,
+          lastName,
+          birthDate,
+          gender,
+          email,
+          password,
+        });
+
+        if (get(response, 'data.account') === serverMessages.accountCreated) {
+          this.$router.push({ name: SIGN_IN_ROUTE });
+        }
+      } catch (err) {
+        // TODO: handel errors
+        console.log(err);
+      }
     },
     onChange(payload) {
       const { name, value } = payload;
@@ -103,9 +125,6 @@ export default {
         value: this[field.name],
       }));
     },
-    ...mapActions({
-      signIn,
-    }),
   },
 };
 </script>

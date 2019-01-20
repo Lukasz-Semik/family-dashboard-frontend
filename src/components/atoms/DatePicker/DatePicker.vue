@@ -7,6 +7,7 @@
     <Datepicker
       :id="name"
       ref="datepicker"
+      :value="value"
       :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
       :input-class="[$style['input'], inputClassNames]"
       :calendar-class="[$style['calendar']]"
@@ -17,7 +18,6 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker';
-import moment from 'moment';
 
 import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
 
@@ -27,6 +27,10 @@ export default {
     WithLabelFieldWrapper,
   },
   props: {
+    value: {
+      type: Date,
+      default: null,
+    },
     name: {
       type: String,
       required: true,
@@ -54,7 +58,6 @@ export default {
   },
   data() {
     return {
-      selectedDate: '1',
       isOpen: false,
       isHovered: false,
     };
@@ -71,7 +74,7 @@ export default {
   methods: {
     onSelectDate(value) {
       this.$emit('onChange', {
-        value: moment(value).format('MM-DD-YYYY'),
+        value,
         name: this.name,
       });
     },

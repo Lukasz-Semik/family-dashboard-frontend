@@ -10,7 +10,6 @@
 export default {
   methods: {
     onSubmit(event) {
-      console.log('onSubmit form');
       this.$emit('onSubmit', event);
     },
   },
