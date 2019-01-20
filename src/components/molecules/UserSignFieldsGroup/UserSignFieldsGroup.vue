@@ -1,6 +1,9 @@
 <template>
   <div>
-    <FormRow v-for="field in fields" :key="field.name">
+    <FormRow
+      v-for="field in fields"
+      :key="field.name"
+    >
       <InputElement
         v-if="field.fieldType === 'input'"
         :name="field.name"

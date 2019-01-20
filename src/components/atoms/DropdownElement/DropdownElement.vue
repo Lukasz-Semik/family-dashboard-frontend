@@ -61,13 +61,6 @@ export default {
       default: '',
     },
   },
-  created() {
-    const foundValue = find(this.options, option => option.value === this.value);
-
-    if (!isEmpty(foundValue)) {
-      this.selected = this.$t(foundValue.label);
-    }
-  },
   data() {
     return {
       selected: null,
@@ -79,13 +72,20 @@ export default {
       return this.options.map(item => this.$t(item.label));
     },
   },
+  created() {
+    const foundValue = find(this.options, option => option.value === this.value);
+
+    if (!isEmpty(foundValue)) {
+      this.selected = this.$t(foundValue.label);
+    }
+  },
   methods: {
     handleChange(selectedOption) {
       this.$emit('onChange', {
         value: get(
           find(this.options, option => this.$t(option.label) === selectedOption),
           'value',
-          null
+          null,
         ),
         name: this.name,
       });

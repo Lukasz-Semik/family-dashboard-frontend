@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <slot name="fields-group"/>
+    <slot name="fields-group" />
 
-    <slot name="button-group"/>
+    <slot name="button-group" />
   </form>
 </template>
 

@@ -18,7 +18,6 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker';
-import moment from 'moment';
 
 import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
 

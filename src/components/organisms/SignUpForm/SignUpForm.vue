@@ -1,10 +1,13 @@
 <template>
   <div :class="[$style['form-wrapper']]">
-    <div v-if="currentStepIndex > 0" :class="[$style['previous-wrapper']]">
+    <div
+      v-if="currentStepIndex > 0"
+      :class="[$style['previous-wrapper']]"
+    >
       <ButtonElement
+        translation-path="general.previous"
+        has-previous-theme
         @onClick="currentStepIndex > 0 ? currentStepIndex -= 1 : null"
-        translationPath="general.previous"
-        hasPreviousTheme
       />
     </div>
 
@@ -31,7 +34,11 @@
 
       <template slot="button-group">
         <div :class="[$style['button-wrapper']]">
-          <ButtonElement type="submit" translation-path="forms.shared.submit" has-blue-theme/>
+          <ButtonElement
+            type="submit"
+            translation-path="forms.shared.submit"
+            has-blue-theme
+          />
         </div>
       </template>
     </FormGroup>
@@ -80,7 +87,9 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      const { currentStepIndex, firstName, lastName, birthDate, gender, email, password } = this;
+      const {
+        currentStepIndex, firstName, lastName, birthDate, gender, email, password,
+      } = this;
 
       if (currentStepIndex < 2) {
         this.currentStepIndex += 1;
