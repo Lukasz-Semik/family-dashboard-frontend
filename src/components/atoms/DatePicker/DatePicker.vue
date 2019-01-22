@@ -1,23 +1,27 @@
 <template>
-  <WithLabelFieldWrapper
-    :name="name"
-    :label-translated-text="labelTranslatedText"
-    :label-translation-path="labelTranslationPath"
-  >
-    <Datepicker
-      :id="name"
-      ref="datepicker"
-      :value="value"
-      :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
-      :input-class="[$style['input'], inputClassNames]"
-      :calendar-class="[$style['calendar']]"
-      @selected="onSelectDate"
-    />
-  </WithLabelFieldWrapper>
+  <div v-click-outside="onClose" @click="isOpen = true">
+    <WithLabelFieldWrapper
+      :name="name"
+      :is-focused="isOpen"
+      :label-translated-text="labelTranslatedText"
+      :label-translation-path="labelTranslationPath"
+    >
+      <Datepicker
+        :id="name"
+        ref="datepicker"
+        :value="value"
+        :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
+        :input-class="[$style['input'], inputClassNames]"
+        :calendar-class="[$style['calendar']]"
+        @selected="onSelectDate"
+      />
+    </WithLabelFieldWrapper>
+  </div>
 </template>
 
 <script>
 import Datepicker from 'vuejs-datepicker';
+import ClickOutside from 'vue-click-outside';
 
 import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
 
@@ -78,6 +82,12 @@ export default {
         name: this.name,
       });
     },
+    onClose() {
+      if (this.isOpen) this.isOpen = false;
+    },
+  },
+  directives: {
+    ClickOutside,
   },
 };
 </script>

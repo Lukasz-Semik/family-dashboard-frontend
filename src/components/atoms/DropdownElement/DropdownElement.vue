@@ -5,14 +5,16 @@
     :label-translation-path="labelTranslationPath"
     :is-focused="isFocused"
   >
-    <DropdownElement
-      v-model="selected"
-      :options="preparedOptions"
-      :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
-      @input="handleChange"
-      @open="isFocused = true"
-      @close="isFocused = false"
-    />
+    <div :class="inputClassNames">
+      <DropdownElement
+        v-model="selected"
+        :options="preparedOptions"
+        :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
+        @input="handleChange"
+        @open="isFocused = true"
+        @close="isFocused = false"
+      />
+    </div>
   </WithLabelFieldWrapper>
 </template>
 
@@ -71,6 +73,9 @@ export default {
     preparedOptions() {
       return this.options.map(item => this.$t(item.label));
     },
+    inputClassNames() {
+      return this.hasCenteredText ? 'is-centered' : '';
+    },
   },
   created() {
     const foundValue = find(this.options, option => option.value === this.value);
@@ -85,7 +90,7 @@ export default {
         value: get(
           find(this.options, option => this.$t(option.label) === selectedOption),
           'value',
-          null,
+          null
         ),
         name: this.name,
       });
@@ -168,4 +173,13 @@ export default {
     }
   }
 }
+/* stylelint-disable no-descending-specificity */
+.is-centered {
+  .multiselect__placeholder,
+  .multiselect__single {
+    width: 100%;
+    text-align: center;
+  }
+}
+/* stylelint-enable */
 </style>
