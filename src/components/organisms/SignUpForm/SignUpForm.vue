@@ -1,9 +1,6 @@
 <template>
   <div :class="[$style['form-wrapper']]">
-    <div
-      v-if="currentStepIndex > 0"
-      :class="[$style['previous-wrapper']]"
-    >
+    <div v-if="currentStepIndex > 0" :class="[$style['previous-wrapper']]">
       <ButtonElement
         translation-path="general.previous"
         has-previous-theme
@@ -34,11 +31,7 @@
 
       <template slot="button-group">
         <div :class="[$style['button-wrapper']]">
-          <ButtonElement
-            type="submit"
-            translation-path="forms.shared.submit"
-            has-blue-theme
-          />
+          <ButtonElement type="submit" translation-path="forms.shared.submit" has-blue-theme/>
         </div>
       </template>
     </FormGroup>
@@ -72,6 +65,7 @@ export default {
       password: '',
       birthDate: null,
       gender: '',
+      errors: {},
     };
   },
   computed: {
@@ -87,14 +81,12 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      const {
-        currentStepIndex, firstName, lastName, birthDate, gender, email, password,
-      } = this;
-
-      if (currentStepIndex < 2) {
+      if (this.currentStepIndex < 2) {
         this.currentStepIndex += 1;
         return;
       }
+
+      const { currentStepIndex, firstName, lastName, birthDate, gender, email, password } = this;
 
       try {
         const response = await apiSignUp({
@@ -115,9 +107,10 @@ export default {
       }
     },
     onChange(payload) {
-      const { name, value } = payload;
+      const { name, value, isValid } = payload;
 
       this[name] = value;
+      this.errors[name] = !isValid;
     },
     generateFields(fields) {
       return fields.map(field => ({

@@ -8,6 +8,7 @@
         :value="field.value"
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
+        :has-submit-error="hasSubmitError"
         @onChange="onChange"
         has-centered-text
       />
@@ -61,6 +62,10 @@ export default {
     fields: {
       type: Array,
       default: () => [],
+    },
+    hasSubmitError: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {

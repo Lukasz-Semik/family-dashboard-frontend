@@ -6,6 +6,10 @@
   &.is-hovered-focused {
     color: $main-orange;
   }
+
+  &.has-error {
+    color: $main-red;
+  }
 }
 
 .field-wrapper {
@@ -24,9 +28,14 @@
     z-index: 1;
     background-color: $main-orange;
     transform: scaleX(0);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 
     &.is-hovered-focused {
+      transform: scaleX(1);
+    }
+
+    &.has-error {
+      background-color: $main-red;
       transform: scaleX(1);
     }
   }

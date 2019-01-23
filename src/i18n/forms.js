@@ -2,6 +2,9 @@ export default {
   shared: {
     submit: 'Submit',
   },
+  errors: {
+    required: 'Required',
+  },
   userSign: {
     email: {
       label: 'E-mail',

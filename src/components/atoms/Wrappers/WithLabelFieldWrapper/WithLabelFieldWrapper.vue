@@ -1,28 +1,35 @@
 <template>
-  <div
-    :class="[$style['field-wrapper']]"
-    @mouseenter="isHovered = true"
-    @mouseleave="isHovered = false"
-  >
-    <label
-      data-test="label"
-      :for="name"
-      :class="[$style['label'], stateClassNames]"
+  <div>
+    <div
+      :class="[$style['field-wrapper']]"
+      @mouseenter="isHovered = true"
+      @mouseleave="isHovered = false"
     >
-      {{ labelTranslatedText || $t(labelTranslationPath) }}
-    </label>
+      <label
+        data-test="label"
+        :for="name"
+        :class="[$style['label'], stateClassNames]"
+      >{{ labelTranslatedText || $t(labelTranslationPath) }}</label>
 
-    <slot />
+      <slot/>
 
-    <div :class="[$style['border']]" />
-    <!-- eslint-disable max-len -->
-    <div :class="[$style['border'], $style['border-hover-focus-indicator'], stateClassNames]" />
-    <!-- esling-enalbe -->
+      <div :class="[$style['border']]"/>
+      <!-- eslint-disable max-len -->
+      <div :class="[$style['border'], $style['border-hover-focus-indicator'], stateClassNames]"/>
+      <!-- esling-enalbe -->
+    </div>
+
+    <ErrorMsg v-if="Boolean(errorMsg)" :translationPath="errorMsg"/>
   </div>
 </template>
 
 <script>
+import ErrorMsg from '@/components/atoms/ErrorMsg/ErrorMsg';
+
 export default {
+  components: {
+    ErrorMsg,
+  },
   props: {
     name: {
       type: String,
@@ -35,6 +42,10 @@ export default {
     isFocused: {
       type: Boolean,
       default: false,
+    },
+    errorMsg: {
+      type: String,
+      default: '',
     },
     labelTranslatedText: {
       type: String,
@@ -52,10 +63,11 @@ export default {
   },
   computed: {
     stateClassNames() {
-      const { $style, isFocused, isHovered } = this;
+      const { $style, isFocused, isHovered, errorMsg } = this;
 
       return {
         [$style['is-hovered-focused']]: isFocused || isHovered,
+        [$style['has-error']]: Boolean(errorMsg),
       };
     },
   },

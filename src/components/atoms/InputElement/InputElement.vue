@@ -4,6 +4,7 @@
     :label-translated-text="labelTranslatedText"
     :label-translation-path="labelTranslationPath"
     :is-focused="isFocused"
+    :error-msg="errorMsg"
   >
     <input
       :id="name"
@@ -15,12 +16,14 @@
       :placeholder="placeholderTranslatedText || this.$t(placeholderTranslationPath)"
       @input="handleChange"
       @focus="isFocused = true"
-      @blur="isFocused = false"
+      @blur="onBlur"
     >
   </WithLabelFieldWrapper>
 </template>
 
 <script>
+import { isEmpty } from 'lodash';
+
 import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
 
 export default {
@@ -64,6 +67,8 @@ export default {
   data() {
     return {
       isFocused: false,
+      isValid: true,
+      errorMsg: '',
     };
   },
   computed: {
@@ -75,13 +80,49 @@ export default {
       };
     },
   },
+  created() {
+    const { isValid } = this.validate(this.value, { isRequired: true });
+    this.isValid = isValid;
+
+    this.emitOnChange(this.value);
+  },
   methods: {
+    validate(value, { isRequired, showError = true }) {
+      let isValid = true;
+      let errorMsg = '';
+
+      if (isRequired && isEmpty(value)) {
+        isValid = false;
+
+        if (showError) {
+          errorMsg = 'forms.errors.required';
+        }
+      }
+
+      return {
+        isValid,
+        errorMsg,
+      };
+    },
     handleChange(event) {
       const { value } = event.target;
 
+      const { isValid, errorMsg } = this.validate(value, { isRequired: true });
+
+      this.isValid = isValid;
+      this.errorMsg = errorMsg;
+
+      this.emitOnChange(value);
+    },
+    onBlur(event) {
+      this.isFocused = false;
+      this.handleChange(event);
+    },
+    emitOnChange(value) {
       this.$emit('onChange', {
         value,
         name: this.name,
+        isValid: this.isValid,
       });
     },
   },
