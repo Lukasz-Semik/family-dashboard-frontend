@@ -40,6 +40,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    isSubmissionFailed: {
+      type: Boolean,
+      default: false,
+    },
     labelTranslatedText: {
       type: String,
       default: '',
@@ -65,6 +69,13 @@ export default {
       default: '',
     },
   },
+  watch: {
+    isSubmissionFailed(newVal, oldVal) {
+      if (newVal && !oldVal) {
+        this.handleValidate(this.value);
+      }
+    },
+  },
   data() {
     return {
       selected: null,
@@ -87,6 +98,11 @@ export default {
     if (!isEmpty(foundValue)) {
       this.selected = this.$t(foundValue.label);
     }
+
+    const { isValid } = validate(this.value, { isRequired: true });
+    this.isValid = isValid;
+
+    this.emitOnChange(this.value);
   },
   methods: {
     onClose() {
@@ -94,11 +110,14 @@ export default {
 
       this.handleChange(this.selected);
     },
-    handleChange(selectedOption) {
+    handleValidate(selectedOption) {
       const { isValid, errorMsg } = validate(selectedOption, { isRequired: true });
 
       this.isValid = isValid;
       this.errorMsg = errorMsg;
+    },
+    handleChange(selectedOption) {
+      this.handleValidate(selectedOption);
       this.emitOnChange(selectedOption);
     },
     emitOnChange(selectedOption) {
@@ -109,6 +128,7 @@ export default {
           null
         ),
         name: this.name,
+        isValid: this.isValid,
       });
     },
   },

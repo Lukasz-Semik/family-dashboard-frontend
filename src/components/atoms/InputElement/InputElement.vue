@@ -44,6 +44,10 @@ export default {
       type: String,
       default: 'text',
     },
+    isSubmissionFailed: {
+      type: Boolean,
+      default: false,
+    },
     placeholderTranslatedText: {
       type: String,
       default: '',
@@ -63,6 +67,13 @@ export default {
     hasCenteredText: {
       type: Boolean,
       default: false,
+    },
+  },
+  watch: {
+    isSubmissionFailed(newVal, oldVal) {
+      if (newVal && !oldVal) {
+        this.handleValidate(this.value);
+      }
     },
   },
   data() {
@@ -88,14 +99,15 @@ export default {
     this.emitOnChange(this.value);
   },
   methods: {
-    handleChange(event) {
-      const { value } = event.target;
-
+    handleValidate(value) {
       const { isValid, errorMsg } = validate(value, { isRequired: true });
 
       this.isValid = isValid;
       this.errorMsg = errorMsg;
-
+    },
+    handleChange(event) {
+      const { value } = event.target;
+      this.handleValidate(value);
       this.emitOnChange(value);
     },
     onBlur(event) {

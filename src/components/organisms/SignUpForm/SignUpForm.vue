@@ -14,18 +14,21 @@
           v-if="currentStepIndex === 1"
           :fields="namesFields"
           @onChange="onChange"
+          :is-submission-failed="isSubmissionFailed"
         />
 
         <UserSignFieldsGroup
           v-if="currentStepIndex === 0"
           :fields="userDetails"
           @onChange="onChange"
+          :is-submission-failed="isSubmissionFailed"
         />
 
         <UserSignFieldsGroup
           v-if="currentStepIndex === 2"
           :fields="accountFields"
           @onChange="onChange"
+          :is-submission-failed="isSubmissionFailed"
         />
       </template>
 
@@ -65,6 +68,7 @@ export default {
       password: '',
       birthDate: null,
       gender: '',
+      isSubmissionFailed: false,
       errors: {},
     };
   },
@@ -81,6 +85,22 @@ export default {
   },
   methods: {
     async handleSubmit() {
+      this.isSubmissionFailed = false;
+      // let fieldsToValidate = ['firstName', 'lastName'];
+      let fieldsToValidate = ['birthDate', 'gender'];
+
+      let isFormValid = true;
+      fieldsToValidate.forEach(key => {
+        if (this.errors[key]) {
+          isFormValid = false;
+        }
+      });
+
+      if (!isFormValid) {
+        this.isSubmissionFailed = true;
+        return;
+      }
+
       if (this.currentStepIndex < 2) {
         this.currentStepIndex += 1;
         return;
@@ -111,6 +131,9 @@ export default {
 
       this[name] = value;
       this.errors[name] = !isValid;
+
+      console.log(payload);
+      console.log(this.errors);
     },
     generateFields(fields) {
       return fields.map(field => ({

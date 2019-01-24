@@ -8,7 +8,7 @@
         :value="field.value"
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
-        :has-submit-error="hasSubmitError"
+        :is-submission-failed="isSubmissionFailed"
         @onChange="onChange"
         has-centered-text
       />
@@ -19,6 +19,7 @@
         :value="field.value"
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
+        :is-submission-failed="isSubmissionFailed"
         @onChange="onChange"
         has-centered-text
       />
@@ -30,6 +31,7 @@
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
         :options="field.options"
+        :is-submission-failed="isSubmissionFailed"
         @onChange="onChange"
         has-centered-text
       />
@@ -63,7 +65,7 @@ export default {
       type: Array,
       default: () => [],
     },
-    hasSubmitError: {
+    isSubmissionFailed: {
       type: Boolean,
       default: false,
     },

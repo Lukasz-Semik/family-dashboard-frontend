@@ -43,6 +43,10 @@ export default {
       type: String,
       required: true,
     },
+    isSubmissionFailed: {
+      type: Boolean,
+      default: false,
+    },
     placeholderTranslatedText: {
       type: String,
       default: '',
@@ -64,6 +68,13 @@ export default {
       default: false,
     },
   },
+  watch: {
+    isSubmissionFailed(newVal, oldVal) {
+      if (newVal && !oldVal) {
+        this.handleValidate(this.value);
+      }
+    },
+  },
   data() {
     return {
       isOpen: false,
@@ -72,6 +83,12 @@ export default {
       errorMsg: '',
       selectedControl: null,
     };
+  },
+  created() {
+    const { isValid } = validate(this.value, { isRequired: true });
+    this.isValid = isValid;
+
+    this.emitOnChange(this.value);
   },
   computed: {
     inputClassNames() {
@@ -84,12 +101,16 @@ export default {
   },
   methods: {
     convertDateToString: date => moment(date).toISOString(),
-    onSelectDate(value) {
+    handleValidate(value) {
       const { isValid, errorMsg } = validate(this.convertDateToString(value), { isRequired: true });
 
-      this.selectedControl = value;
       this.isValid = isValid;
       this.errorMsg = errorMsg;
+    },
+    onSelectDate(value) {
+      this.selectedControl = value;
+
+      this.handleValidate(value);
 
       this.emitOnChange(value);
     },
