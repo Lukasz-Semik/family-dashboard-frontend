@@ -4,6 +4,7 @@
     :label-translated-text="labelTranslatedText"
     :label-translation-path="labelTranslationPath"
     :is-focused="isFocused"
+    :error-msg="errorMsg"
   >
     <div :class="inputClassNames">
       <DropdownElement
@@ -12,7 +13,7 @@
         :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
         @input="handleChange"
         @open="isFocused = true"
-        @close="isFocused = false"
+        @close="onClose"
       />
     </div>
   </WithLabelFieldWrapper>
@@ -22,6 +23,7 @@
 import DropdownElement from 'vue-multiselect';
 import { find, get, isEmpty } from 'lodash';
 
+import { validate } from '@/helpers/validators';
 import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
 
 export default {
@@ -67,6 +69,8 @@ export default {
     return {
       selected: null,
       isFocused: false,
+      isValid: false,
+      errorMsg: '',
     };
   },
   computed: {
@@ -85,7 +89,19 @@ export default {
     }
   },
   methods: {
+    onClose() {
+      this.isFocused = false;
+
+      this.handleChange(this.selected);
+    },
     handleChange(selectedOption) {
+      const { isValid, errorMsg } = validate(selectedOption, { isRequired: true });
+
+      this.isValid = isValid;
+      this.errorMsg = errorMsg;
+      this.emitOnChange(selectedOption);
+    },
+    emitOnChange(selectedOption) {
       this.$emit('onChange', {
         value: get(
           find(this.options, option => this.$t(option.label) === selectedOption),
