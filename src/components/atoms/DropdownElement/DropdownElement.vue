@@ -1,5 +1,5 @@
 <template>
-  <WithLabelFieldWrapper
+  <FieldControl
     :name="name"
     :label-translated-text="labelTranslatedText"
     :label-translation-path="labelTranslationPath"
@@ -16,7 +16,7 @@
         @close="onClose"
       />
     </div>
-  </WithLabelFieldWrapper>
+  </FieldControl>
 </template>
 
 <script>
@@ -24,12 +24,12 @@ import DropdownElement from 'vue-multiselect';
 import { find, get, isEmpty } from 'lodash';
 
 import { validate } from '@/helpers/validators';
-import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
+import FieldControl from '@/components/molecules/FieldControl/FieldControl.vue';
 
 export default {
   components: {
     DropdownElement,
-    WithLabelFieldWrapper,
+    FieldControl,
   },
   props: {
     name: {

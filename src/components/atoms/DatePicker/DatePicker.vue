@@ -1,6 +1,6 @@
 <template>
   <div v-click-outside="onClose" @click="isOpen = true">
-    <WithLabelFieldWrapper
+    <FieldControl
       :name="name"
       :is-focused="isOpen"
       :label-translated-text="labelTranslatedText"
@@ -16,7 +16,7 @@
         :calendar-class="[$style['calendar']]"
         @selected="onSelectDate"
       />
-    </WithLabelFieldWrapper>
+    </FieldControl>
   </div>
 </template>
 
@@ -27,12 +27,12 @@ import moment from 'moment';
 import { isEmpty } from 'lodash';
 
 import { validate } from '@/helpers/validators';
-import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
+import FieldControl from '@/components/molecules/FieldControl/FieldControl.vue';
 
 export default {
   components: {
     Datepicker,
-    WithLabelFieldWrapper,
+    FieldControl,
   },
   props: {
     value: {

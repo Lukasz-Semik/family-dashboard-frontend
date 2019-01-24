@@ -1,5 +1,5 @@
 <template>
-  <WithLabelFieldWrapper
+  <FieldControl
     :name="name"
     :label-translated-text="labelTranslatedText"
     :label-translation-path="labelTranslationPath"
@@ -18,18 +18,18 @@
       @focus="isFocused = true"
       @blur="onBlur"
     >
-  </WithLabelFieldWrapper>
+  </FieldControl>
 </template>
 
 <script>
 import { isEmpty } from 'lodash';
 
 import { validate } from '@/helpers/validators';
-import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
+import FieldControl from '@/components/molecules/FieldControl/FieldControl.vue';
 
 export default {
   components: {
-    WithLabelFieldWrapper,
+    FieldControl,
   },
   props: {
     name: {
