@@ -92,17 +92,17 @@ export default {
       return this.hasCenteredText ? 'is-centered' : '';
     },
   },
-  created() {
+  mounted() {
     const foundValue = find(this.options, option => option.value === this.value);
 
     if (!isEmpty(foundValue)) {
       this.selected = this.$t(foundValue.label);
     }
 
-    const { isValid } = validate(this.value, { isRequired: true });
+    const { isValid } = validate(foundValue, { isRequired: true });
     this.isValid = isValid;
 
-    this.emitOnChange(this.value);
+    this.emitOnChange(this.$t(foundValue && foundValue.label));
   },
   methods: {
     onClose() {

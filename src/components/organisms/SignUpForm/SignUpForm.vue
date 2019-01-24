@@ -11,14 +11,14 @@
     <FormGroup @onSubmit="handleSubmit">
       <template slot="fields-group">
         <UserSignFieldsGroup
-          v-if="currentStepIndex === 1"
+          v-if="currentStepIndex === 0"
           :fields="namesFields"
           @onChange="onChange"
           :is-submission-failed="isSubmissionFailed"
         />
 
         <UserSignFieldsGroup
-          v-if="currentStepIndex === 0"
+          v-if="currentStepIndex === 1"
           :fields="userDetails"
           @onChange="onChange"
           :is-submission-failed="isSubmissionFailed"
@@ -86,8 +86,15 @@ export default {
   methods: {
     async handleSubmit() {
       this.isSubmissionFailed = false;
-      // let fieldsToValidate = ['firstName', 'lastName'];
-      let fieldsToValidate = ['birthDate', 'gender'];
+      let fieldsToValidate = ['firstName', 'lastName'];
+
+      if (this.currentStepIndex > 0) {
+        fieldsToValidate = [...fieldsToValidate, 'birthDate', 'gender'];
+      }
+
+      if (this.currentStepIndex > 1) {
+        fieldsToValidate = [...fieldsToValidate, 'email', 'password'];
+      }
 
       let isFormValid = true;
       fieldsToValidate.forEach(key => {
@@ -131,9 +138,6 @@ export default {
 
       this[name] = value;
       this.errors[name] = !isValid;
-
-      console.log(payload);
-      console.log(this.errors);
     },
     generateFields(fields) {
       return fields.map(field => ({

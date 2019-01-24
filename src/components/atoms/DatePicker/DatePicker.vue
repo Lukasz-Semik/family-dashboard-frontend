@@ -84,8 +84,8 @@ export default {
       selectedControl: null,
     };
   },
-  created() {
-    const { isValid } = validate(this.value, { isRequired: true });
+  mounted() {
+    const { isValid } = validate(this.convertDateToString(this.value), { isRequired: true });
     this.isValid = isValid;
 
     this.emitOnChange(this.value);
