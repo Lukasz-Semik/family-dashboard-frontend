@@ -11,13 +11,13 @@
     <FormGroup @onSubmit="handleSubmit">
       <template slot="fields-group">
         <UserSignFieldsGroup
-          v-if="currentStepIndex === 0"
+          v-if="currentStepIndex === 1"
           :fields="namesFields"
           @onChange="onChange"
         />
 
         <UserSignFieldsGroup
-          v-if="currentStepIndex === 1"
+          v-if="currentStepIndex === 0"
           :fields="userDetails"
           @onChange="onChange"
         />

@@ -24,6 +24,7 @@
 <script>
 import { isEmpty } from 'lodash';
 
+import { validate } from '@/helpers/validators';
 import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
 
 export default {
@@ -81,33 +82,16 @@ export default {
     },
   },
   created() {
-    const { isValid } = this.validate(this.value, { isRequired: true });
+    const { isValid } = validate(this.value, { isRequired: true });
     this.isValid = isValid;
 
     this.emitOnChange(this.value);
   },
   methods: {
-    validate(value, { isRequired, showError = true }) {
-      let isValid = true;
-      let errorMsg = '';
-
-      if (isRequired && isEmpty(value)) {
-        isValid = false;
-
-        if (showError) {
-          errorMsg = 'forms.errors.required';
-        }
-      }
-
-      return {
-        isValid,
-        errorMsg,
-      };
-    },
     handleChange(event) {
       const { value } = event.target;
 
-      const { isValid, errorMsg } = this.validate(value, { isRequired: true });
+      const { isValid, errorMsg } = validate(value, { isRequired: true });
 
       this.isValid = isValid;
       this.errorMsg = errorMsg;

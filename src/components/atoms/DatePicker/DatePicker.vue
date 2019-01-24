@@ -5,6 +5,7 @@
       :is-focused="isOpen"
       :label-translated-text="labelTranslatedText"
       :label-translation-path="labelTranslationPath"
+      :error-msg="errorMsg"
     >
       <Datepicker
         :id="name"
@@ -22,7 +23,10 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 import ClickOutside from 'vue-click-outside';
+import moment from 'moment';
+import { isEmpty } from 'lodash';
 
+import { validate } from '@/helpers/validators';
 import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
 
 export default {
@@ -64,6 +68,9 @@ export default {
     return {
       isOpen: false,
       isHovered: false,
+      isValid: false,
+      errorMsg: '',
+      selectedControl: null,
     };
   },
   computed: {
@@ -76,14 +83,29 @@ export default {
     },
   },
   methods: {
+    convertDateToString: date => moment(date).toISOString(),
     onSelectDate(value) {
+      const { isValid, errorMsg } = validate(this.convertDateToString(value), { isRequired: true });
+
+      this.selectedControl = value;
+      this.isValid = isValid;
+      this.errorMsg = errorMsg;
+
+      this.emitOnChange(value);
+    },
+    onClose() {
+      if (this.isOpen) {
+        this.isOpen = false;
+
+        this.onSelectDate(this.value);
+      }
+    },
+    emitOnChange(value) {
       this.$emit('onChange', {
         value,
         name: this.name,
+        isValid: this.isValid,
       });
-    },
-    onClose() {
-      if (this.isOpen) this.isOpen = false;
     },
   },
   directives: {
