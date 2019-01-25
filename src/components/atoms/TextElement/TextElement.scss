@@ -1,0 +1,10 @@
+.text {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  font-weight: 300;
+  color: $medium-gray;
+
+  &.has-centered-text {
+    text-align: center;
+  }
+}

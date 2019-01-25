@@ -16,27 +16,38 @@
         <UserSignFieldsGroup
           v-if="currentStepIndex === 0"
           :fields="namesFields"
+          :is-submission-failed="isSubmissionFailed"
           @onChange="onChange"
         />
 
         <UserSignFieldsGroup
           v-if="currentStepIndex === 1"
           :fields="userDetails"
+          :is-submission-failed="isSubmissionFailed"
           @onChange="onChange"
         />
 
         <UserSignFieldsGroup
           v-if="currentStepIndex === 2"
           :fields="accountFields"
+          :is-submission-failed="isSubmissionFailed"
           @onChange="onChange"
         />
+
+        <template v-if="currentStepIndex === 3">
+          <TextElement
+            translation-path="general.successfulRegister"
+            :translation-values="{ email }"
+            has-centered-text
+          />
+        </template>
       </template>
 
       <template slot="button-group">
         <div :class="[$style['button-wrapper']]">
           <ButtonElement
             type="submit"
-            translation-path="forms.shared.submit"
+            :translation-path="buttonTranslationPath"
             has-blue-theme
           />
         </div>
@@ -49,10 +60,12 @@
 import { get } from 'lodash';
 
 import { apiSignUp } from '@/api';
+import { checkIsFormValid } from '@/helpers/validators';
 import { emailPasswordFields, userNamesFields, userDetailsFields } from '@/constants/forms';
 import { serverMessages } from '@/constants/serverResponses';
 import { SIGN_IN_ROUTE } from '@/constants/routesNames';
 
+import TextElement from '@/components/atoms/TextElement/TextElement.vue';
 import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
@@ -62,6 +75,7 @@ export default {
     FormGroup,
     UserSignFieldsGroup,
     ButtonElement,
+    TextElement,
   },
   data() {
     return {
@@ -72,6 +86,8 @@ export default {
       password: '',
       birthDate: null,
       gender: '',
+      isSubmissionFailed: false,
+      errors: {},
     };
   },
   computed: {
@@ -84,40 +100,72 @@ export default {
     userDetails() {
       return this.generateFields(userDetailsFields);
     },
+    buttonTranslationPath() {
+      if (this.currentStepIndex === 3) return 'general.gotIt';
+      if (this.currentStepIndex === 2) return 'forms.shared.submit';
+
+      return 'general.next';
+    },
   },
   methods: {
     async handleSubmit() {
-      const {
-        currentStepIndex, firstName, lastName, birthDate, gender, email, password,
-      } = this;
+      this.isSubmissionFailed = false;
+      let fieldsToValidate = ['firstName', 'lastName'];
 
-      if (currentStepIndex < 2) {
+      if (this.currentStepIndex > 0) {
+        fieldsToValidate = [...fieldsToValidate, 'birthDate', 'gender'];
+      }
+
+      if (this.currentStepIndex > 1) {
+        fieldsToValidate = [...fieldsToValidate, 'email', 'password'];
+      }
+
+      const isFormValid = checkIsFormValid(this.errors, fieldsToValidate);
+
+      if (!isFormValid) {
+        this.isSubmissionFailed = true;
+        return;
+      }
+
+      if (this.currentStepIndex < 2) {
         this.currentStepIndex += 1;
         return;
       }
 
-      try {
-        const response = await apiSignUp({
-          firstName,
-          lastName,
-          birthDate,
-          gender,
-          email,
-          password,
-        });
+      const {
+        firstName, lastName, birthDate, gender, email, password,
+      } = this;
 
-        if (get(response, 'data.account') === serverMessages.accountCreated) {
-          this.$router.push({ name: SIGN_IN_ROUTE });
+      if (this.currentStepIndex === 2) {
+        try {
+          const response = await apiSignUp({
+            firstName,
+            lastName,
+            birthDate,
+            gender,
+            email,
+            password,
+          });
+
+          if (get(response, 'data.account') === serverMessages.accountCreated) {
+            this.currentStepIndex = 3;
+            return;
+          }
+        } catch (err) {
+          // TODO: handel errors
+          console.log(err);
         }
-      } catch (err) {
-        // TODO: handel errors
-        console.log(err);
+      }
+
+      if (this.currentStepIndex === 3) {
+        this.$router.push({ name: SIGN_IN_ROUTE });
       }
     },
     onChange(payload) {
-      const { name, value } = payload;
+      const { name, value, isValid } = payload;
 
       this[name] = value;
+      this.errors[name] = !isValid;
     },
     generateFields(fields) {
       return fields.map(field => ({

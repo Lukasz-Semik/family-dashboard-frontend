@@ -1,31 +1,35 @@
 <template>
-  <WithLabelFieldWrapper
+  <FieldControl
     :name="name"
     :label-translated-text="labelTranslatedText"
     :label-translation-path="labelTranslationPath"
     :is-focused="isFocused"
+    :error-msg="errorMsg"
   >
-    <DropdownElement
-      v-model="selected"
-      :options="preparedOptions"
-      :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
-      @input="handleChange"
-      @open="isFocused = true"
-      @close="isFocused = false"
-    />
-  </WithLabelFieldWrapper>
+    <div :class="inputClassNames">
+      <DropdownElement
+        v-model="selected"
+        :options="preparedOptions"
+        :placeholder="placeholderTranslatedText || $t(placeholderTranslationPath)"
+        @input="handleChange"
+        @open="isFocused = true"
+        @close="onClose"
+      />
+    </div>
+  </FieldControl>
 </template>
 
 <script>
 import DropdownElement from 'vue-multiselect';
 import { find, get, isEmpty } from 'lodash';
 
-import WithLabelFieldWrapper from '@/components/atoms/Wrappers/WithLabelFieldWrapper/WithLabelFieldWrapper.vue';
+import { validate } from '@/helpers/validators';
+import FieldControl from '@/components/molecules/FieldControl/FieldControl.vue';
 
 export default {
   components: {
     DropdownElement,
-    WithLabelFieldWrapper,
+    FieldControl,
   },
   props: {
     name: {
@@ -35,6 +39,14 @@ export default {
     options: {
       type: Array,
       default: () => [],
+    },
+    isRequired: {
+      type: Boolean,
+      default: false,
+    },
+    isSubmissionFailed: {
+      type: Boolean,
+      default: false,
     },
     labelTranslatedText: {
       type: String,
@@ -65,22 +77,54 @@ export default {
     return {
       selected: null,
       isFocused: false,
+      isValid: false,
+      errorMsg: '',
     };
   },
   computed: {
     preparedOptions() {
       return this.options.map(item => this.$t(item.label));
     },
+    inputClassNames() {
+      return this.hasCenteredText ? 'is-centered' : '';
+    },
   },
-  created() {
+  watch: {
+    isSubmissionFailed(newVal, oldVal) {
+      if (newVal && !oldVal) {
+        this.handleValidate(this.value);
+      }
+    },
+  },
+  mounted() {
     const foundValue = find(this.options, option => option.value === this.value);
 
     if (!isEmpty(foundValue)) {
       this.selected = this.$t(foundValue.label);
     }
+
+    const { isValid } = validate(foundValue, { isRequired: this.isRequired });
+    this.isValid = isValid;
+
+    this.emitOnChange(this.$t(foundValue && foundValue.label));
   },
   methods: {
+    onClose() {
+      this.isFocused = false;
+
+      this.handleChange(this.selected);
+    },
+    handleValidate(selectedOption) {
+      const { isValid, errorMsg } = validate(selectedOption, { isRequired: this.isRequired });
+
+      this.isValid = isValid;
+      this.errorMsg = errorMsg;
+    },
     handleChange(selectedOption) {
+      this.handleValidate(selectedOption);
+      this.emitOnChange(selectedOption);
+    },
+    emitOnChange(selectedOption) {
       this.$emit('onChange', {
         value: get(
           find(this.options, option => this.$t(option.label) === selectedOption),
@@ -88,6 +132,7 @@ export default {
           null,
         ),
         name: this.name,
+        isValid: this.isValid,
       });
     },
   },
@@ -168,4 +213,13 @@ export default {
     }
   }
 }
+/* stylelint-disable no-descending-specificity */
+.is-centered {
+  .multiselect__placeholder,
+  .multiselect__single {
+    width: 100%;
+    text-align: center;
+  }
+}
+/* stylelint-enable */
 </style>

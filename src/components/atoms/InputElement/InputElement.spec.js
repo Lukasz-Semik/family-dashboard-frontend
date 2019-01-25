@@ -74,7 +74,7 @@ describe('<InputElement/>', () => {
     $input.trigger('input');
 
     expect(wrapper.emitted().onChange).toBeTruthy();
-    expect(wrapper.emitted().onChange[0][0]).toMatchObject({
+    expect(wrapper.emitted().onChange[1][0]).toMatchObject({
       value: 'some-value',
       name: 'test-name',
     });

@@ -11,6 +11,11 @@
         :value="field.value"
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
+        :is-submission-failed="isSubmissionFailed"
+        :is-email-required="field.isEmailRequired"
+        :min-length-required="field.minLengthRequired"
+        :max-length-required="field.maxLengthRequired"
+        is-required
         has-centered-text
         @onChange="onChange"
       />
@@ -21,6 +26,9 @@
         :value="field.value"
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
+        :is-submission-failed="isSubmissionFailed"
+        is-required
+        has-centered-text
         @onChange="onChange"
       />
 
@@ -31,6 +39,9 @@
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
         :options="field.options"
+        :is-submission-failed="isSubmissionFailed"
+        is-required
+        has-centered-text
         @onChange="onChange"
       />
     </FormRow>
@@ -62,6 +73,10 @@ export default {
     fields: {
       type: Array,
       default: () => [],
+    },
+    isSubmissionFailed: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {

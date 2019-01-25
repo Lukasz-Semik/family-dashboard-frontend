@@ -11,6 +11,7 @@ module.exports = {
     'consistent-return': 'off',
     'implicit-arrow-linebreak': 'off',
     'operator-linebreak': 'off',
+    'arrow-parens': 'off',
     'no-param-reassign': [
       'error',
       {
