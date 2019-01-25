@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import { isEmpty } from 'lodash';
-
 import { validate } from '@/helpers/validators';
 import FieldControl from '@/components/molecules/FieldControl/FieldControl.vue';
 
@@ -55,9 +53,11 @@ export default {
     },
     minLengthRequired: {
       type: Number,
+      default: 0,
     },
     maxLengthRequired: {
       type: Number,
+      default: 0,
     },
     isSubmissionFailed: {
       type: Boolean,
@@ -83,12 +83,6 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  created() {
-    const { isValid } = validate(this.value, this.validationOptions);
-    this.isValid = isValid;
-
-    this.emitOnChange(this.value);
   },
   data() {
     return {
@@ -121,6 +115,12 @@ export default {
         this.handleValidate(this.value);
       }
     },
+  },
+  created() {
+    const { isValid } = validate(this.value, this.validationOptions);
+    this.isValid = isValid;
+
+    this.emitOnChange(this.value);
   },
   methods: {
     handleValidate(value) {

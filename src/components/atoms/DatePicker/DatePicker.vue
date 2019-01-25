@@ -1,5 +1,8 @@
 <template>
-  <div v-click-outside="onClose" @click="isOpen = true">
+  <div
+    v-click-outside="onClose"
+    @click="isOpen = true"
+  >
     <FieldControl
       :name="name"
       :is-focused="isOpen"
@@ -24,7 +27,6 @@
 import Datepicker from 'vuejs-datepicker';
 import ClickOutside from 'vue-click-outside';
 import moment from 'moment';
-import { isEmpty } from 'lodash';
 
 import { validate } from '@/helpers/validators';
 import FieldControl from '@/components/molecules/FieldControl/FieldControl.vue';

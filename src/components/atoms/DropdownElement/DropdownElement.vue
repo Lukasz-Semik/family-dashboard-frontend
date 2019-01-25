@@ -129,7 +129,7 @@ export default {
         value: get(
           find(this.options, option => this.$t(option.label) === selectedOption),
           'value',
-          null
+          null,
         ),
         name: this.name,
         isValid: this.isValid,

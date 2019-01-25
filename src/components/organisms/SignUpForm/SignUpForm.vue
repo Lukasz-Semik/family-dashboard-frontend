@@ -1,10 +1,13 @@
 <template>
   <div :class="[$style['form-wrapper']]">
-    <div v-if="currentStepIndex > 0" :class="[$style['previous-wrapper']]">
+    <div
+      v-if="currentStepIndex > 0"
+      :class="[$style['previous-wrapper']]"
+    >
       <ButtonElement
         translation-path="general.previous"
-        @onClick="currentStepIndex > 0 ? currentStepIndex -= 1 : null"
         has-previous-theme
+        @onClick="currentStepIndex > 0 ? currentStepIndex -= 1 : null"
       />
     </div>
 
@@ -33,16 +36,20 @@
 
         <template v-if="currentStepIndex === 3">
           <TextElement
-            translationPath="general.successfulRegister"
-            :translationValues="{ email }"
+            translation-path="general.successfulRegister"
+            :translation-values="{ email }"
             has-centered-text
-          ></TextElement>
+          />
         </template>
       </template>
 
       <template slot="button-group">
         <div :class="[$style['button-wrapper']]">
-          <ButtonElement type="submit" :translation-path="buttonTranslationPath" has-blue-theme/>
+          <ButtonElement
+            type="submit"
+            :translation-path="buttonTranslationPath"
+            has-blue-theme
+          />
         </div>
       </template>
     </FormGroup>
@@ -125,7 +132,9 @@ export default {
         return;
       }
 
-      const { firstName, lastName, birthDate, gender, email, password } = this;
+      const {
+        firstName, lastName, birthDate, gender, email, password,
+      } = this;
 
       if (this.currentStepIndex === 2) {
         try {

@@ -4,14 +4,18 @@
       <template slot="fields-group">
         <UserSignFieldsGroup
           :fields="fields"
-          @onChange="onChange"
           :is-submission-failed="isSubmissionFailed"
+          @onChange="onChange"
         />
       </template>
 
       <template slot="button-group">
         <div :class="[$style['button-container']]">
-          <ButtonElement type="submit" translation-path="forms.shared.submit" has-blue-theme/>
+          <ButtonElement
+            type="submit"
+            translation-path="forms.shared.submit"
+            has-blue-theme
+          />
         </div>
       </template>
     </FormGroup>
@@ -20,7 +24,6 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { isEmpty } from 'lodash';
 
 import { checkIsFormValid } from '@/helpers/validators';
 import { DASHBOARD_ROUTE } from '@/constants/routesNames';
