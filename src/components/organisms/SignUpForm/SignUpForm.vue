@@ -1,9 +1,6 @@
 <template>
   <div :class="[$style['form-wrapper']]">
-    <div
-      v-if="currentStepIndex > 0"
-      :class="[$style['previous-wrapper']]"
-    >
+    <div v-if="currentStepIndex > 0" :class="[$style['previous-wrapper']]">
       <ButtonElement
         translation-path="general.previous"
         has-previous-theme
@@ -45,21 +42,21 @@
 
       <template slot="button-group">
         <div :class="[$style['button-wrapper']]">
-          <ButtonElement
-            type="submit"
-            :translation-path="buttonTranslationPath"
-            has-blue-theme
-          />
+          <ButtonElement type="submit" :translation-path="buttonTranslationPath" has-blue-theme/>
         </div>
       </template>
     </FormGroup>
+
+    <button @click="showToast">Click</button>
   </div>
 </template>
 
 <script>
 import { get } from 'lodash';
+import { mapActions } from 'vuex';
 
 import { apiSignUp } from '@/api';
+import { showToast } from '@/store/toast/actions';
 import { checkIsFormValid } from '@/helpers/validators';
 import { emailPasswordFields, userNamesFields, userDetailsFields } from '@/constants/forms';
 import { serverMessages } from '@/constants/serverResponses';
@@ -132,9 +129,7 @@ export default {
         return;
       }
 
-      const {
-        firstName, lastName, birthDate, gender, email, password,
-      } = this;
+      const { firstName, lastName, birthDate, gender, email, password } = this;
 
       if (this.currentStepIndex === 2) {
         try {
@@ -173,6 +168,9 @@ export default {
         value: this[field.name],
       }));
     },
+    ...mapActions({
+      showToast,
+    }),
   },
 };
 </script>

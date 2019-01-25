@@ -3,7 +3,10 @@ import actions from './actions';
 import mutations from './mutations';
 
 const state = {
-  isSignedIn: false,
+  isMessageVisible: false,
+  translationPath: '',
+  translatedText: '',
+  type: '',
 };
 
 export default {
