@@ -1,6 +1,9 @@
 <template>
   <div>
-    <FormRow v-for="field in fields" :key="field.name">
+    <FormRow
+      v-for="field in fields"
+      :key="field.name"
+    >
       <InputElement
         v-if="field.fieldType === 'input'"
         :name="field.name"
@@ -9,8 +12,8 @@
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
         :is-submission-failed="isSubmissionFailed"
-        @onChange="onChange"
         has-centered-text
+        @onChange="onChange"
       />
 
       <DatePicker
@@ -20,8 +23,8 @@
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
         :is-submission-failed="isSubmissionFailed"
-        @onChange="onChange"
         has-centered-text
+        @onChange="onChange"
       />
 
       <DropdownElement
@@ -32,8 +35,8 @@
         :placeholder-translation-path="field.placeholderTranslationPath"
         :options="field.options"
         :is-submission-failed="isSubmissionFailed"
-        @onChange="onChange"
         has-centered-text
+        @onChange="onChange"
       />
     </FormRow>
   </div>

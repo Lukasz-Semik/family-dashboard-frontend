@@ -69,13 +69,6 @@ export default {
       default: '',
     },
   },
-  watch: {
-    isSubmissionFailed(newVal, oldVal) {
-      if (newVal && !oldVal) {
-        this.handleValidate(this.value);
-      }
-    },
-  },
   data() {
     return {
       selected: null,
@@ -90,6 +83,13 @@ export default {
     },
     inputClassNames() {
       return this.hasCenteredText ? 'is-centered' : '';
+    },
+  },
+  watch: {
+    isSubmissionFailed(newVal, oldVal) {
+      if (newVal && !oldVal) {
+        this.handleValidate(this.value);
+      }
     },
   },
   mounted() {
@@ -125,7 +125,7 @@ export default {
         value: get(
           find(this.options, option => this.$t(option.label) === selectedOption),
           'value',
-          null
+          null,
         ),
         name: this.name,
         isValid: this.isValid,

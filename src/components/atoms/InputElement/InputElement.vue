@@ -69,13 +69,6 @@ export default {
       default: false,
     },
   },
-  watch: {
-    isSubmissionFailed(newVal, oldVal) {
-      if (newVal && !oldVal) {
-        this.handleValidate(this.value);
-      }
-    },
-  },
   data() {
     return {
       isFocused: false,
@@ -90,6 +83,13 @@ export default {
       return {
         [$style['is-centered']]: hasCenteredText,
       };
+    },
+  },
+  watch: {
+    isSubmissionFailed(newVal, oldVal) {
+      if (newVal && !oldVal) {
+        this.handleValidate(this.value);
+      }
     },
   },
   created() {

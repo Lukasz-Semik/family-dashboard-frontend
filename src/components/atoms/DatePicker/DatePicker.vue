@@ -1,5 +1,8 @@
 <template>
-  <div v-click-outside="onClose" @click="isOpen = true">
+  <div
+    v-click-outside="onClose"
+    @click="isOpen = true"
+  >
     <FieldControl
       :name="name"
       :is-focused="isOpen"
@@ -33,6 +36,9 @@ export default {
   components: {
     Datepicker,
     FieldControl,
+  },
+  directives: {
+    ClickOutside,
   },
   props: {
     value: {
@@ -68,13 +74,6 @@ export default {
       default: false,
     },
   },
-  watch: {
-    isSubmissionFailed(newVal, oldVal) {
-      if (newVal && !oldVal) {
-        this.handleValidate(this.value);
-      }
-    },
-  },
   data() {
     return {
       isOpen: false,
@@ -84,12 +83,6 @@ export default {
       selectedControl: null,
     };
   },
-  mounted() {
-    const { isValid } = validate(this.convertDateToString(this.value), { isRequired: true });
-    this.isValid = isValid;
-
-    this.emitOnChange(this.value);
-  },
   computed: {
     inputClassNames() {
       const { $style, hasCenteredText } = this;
@@ -98,6 +91,19 @@ export default {
         [$style['is-centered']]: hasCenteredText,
       };
     },
+  },
+  watch: {
+    isSubmissionFailed(newVal, oldVal) {
+      if (newVal && !oldVal) {
+        this.handleValidate(this.value);
+      }
+    },
+  },
+  mounted() {
+    const { isValid } = validate(this.convertDateToString(this.value), { isRequired: true });
+    this.isValid = isValid;
+
+    this.emitOnChange(this.value);
   },
   methods: {
     convertDateToString: date => moment(date).toISOString(),
@@ -128,9 +134,6 @@ export default {
         isValid: this.isValid,
       });
     },
-  },
-  directives: {
-    ClickOutside,
   },
 };
 </script>

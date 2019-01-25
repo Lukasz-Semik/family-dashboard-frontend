@@ -3,8 +3,8 @@
     <div v-if="currentStepIndex > 0" :class="[$style['previous-wrapper']]">
       <ButtonElement
         translation-path="general.previous"
-        has-previous-theme
         @onClick="currentStepIndex > 0 ? currentStepIndex -= 1 : null"
+        has-previous-theme
       />
     </div>
 
@@ -13,28 +13,36 @@
         <UserSignFieldsGroup
           v-if="currentStepIndex === 0"
           :fields="namesFields"
-          @onChange="onChange"
           :is-submission-failed="isSubmissionFailed"
+          @onChange="onChange"
         />
 
         <UserSignFieldsGroup
           v-if="currentStepIndex === 1"
           :fields="userDetails"
-          @onChange="onChange"
           :is-submission-failed="isSubmissionFailed"
+          @onChange="onChange"
         />
 
         <UserSignFieldsGroup
           v-if="currentStepIndex === 2"
           :fields="accountFields"
-          @onChange="onChange"
           :is-submission-failed="isSubmissionFailed"
+          @onChange="onChange"
         />
+
+        <template v-if="currentStepIndex === 3">
+          <TextElement
+            translationPath="general.successfulRegister"
+            :translationValues="{ email }"
+            has-centered-text
+          ></TextElement>
+        </template>
       </template>
 
       <template slot="button-group">
         <div :class="[$style['button-wrapper']]">
-          <ButtonElement type="submit" translation-path="forms.shared.submit" has-blue-theme/>
+          <ButtonElement type="submit" :translation-path="buttonTranslationPath" has-blue-theme/>
         </div>
       </template>
     </FormGroup>
@@ -49,6 +57,7 @@ import { emailPasswordFields, userNamesFields, userDetailsFields } from '@/const
 import { serverMessages } from '@/constants/serverResponses';
 import { SIGN_IN_ROUTE } from '@/constants/routesNames';
 
+import TextElement from '@/components/atoms/TextElement/TextElement.vue';
 import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
@@ -58,6 +67,7 @@ export default {
     FormGroup,
     UserSignFieldsGroup,
     ButtonElement,
+    TextElement,
   },
   data() {
     return {
@@ -81,6 +91,12 @@ export default {
     },
     userDetails() {
       return this.generateFields(userDetailsFields);
+    },
+    buttonTranslationPath() {
+      if (this.currentStepIndex === 3) return 'general.gotIt';
+      if (this.currentStepIndex === 2) return 'forms.shared.submit';
+
+      return 'general.next';
     },
   },
   methods: {
@@ -113,24 +129,31 @@ export default {
         return;
       }
 
-      const { currentStepIndex, firstName, lastName, birthDate, gender, email, password } = this;
+      const { firstName, lastName, birthDate, gender, email, password } = this;
 
-      try {
-        const response = await apiSignUp({
-          firstName,
-          lastName,
-          birthDate,
-          gender,
-          email,
-          password,
-        });
+      if (this.currentStepIndex === 2) {
+        try {
+          const response = await apiSignUp({
+            firstName,
+            lastName,
+            birthDate,
+            gender,
+            email,
+            password,
+          });
 
-        if (get(response, 'data.account') === serverMessages.accountCreated) {
-          this.$router.push({ name: SIGN_IN_ROUTE });
+          if (get(response, 'data.account') === serverMessages.accountCreated) {
+            this.currentStepIndex = 3;
+            return;
+          }
+        } catch (err) {
+          // TODO: handel errors
+          console.log(err);
         }
-      } catch (err) {
-        // TODO: handel errors
-        console.log(err);
+      }
+
+      if (this.currentStepIndex === 3) {
+        this.$router.push({ name: SIGN_IN_ROUTE });
       }
     },
     onChange(payload) {
