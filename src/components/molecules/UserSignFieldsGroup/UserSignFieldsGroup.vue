@@ -12,6 +12,7 @@
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
         :is-submission-failed="isSubmissionFailed"
+        is-required
         has-centered-text
         @onChange="onChange"
       />
@@ -23,6 +24,7 @@
         :label-translation-path="field.labelTranslationPath"
         :placeholder-translation-path="field.placeholderTranslationPath"
         :is-submission-failed="isSubmissionFailed"
+        is-required
         has-centered-text
         @onChange="onChange"
       />
@@ -35,6 +37,7 @@
         :placeholder-translation-path="field.placeholderTranslationPath"
         :options="field.options"
         :is-submission-failed="isSubmissionFailed"
+        is-required
         has-centered-text
         @onChange="onChange"
       />

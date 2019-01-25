@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-click-outside="onClose"
-    @click="isOpen = true"
-  >
+  <div v-click-outside="onClose" @click="isOpen = true">
     <FieldControl
       :name="name"
       :is-focused="isOpen"
@@ -48,6 +45,10 @@ export default {
     name: {
       type: String,
       required: true,
+    },
+    isRequired: {
+      type: Boolean,
+      default: false,
     },
     isSubmissionFailed: {
       type: Boolean,
@@ -100,7 +101,9 @@ export default {
     },
   },
   mounted() {
-    const { isValid } = validate(this.convertDateToString(this.value), { isRequired: true });
+    const { isValid } = validate(this.convertDateToString(this.value), {
+      isRequired: this.isRequired,
+    });
     this.isValid = isValid;
 
     this.emitOnChange(this.value);
@@ -108,7 +111,9 @@ export default {
   methods: {
     convertDateToString: date => moment(date).toISOString(),
     handleValidate(value) {
-      const { isValid, errorMsg } = validate(this.convertDateToString(value), { isRequired: true });
+      const { isValid, errorMsg } = validate(this.convertDateToString(value), {
+        isRequired: this.isRequired,
+      });
 
       this.isValid = isValid;
       this.errorMsg = errorMsg;

@@ -44,6 +44,10 @@ export default {
       type: String,
       default: 'text',
     },
+    isRequired: {
+      type: Boolean,
+      default: false,
+    },
     isSubmissionFailed: {
       type: Boolean,
       default: false,
@@ -93,14 +97,14 @@ export default {
     },
   },
   created() {
-    const { isValid } = validate(this.value, { isRequired: true });
+    const { isValid } = validate(this.value, { isRequired: this.isRequired });
     this.isValid = isValid;
 
     this.emitOnChange(this.value);
   },
   methods: {
     handleValidate(value) {
-      const { isValid, errorMsg } = validate(value, { isRequired: true });
+      const { isValid, errorMsg } = validate(value, { isRequired: this.isRequired });
 
       this.isValid = isValid;
       this.errorMsg = errorMsg;

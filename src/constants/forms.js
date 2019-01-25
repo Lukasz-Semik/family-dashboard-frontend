@@ -5,6 +5,7 @@ export const emailPasswordFields = [
     fieldType: 'input',
     labelTranslationPath: 'forms.userSign.email.label',
     placeholderTranslationPath: 'forms.userSign.email.placeholder',
+    isEmailRequired: true,
   },
   {
     name: 'password',
@@ -12,6 +13,8 @@ export const emailPasswordFields = [
     fieldType: 'input',
     labelTranslationPath: 'forms.userSign.password.label',
     placeholderTranslationPath: 'forms.userSign.password.placeholder',
+    minLengthRequired: 6,
+    maxLengthRequired: 30,
   },
 ];
 

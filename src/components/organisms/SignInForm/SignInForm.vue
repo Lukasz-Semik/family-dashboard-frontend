@@ -2,7 +2,11 @@
   <div :class="[$style['form-wrapper']]">
     <FormGroup @onSubmit="handleSubmit">
       <template slot="fields-group">
-        <UserSignFieldsGroup :fields="fields" @onChange="onChange"/>
+        <UserSignFieldsGroup
+          :fields="fields"
+          @onChange="onChange"
+          :is-submission-failed="isSubmissionFailed"
+        />
       </template>
 
       <template slot="button-group">
@@ -16,10 +20,13 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { isEmpty } from 'lodash';
 
+import { checkIsFormValid } from '@/helpers/validators';
 import { DASHBOARD_ROUTE } from '@/constants/routesNames';
 import { emailPasswordFields } from '@/constants/forms';
 import { signIn } from '@/store/currentUser/actions';
+
 import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
@@ -34,6 +41,8 @@ export default {
     return {
       email: '',
       password: '',
+      isSubmissionFailed: false,
+      errors: {},
     };
   },
   computed: {
@@ -46,16 +55,26 @@ export default {
   },
   methods: {
     async handleSubmit() {
+      this.isSubmissionFailed = false;
+
       const { email, password } = this;
+
+      const isFormValid = checkIsFormValid(this.errors, ['email', 'password']);
+
+      if (!isFormValid) {
+        this.isSubmissionFailed = true;
+        return;
+      }
 
       const { isAuthorized } = await this.signIn({ email, password });
 
       if (isAuthorized) return this.$router.push({ name: DASHBOARD_ROUTE });
     },
     onChange(payload) {
-      const { name, value } = payload;
+      const { name, value, isValid } = payload;
 
       this[name] = value;
+      this.errors[name] = !isValid;
     },
     ...mapActions({
       signIn,

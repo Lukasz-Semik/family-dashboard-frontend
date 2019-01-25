@@ -40,6 +40,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    isRequired: {
+      type: Boolean,
+      default: false,
+    },
     isSubmissionFailed: {
       type: Boolean,
       default: false,
@@ -99,7 +103,7 @@ export default {
       this.selected = this.$t(foundValue.label);
     }
 
-    const { isValid } = validate(foundValue, { isRequired: true });
+    const { isValid } = validate(foundValue, { isRequired: this.isRequired });
     this.isValid = isValid;
 
     this.emitOnChange(this.$t(foundValue && foundValue.label));
@@ -111,7 +115,7 @@ export default {
       this.handleChange(this.selected);
     },
     handleValidate(selectedOption) {
-      const { isValid, errorMsg } = validate(selectedOption, { isRequired: true });
+      const { isValid, errorMsg } = validate(selectedOption, { isRequired: this.isRequired });
 
       this.isValid = isValid;
       this.errorMsg = errorMsg;
@@ -125,7 +129,7 @@ export default {
         value: get(
           find(this.options, option => this.$t(option.label) === selectedOption),
           'value',
-          null,
+          null
         ),
         name: this.name,
         isValid: this.isValid,

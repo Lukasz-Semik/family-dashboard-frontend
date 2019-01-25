@@ -53,6 +53,7 @@
 import { get } from 'lodash';
 
 import { apiSignUp } from '@/api';
+import { checkIsFormValid } from '@/helpers/validators';
 import { emailPasswordFields, userNamesFields, userDetailsFields } from '@/constants/forms';
 import { serverMessages } from '@/constants/serverResponses';
 import { SIGN_IN_ROUTE } from '@/constants/routesNames';
@@ -112,12 +113,7 @@ export default {
         fieldsToValidate = [...fieldsToValidate, 'email', 'password'];
       }
 
-      let isFormValid = true;
-      fieldsToValidate.forEach(key => {
-        if (this.errors[key]) {
-          isFormValid = false;
-        }
-      });
+      const isFormValid = checkIsFormValid(this.errors, fieldsToValidate);
 
       if (!isFormValid) {
         this.isSubmissionFailed = true;

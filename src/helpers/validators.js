@@ -14,3 +14,15 @@ export const validate = (value, { isRequired }) => {
     errorMsg,
   };
 };
+
+export const checkIsFormValid = (values, fieldsToValidate) => {
+  let isFormValid = true;
+
+  fieldsToValidate.forEach(key => {
+    if (values[key]) {
+      isFormValid = false;
+    }
+  });
+
+  return isFormValid;
+};
