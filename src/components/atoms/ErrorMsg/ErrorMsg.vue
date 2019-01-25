@@ -1,7 +1,5 @@
 <template>
-  <p :class="[$style['error-msg']]">
-    {{ translatedText || $t(translationPath) }}
-  </p>
+  <p :class="[$style['error-msg']]">{{ translatedText || $t(translationPath, msgValues) }}</p>
 </template>
 
 <script>
@@ -14,6 +12,10 @@ export default {
     translatedText: {
       type: String,
       default: '',
+    },
+    msgValues: {
+      type: Object,
+      default: () => {},
     },
   },
 };

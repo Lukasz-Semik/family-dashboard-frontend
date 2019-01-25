@@ -5,6 +5,7 @@
     :label-translation-path="labelTranslationPath"
     :is-focused="isFocused"
     :error-msg="errorMsg"
+    :error-msg-values="{msg : errorTranslationValues}"
   >
     <input
       :id="name"
@@ -48,6 +49,16 @@ export default {
       type: Boolean,
       default: false,
     },
+    isEmailRequired: {
+      type: Boolean,
+      default: false,
+    },
+    minLengthRequired: {
+      type: Number,
+    },
+    maxLengthRequired: {
+      type: Number,
+    },
     isSubmissionFailed: {
       type: Boolean,
       default: false,
@@ -73,11 +84,18 @@ export default {
       default: false,
     },
   },
+  created() {
+    const { isValid } = validate(this.value, this.validationOptions);
+    this.isValid = isValid;
+
+    this.emitOnChange(this.value);
+  },
   data() {
     return {
       isFocused: false,
       isValid: true,
       errorMsg: '',
+      errorTranslationValues: '',
     };
   },
   computed: {
@@ -88,6 +106,14 @@ export default {
         [$style['is-centered']]: hasCenteredText,
       };
     },
+    validationOptions() {
+      return {
+        isRequired: this.isRequired,
+        isEmailRequired: this.isEmailRequired,
+        minLengthRequired: this.minLengthRequired,
+        maxLengthRequired: this.maxLengthRequired,
+      };
+    },
   },
   watch: {
     isSubmissionFailed(newVal, oldVal) {
@@ -96,18 +122,13 @@ export default {
       }
     },
   },
-  created() {
-    const { isValid } = validate(this.value, { isRequired: this.isRequired });
-    this.isValid = isValid;
-
-    this.emitOnChange(this.value);
-  },
   methods: {
     handleValidate(value) {
-      const { isValid, errorMsg } = validate(value, { isRequired: this.isRequired });
+      const { isValid, errorMsg, errorTranslationValues } = validate(value, this.validationOptions);
 
       this.isValid = isValid;
       this.errorMsg = errorMsg;
+      this.errorTranslationValues = errorTranslationValues;
     },
     handleChange(event) {
       const { value } = event.target;

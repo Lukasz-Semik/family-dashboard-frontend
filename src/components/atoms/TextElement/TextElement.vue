@@ -27,7 +27,7 @@ export default {
   computed: {
     classNames() {
       const { $style, hasCenteredText } = this;
-      console.log(hasCenteredText);
+
       return {
         [$style['has-centered-text']]: hasCenteredText,
       };

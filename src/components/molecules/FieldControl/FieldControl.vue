@@ -9,22 +9,17 @@
         data-test="label"
         :for="name"
         :class="[$style['label'], stateClassNames]"
-      >
-        {{ labelTranslatedText || $t(labelTranslationPath) }}
-      </label>
+      >{{ labelTranslatedText || $t(labelTranslationPath) }}</label>
 
-      <slot />
+      <slot/>
 
-      <div :class="[$style['border']]" />
+      <div :class="[$style['border']]"/>
       <!-- eslint-disable max-len -->
-      <div :class="[$style['border'], $style['border-hover-focus-indicator'], stateClassNames]" />
+      <div :class="[$style['border'], $style['border-hover-focus-indicator'], stateClassNames]"/>
       <!-- esling-enalbe -->
     </div>
 
-    <ErrorMsg
-      v-if="Boolean(errorMsg)"
-      :translation-path="errorMsg"
-    />
+    <ErrorMsg v-if="Boolean(errorMsg)" :translation-path="errorMsg" :msg-values="errorMsgValues"/>
   </div>
 </template>
 
@@ -52,6 +47,10 @@ export default {
       type: String,
       default: '',
     },
+    errorMsgValues: {
+      type: Object,
+      default: () => {},
+    },
     labelTranslatedText: {
       type: String,
       default: '',
@@ -68,9 +67,7 @@ export default {
   },
   computed: {
     stateClassNames() {
-      const {
-        $style, isFocused, isHovered, errorMsg,
-      } = this;
+      const { $style, isFocused, isHovered, errorMsg } = this;
 
       return {
         [$style['is-hovered-focused']]: isFocused || isHovered,

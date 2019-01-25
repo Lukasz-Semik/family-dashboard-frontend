@@ -4,6 +4,9 @@ export default {
   },
   errors: {
     required: 'Required',
+    minLength: 'Has to be longer than {msg}',
+    maxLength: 'Cannot be longer than {msg}',
+    wrongEmailFormat: 'Wrong format of e-mail',
   },
   userSign: {
     email: {
