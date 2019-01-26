@@ -8,6 +8,7 @@
   >
     <button
       v-if="isMessageVisible"
+      data-test="toast-element"
       :class="[$style['toast'], classNames]"
     >
       {{ translatedText || $t(translationPath) }}

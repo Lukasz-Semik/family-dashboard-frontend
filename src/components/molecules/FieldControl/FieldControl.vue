@@ -41,10 +41,6 @@ export default {
       type: String,
       required: true,
     },
-    type: {
-      type: String,
-      default: 'text',
-    },
     isFocused: {
       type: Boolean,
       default: false,
@@ -74,7 +70,7 @@ export default {
   computed: {
     stateClassNames() {
       const {
-        $style, isFocused, isHovered, errorMsg,
+        $style, isFocused, isHovered, errorMsg
       } = this;
 
       return {

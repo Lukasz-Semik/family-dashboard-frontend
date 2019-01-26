@@ -56,27 +56,34 @@ describe('<InputElement/>', () => {
     expect($input.attributes('value')).toBe('test-value');
   });
 
-  it('should handle on input event properly', () => {
+  it('should handle on input event properly and emit onChange initially', () => {
     const wrapper = mount(InputElement, {
       propsData: {
         name: 'test-name',
-        value: 'test-value',
+        value: '',
         type: 'button',
         placeholderTranslatedText: 'test-placeholder',
         labelTranslatedText: 'test-label',
         hasCenteredText: true,
+        isRequired: true,
       },
     });
 
+    expect(wrapper.emitted('onChange')[0][0]).toEqual({
+      value: '',
+      name: 'test-name',
+      isValid: false,
+    });
     const $input = wrapper.find('[data-test="input"]');
 
     $input.element.value = 'some-value';
     $input.trigger('input');
 
-    expect(wrapper.emitted().onChange).toBeTruthy();
-    expect(wrapper.emitted().onChange[1][0]).toMatchObject({
+    expect(wrapper.emitted('onChange')).toBeTruthy();
+    expect(wrapper.emitted('onChange')[1][0]).toEqual({
       value: 'some-value',
       name: 'test-name',
+      isValid: true,
     });
   });
 });

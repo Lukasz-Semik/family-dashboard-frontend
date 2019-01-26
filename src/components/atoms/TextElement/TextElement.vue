@@ -1,5 +1,6 @@
 <template>
   <p
+    data-test="text-element"
     :class="[$style['text'], classNames]"
   >
     {{ translatedText || $t(translationPath, translationValues) }}
