@@ -11,11 +11,7 @@
 
       <template slot="button-group">
         <div :class="[$style['button-container']]">
-          <ButtonElement
-            type="submit"
-            translation-path="forms.shared.submit"
-            has-blue-theme
-          />
+          <ButtonElement type="submit" translation-path="forms.shared.submit" has-blue-theme/>
         </div>
       </template>
     </FormGroup>
@@ -29,6 +25,7 @@ import { checkIsFormValid } from '@/helpers/validators';
 import { DASHBOARD_ROUTE } from '@/constants/routesNames';
 import { emailPasswordFields } from '@/constants/forms';
 import { signIn } from '@/store/currentUser/actions';
+import { showToast } from '@/store/toast/actions';
 
 import FormGroup from '@/components/atoms/Form/FormGroup.vue';
 import UserSignFieldsGroup from '@/components/molecules/UserSignFieldsGroup/UserSignFieldsGroup.vue';
@@ -69,9 +66,15 @@ export default {
         return;
       }
 
-      const { isAuthorized } = await this.signIn({ email, password });
+      try {
+        const { isAuthorized } = await this.signIn({ email, password });
 
-      if (isAuthorized) return this.$router.push({ name: DASHBOARD_ROUTE });
+        if (isAuthorized) return this.$router.push({ name: DASHBOARD_ROUTE });
+
+        this.showToast({ toastType: 'error', text: 'errors.wrongEmailPass' });
+      } catch (err) {
+        this.showToast({ toastType: 'error', text: 'errors.sthWrong' });
+      }
     },
     onChange(payload) {
       const { name, value, isValid } = payload;
@@ -81,6 +84,7 @@ export default {
     },
     ...mapActions({
       signIn,
+      showToast,
     }),
   },
 };

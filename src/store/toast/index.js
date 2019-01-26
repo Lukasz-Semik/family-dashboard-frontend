@@ -6,7 +6,7 @@ const state = {
   isMessageVisible: false,
   translationPath: '',
   translatedText: '',
-  type: '',
+  toastType: '',
 };
 
 export default {

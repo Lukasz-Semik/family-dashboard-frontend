@@ -16,7 +16,12 @@
 <script>
 import { mapGetters } from 'vuex';
 
-import { isMessageVisible, translationPath, translatedText, type } from '@/store/toast/getters';
+import {
+  isMessageVisible,
+  translationPath,
+  translatedText,
+  toastType,
+} from '@/store/toast/getters';
 
 export default {
   data() {
@@ -25,19 +30,20 @@ export default {
     };
   },
   computed: {
+    classNames() {
+      const { $style, toastType } = this;
+
+      return {
+        [$style['is-success']]: toastType === 'success',
+        [$style['is-error']]: toastType === 'error',
+      };
+    },
     ...mapGetters({
       isMessageVisible,
       translationPath,
       translatedText,
-      type,
+      toastType,
     }),
-    classNames() {
-      const { $style, isVisible } = this;
-
-      return {
-        [$style['is-visible']]: isVisible,
-      };
-    },
   },
 };
 </script>

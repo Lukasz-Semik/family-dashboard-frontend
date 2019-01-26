@@ -13,16 +13,20 @@ export const api = axios.create({
 });
 
 export const apiSignIn = (email, password) =>
-  api.post(API_SIGN_IN, {
-    email,
-    password,
-  });
+  api
+    .post(API_SIGN_IN, {
+      email,
+      password,
+    })
+    .catch(err => err.response);
 
 export const apiCheckIsSignedIn = token =>
-  api.get(API_CHECK_IS_SIGNED_IN, {
-    headers: {
-      authorization: token,
-    },
-  });
+  api
+    .get(API_CHECK_IS_SIGNED_IN, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .catch(err => err.response);
 
-export const apiSignUp = payload => api.post(API_SIGN_UP, payload);
+export const apiSignUp = payload => api.post(API_SIGN_UP, payload).catch(err => err.response);

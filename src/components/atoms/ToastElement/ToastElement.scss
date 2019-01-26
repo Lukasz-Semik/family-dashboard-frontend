@@ -8,14 +8,28 @@
   font-size: 1.4rem;
   opacity: 1;
   border-radius: 5px;
-  background-color: $green-success;
   box-shadow: $dark-grey-shadow;
   transform: scale(1);
 
   &::after {
-    content: ':)';
     display: inline-block;
     margin-left: 0.5rem;
+  }
+
+  &.is-success {
+    background-color: $green-success;
+
+    &::after {
+      content: ':)';
+    }
+  }
+
+  &.is-error {
+    background-color: $red-danger;
+
+    &::after {
+      content: ':(';
+    }
   }
 }
 

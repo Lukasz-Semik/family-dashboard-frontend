@@ -6,15 +6,15 @@ export const hideToast = 'hideToast';
 export default {
   [showToast]: (
     { commit },
-    { isTranslated = false, type = 'success', text = 'general.success' } = {}
+    { isTranslated = false, toastType = 'success', text = 'general.success' } = {}
   ) => {
     const commitPayload = {};
 
     if (isTranslated) commitPayload.translatedText = text;
     else commitPayload.translationPath = text;
+    console.log(toastType);
+    commit(setToastData, { ...commitPayload, toastType });
 
-    commit(setToastData, { ...commitPayload, type });
-
-    setTimeout(() => commit(resetToastData), 6000);
+    setTimeout(() => commit(resetToastData), 5000);
   },
 };

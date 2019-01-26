@@ -172,14 +172,19 @@ export default {
             password,
           });
 
+          console.log(response);
           if (get(response, 'data.account') === serverMessages.accountCreated) {
             this.showToast({ text: 'forms.userSign.registered' });
             this.currentStepIndex = 3;
             return;
           }
+
+          if (get(response, 'status') === 409) {
+            this.showToast({ toastType: 'error', text: 'errors.emailTaken' });
+            return;
+          }
         } catch (err) {
-          // TODO: handel errors
-          console.log(err);
+          this.showToast({ toastType: 'error', text: 'errors.sthWrong' });
         }
       }
 
