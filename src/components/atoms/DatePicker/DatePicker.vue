@@ -1,5 +1,8 @@
 <template>
-  <div v-click-outside="onClose" @click="isOpen = true">
+  <div
+    v-click-outside="onClose"
+    @click="isOpen = true"
+  >
     <FieldControl
       :name="name"
       :is-focused="isOpen"
@@ -119,7 +122,7 @@ export default {
     },
     onSelectDate(value) {
       this.selectedControl = value;
-      console.log(value);
+
       this.handleValidate(value);
 
       this.emitOnChange(value);

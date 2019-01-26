@@ -7,10 +7,12 @@
     :enter-class="$style['fade-enter']"
   >
     <button
-      data-test="toast-element"
       v-if="isMessageVisible"
+      data-test="toast-element"
       :class="[$style['toast'], classNames]"
-    >{{ translatedText || $t(translationPath) }}</button>
+    >
+      {{ translatedText || $t(translationPath) }}
+    </button>
   </Transition>
 </template>
 
