@@ -1,6 +1,6 @@
 <template>
   <div :class="[$style['form-wrapper']]">
-    <div v-if="currentStepIndex > 0" :class="[$style['previous-wrapper']]">
+    <div v-show="currentStepIndex > 0" :class="[$style['previous-wrapper']]">
       <ButtonElement
         translation-path="general.previous"
         has-previous-theme
@@ -10,34 +10,66 @@
 
     <FormGroup @onSubmit="handleSubmit">
       <template slot="fields-group">
-        <UserSignFieldsGroup
-          v-if="currentStepIndex === 0"
-          :fields="namesFields"
-          :is-submission-failed="isSubmissionFailed"
-          @onChange="onChange"
-        />
-
-        <UserSignFieldsGroup
-          v-if="currentStepIndex === 1"
-          :fields="userDetails"
-          :is-submission-failed="isSubmissionFailed"
-          @onChange="onChange"
-        />
-
-        <UserSignFieldsGroup
-          v-if="currentStepIndex === 2"
-          :fields="accountFields"
-          :is-submission-failed="isSubmissionFailed"
-          @onChange="onChange"
-        />
-
-        <template v-if="currentStepIndex === 3">
-          <TextElement
-            translation-path="general.successfulRegister"
-            :translation-values="{ email }"
-            has-centered-text
+        <transition
+          mode="out-in"
+          :leave-active-class="$style['slide-leave-active']"
+          :leave-to-class="$style['slide-leave-to']"
+          :enter-active-class="$style['slide-enter-active']"
+          :enter-class="$style['slide-enter']"
+        >
+          <UserSignFieldsGroup
+            v-if="currentStepIndex === 0"
+            :fields="namesFields"
+            :is-submission-failed="isSubmissionFailed"
+            @onChange="onChange"
           />
-        </template>
+        </transition>
+
+        <transition
+          mode="out-in"
+          :leave-active-class="$style['slide-leave-active']"
+          :leave-to-class="$style['slide-leave-to']"
+          :enter-active-class="$style['slide-enter-active']"
+          :enter-class="$style['slide-enter']"
+        >
+          <UserSignFieldsGroup
+            v-if="currentStepIndex === 1"
+            :fields="userDetails"
+            :is-submission-failed="isSubmissionFailed"
+            @onChange="onChange"
+          />
+        </transition>
+
+        <transition
+          mode="out-in"
+          :leave-active-class="$style['slide-leave-active']"
+          :leave-to-class="$style['slide-leave-to']"
+          :enter-active-class="$style['slide-enter-active']"
+          :enter-class="$style['slide-enter']"
+        >
+          <UserSignFieldsGroup
+            v-if="currentStepIndex === 2"
+            :fields="accountFields"
+            :is-submission-failed="isSubmissionFailed"
+            @onChange="onChange"
+          />
+        </transition>
+
+        <transition
+          mode="out-in"
+          :leave-active-class="$style['slide-leave-active']"
+          :leave-to-class="$style['slide-leave-to']"
+          :enter-active-class="$style['slide-enter-active']"
+          :enter-class="$style['slide-enter']"
+        >
+          <template v-if="currentStepIndex === 3">
+            <TextElement
+              translation-path="general.successfulRegister"
+              :translation-values="{ email }"
+              has-centered-text
+            />
+          </template>
+        </transition>
       </template>
 
       <template slot="button-group">

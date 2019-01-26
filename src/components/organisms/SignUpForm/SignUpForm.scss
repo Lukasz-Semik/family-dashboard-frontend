@@ -15,3 +15,18 @@
     left: -15rem;
   }
 }
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.slide-leave-active {
+  display: none;
+}
+
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
+}
