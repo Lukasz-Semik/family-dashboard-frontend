@@ -1,7 +1,8 @@
 <template>
-  <p :class="[$style['error-msg']]">
-    {{ translatedText || $t(translationPath, msgValues) }}
-  </p>
+  <p
+    data-test="error-msg"
+    :class="[$style['error-msg']]"
+  >{{ translatedText || $t(translationPath, msgValues) }}</p>
 </template>
 
 <script>

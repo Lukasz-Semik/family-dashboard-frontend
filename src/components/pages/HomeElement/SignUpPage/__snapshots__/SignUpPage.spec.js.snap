@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignUpPage/> should render properly 1`] = `
+<usersign-stub titletranslationpath="general.signUp">
+  <div class="form-wrapper">
+    <signupform-stub></signupform-stub>
+  </div>
+</usersign-stub>
+`;
