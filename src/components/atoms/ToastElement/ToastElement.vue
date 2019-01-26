@@ -1,5 +1,5 @@
 <template>
-  <transition
+  <Transition
     mode="out-in"
     :leave-active-class="$style['fade-leave-active']"
     :leave-to-class="$style['fade-leave-to']"
@@ -9,8 +9,10 @@
     <button
       v-if="isMessageVisible"
       :class="[$style['toast'], classNames]"
-    >{{ translatedText || $t(translationPath) }}</button>
-  </transition>
+    >
+      {{ translatedText || $t(translationPath) }}
+    </button>
+  </Transition>
 </template>
 
 <script>
@@ -31,11 +33,11 @@ export default {
   },
   computed: {
     classNames() {
-      const { $style, toastType } = this;
+      const { $style, toastType: toast } = this;
 
       return {
-        [$style['is-success']]: toastType === 'success',
-        [$style['is-error']]: toastType === 'error',
+        [$style['is-success']]: toast === 'success',
+        [$style['is-error']]: toast === 'error',
       };
     },
     ...mapGetters({

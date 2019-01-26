@@ -1,14 +1,20 @@
 <template>
   <div>
-    <ToastElement translatedText="some fucking notification"/>
+    <ToastElement translated-text="some fucking notification" />
 
     <div :class="[$style['title-wrapper']]">
-      <TitleElement translation-path="general.appTitle"/>
+      <TitleElement translation-path="general.appTitle" />
     </div>
 
     <div :class="[$style['links-wrapper']]">
-      <Link :to="signInRoute" translation-path="general.signIn"/>
-      <Link :to="signUpRoute" translation-path="general.signUp"/>
+      <Link
+        :to="signInRoute"
+        translation-path="general.signIn"
+      />
+      <Link
+        :to="signUpRoute"
+        translation-path="general.signUp"
+      />
     </div>
 
     <Transition
@@ -18,7 +24,7 @@
       :enter-active-class="$style['toggle-view-enter-active']"
       :enter-class="$style['toggle-view-enter']"
     >
-      <RouterView/>
+      <RouterView />
     </Transition>
   </div>
 </template>

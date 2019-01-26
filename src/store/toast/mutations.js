@@ -3,7 +3,6 @@ export const resetToastData = 'resetToastData';
 
 export default {
   [setToastData]: (state, { translatedText, translationPath, toastType }) => {
-    console.log('mut', toastType);
     state.translatedText = translatedText;
     state.translationPath = translationPath;
     state.toastType = toastType;

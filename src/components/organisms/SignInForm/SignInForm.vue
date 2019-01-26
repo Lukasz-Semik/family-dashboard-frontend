@@ -11,7 +11,11 @@
 
       <template slot="button-group">
         <div :class="[$style['button-container']]">
-          <ButtonElement type="submit" translation-path="forms.shared.submit" has-blue-theme/>
+          <ButtonElement
+            type="submit"
+            translation-path="forms.shared.submit"
+            has-blue-theme
+          />
         </div>
       </template>
     </FormGroup>

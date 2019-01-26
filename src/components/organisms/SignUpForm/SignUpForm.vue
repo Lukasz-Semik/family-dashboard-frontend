@@ -1,6 +1,9 @@
 <template>
   <div :class="[$style['form-wrapper']]">
-    <div v-show="currentStepIndex > 0" :class="[$style['previous-wrapper']]">
+    <div
+      v-show="currentStepIndex > 0"
+      :class="[$style['previous-wrapper']]"
+    >
       <ButtonElement
         translation-path="general.previous"
         has-previous-theme
@@ -10,7 +13,7 @@
 
     <FormGroup @onSubmit="handleSubmit">
       <template slot="fields-group">
-        <transition
+        <Transition
           mode="out-in"
           :leave-active-class="$style['slide-leave-active']"
           :leave-to-class="$style['slide-leave-to']"
@@ -23,9 +26,9 @@
             :is-submission-failed="isSubmissionFailed"
             @onChange="onChange"
           />
-        </transition>
+        </Transition>
 
-        <transition
+        <Transition
           mode="out-in"
           :leave-active-class="$style['slide-leave-active']"
           :leave-to-class="$style['slide-leave-to']"
@@ -38,9 +41,9 @@
             :is-submission-failed="isSubmissionFailed"
             @onChange="onChange"
           />
-        </transition>
+        </Transition>
 
-        <transition
+        <Transition
           mode="out-in"
           :leave-active-class="$style['slide-leave-active']"
           :leave-to-class="$style['slide-leave-to']"
@@ -53,9 +56,9 @@
             :is-submission-failed="isSubmissionFailed"
             @onChange="onChange"
           />
-        </transition>
+        </Transition>
 
-        <transition
+        <Transition
           mode="out-in"
           :leave-active-class="$style['slide-leave-active']"
           :leave-to-class="$style['slide-leave-to']"
@@ -69,12 +72,16 @@
               has-centered-text
             />
           </template>
-        </transition>
+        </Transition>
       </template>
 
       <template slot="button-group">
         <div :class="[$style['button-wrapper']]">
-          <ButtonElement type="submit" :translation-path="buttonTranslationPath" has-blue-theme/>
+          <ButtonElement
+            type="submit"
+            :translation-path="buttonTranslationPath"
+            has-blue-theme
+          />
         </div>
       </template>
     </FormGroup>
@@ -159,7 +166,9 @@ export default {
         return;
       }
 
-      const { firstName, lastName, birthDate, gender, email, password } = this;
+      const {
+        firstName, lastName, birthDate, gender, email, password
+      } = this;
 
       if (this.currentStepIndex === 2) {
         try {
@@ -172,7 +181,6 @@ export default {
             password,
           });
 
-          console.log(response);
           if (get(response, 'data.account') === serverMessages.accountCreated) {
             this.showToast({ text: 'forms.userSign.registered' });
             this.currentStepIndex = 3;

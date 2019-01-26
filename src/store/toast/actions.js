@@ -12,7 +12,7 @@ export default {
 
     if (isTranslated) commitPayload.translatedText = text;
     else commitPayload.translationPath = text;
-    console.log(toastType);
+
     commit(setToastData, { ...commitPayload, toastType });
 
     setTimeout(() => commit(resetToastData), 5000);
