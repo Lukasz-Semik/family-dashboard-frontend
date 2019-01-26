@@ -1,12 +1,12 @@
-import { setToastData } from './mutations';
+import { setToastData, resetToastData } from './mutations';
 
 export const showToast = 'showToast';
+export const hideToast = 'hideToast';
 
 export default {
   [showToast]: (
     { commit },
-    // eslint-disable-next-line comma-dangle
-    { isTranslated = false, type = 'success', text = 'notifications.success' }
+    { isTranslated = false, type = 'success', text = 'general.success' } = {}
   ) => {
     const commitPayload = {};
 
@@ -14,7 +14,7 @@ export default {
     else commitPayload.translationPath = text;
 
     commit(setToastData, { ...commitPayload, type });
+
+    setTimeout(() => commit(resetToastData), 6000);
   },
 };
-
-// async ({ commit }, { email, password }) => {

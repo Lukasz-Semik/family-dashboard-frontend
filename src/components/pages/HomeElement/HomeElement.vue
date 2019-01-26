@@ -12,11 +12,11 @@
     </div>
 
     <Transition
+      mode="out-in"
       :leave-active-class="$style['toggle-view-leave-active']"
-      :leave-class="$style['toggle-view-leave']"
+      :leave-to-class="$style['toggle-view-leave-to']"
       :enter-active-class="$style['toggle-view-enter-active']"
       :enter-class="$style['toggle-view-enter']"
-      mode="out-in"
     >
       <RouterView/>
     </Transition>

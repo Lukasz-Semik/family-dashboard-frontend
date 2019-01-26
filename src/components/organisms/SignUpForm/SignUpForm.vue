@@ -46,8 +46,6 @@
         </div>
       </template>
     </FormGroup>
-
-    <button @click="showToast">Click</button>
   </div>
 </template>
 
@@ -143,6 +141,7 @@ export default {
           });
 
           if (get(response, 'data.account') === serverMessages.accountCreated) {
+            this.showToast({ text: 'forms.userSign.registered' });
             this.currentStepIndex = 3;
             return;
           }

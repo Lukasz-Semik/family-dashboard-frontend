@@ -12,6 +12,7 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'operator-linebreak': 'off',
     'arrow-parens': 'off',
+    'comma-dangle': 'off',
     'no-param-reassign': [
       'error',
       {

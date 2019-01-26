@@ -9,6 +9,7 @@ export default {
     wrongEmailFormat: 'Wrong format of e-mail',
   },
   userSign: {
+    registered: 'Account has been created',
     email: {
       label: 'E-mail',
       placeholder: 'E.g. john@gmail.com',
