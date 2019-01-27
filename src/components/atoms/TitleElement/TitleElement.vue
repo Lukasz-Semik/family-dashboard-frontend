@@ -26,6 +26,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isBlack: {
+      type: Boolean,
+      default: false,
+    },
     isSmall: {
       type: Boolean,
       default: false,
@@ -42,10 +46,11 @@ export default {
   computed: {
     classNames() {
       const {
-        $style, isOrange, isSmall, isUppercased, isCentered,
+        $style, isOrange, isBlack, isSmall, isUppercased, isCentered
       } = this;
 
       return {
+        [$style['is-black']]: isBlack,
         [$style['is-orange']]: isOrange,
         [$style['is-small']]: isSmall,
         [$style['is-uppercased']]: isUppercased,
