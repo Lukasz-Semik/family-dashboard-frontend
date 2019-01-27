@@ -6,6 +6,10 @@
     color: $main-orange;
   }
 
+  &.is-black {
+    color: $black;
+  }
+
   &.is-small {
     font-size: 2.1rem;
   }

@@ -1,8 +1,15 @@
+import {
+  SIGN_IN_ROUTE,
+  SIGN_UP_ROUTE,
+  DASHBOARD_ROUTE,
+  CONFIRM_ROUTE,
+} from '@/constants/routesNames';
+
 import HomeElement from '@/components/pages/HomeElement/HomeElement.vue';
 import SignInPage from '@/components/pages/HomeElement/SignInPage/SignInPage.vue';
 import SignUpPage from '@/components/pages/HomeElement/SignUpPage/SignUpPage.vue';
 import Dashboard from '@/components/pages/Dashboard/Dashboard.vue';
-import { SIGN_IN_ROUTE, SIGN_UP_ROUTE, DASHBOARD_ROUTE } from '@/constants/routesNames';
+import ConfirmPage from '@/components/pages/ConfirmPage/ConfirmPage.vue';
 
 const homeRoute = {
   path: '/',
@@ -31,4 +38,10 @@ const dashboardRoute = {
   },
 };
 
-export default [homeRoute, dashboardRoute];
+const confirmRoute = {
+  path: '/confirm',
+  name: CONFIRM_ROUTE,
+  component: ConfirmPage,
+};
+
+export default [homeRoute, dashboardRoute, confirmRoute];

@@ -1,0 +1,17 @@
+.confirm-wrapper {
+  @include flexCenter();
+
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+.message-wrapper {
+  margin: 5rem 0;
+}
+
+.app-title-wrapper {
+  position: absolute;
+  top: 0.3rem;
+  left: 1rem;
+}
