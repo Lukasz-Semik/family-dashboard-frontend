@@ -13,6 +13,8 @@ module.exports = {
     'operator-linebreak': 'off',
     'arrow-parens': 'off',
     'comma-dangle': 'off',
+    'object-curly-newline': 'off',
+    'import/no-named-as-default-member': 'off',
     'no-param-reassign': [
       'error',
       {
@@ -34,6 +36,7 @@ module.exports = {
         it: true,
         expect: true,
         beforeEach: true,
+        jest: true,
       },
     },
   ],
