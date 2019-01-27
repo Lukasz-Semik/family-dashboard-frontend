@@ -1,7 +1,6 @@
 import { setToastData, resetToastData } from './mutations';
 
 export const showToast = 'showToast';
-export const hideToast = 'hideToast';
 
 export default {
   [showToast]: (
