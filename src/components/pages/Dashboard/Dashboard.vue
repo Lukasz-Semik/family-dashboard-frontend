@@ -1,19 +1,26 @@
 <template>
-  <h1>Dashboard placeholder</h1>
+  <div :class="[$style['title-wrapper']]">
+    <TitleElement translation-path="general.appTitle"/>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
-import { SIGN_IN_ROUTE } from '@/constants/routesNames';
-import { isSignedIn } from '@/store/currentUser/getters';
+import { getCurrentUser } from '@/store/currentUser/actions';
+import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 
 export default {
-  computed: mapGetters({
-    isSignedIn,
-  }),
   created() {
-    if (!this.isSignedIn) this.$router.push({ name: SIGN_IN_ROUTE });
+    this.getCurrentUser();
+  },
+  components: {
+    TitleElement,
+  },
+  methods: {
+    ...mapActions({ getCurrentUser }),
   },
 };
 </script>
+
+<style lang="scss" module src="./Dashboard.scss" />

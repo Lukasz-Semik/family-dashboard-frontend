@@ -5,7 +5,9 @@ import {
   API_CHECK_IS_SIGNED_IN,
   API_SIGN_UP,
   API_CONFIRM_ACCOUNT,
+  API_GET_CURRENT_USER,
 } from '@/constants/api';
+import { getLocalStorageItem } from '@/utils/localStorage';
 
 const baseURL =
   process.env.PROCESS_ENV === 'production'
@@ -17,6 +19,18 @@ export const api = axios.create({
   baseURL,
 });
 
+api.interceptors.request.use(config => {
+  const { headers } = config;
+
+  return {
+    ...config,
+    headers: {
+      ...headers,
+      authorization: getLocalStorageItem('_token'),
+    },
+  };
+});
+
 export const apiSignIn = (email, password) =>
   api
     .post(API_SIGN_IN, {
@@ -25,16 +39,11 @@ export const apiSignIn = (email, password) =>
     })
     .catch(err => err.response);
 
-export const apiCheckIsSignedIn = token =>
-  api
-    .get(API_CHECK_IS_SIGNED_IN, {
-      headers: {
-        authorization: token,
-      },
-    })
-    .catch(err => err.response);
+export const apiCheckIsSignedIn = () => api.get(API_CHECK_IS_SIGNED_IN).catch(err => err.response);
 
 export const apiSignUp = payload => api.post(API_SIGN_UP, payload).catch(err => err.response);
 
 export const apiConfirmAccount = token =>
   api.post(API_CONFIRM_ACCOUNT, { confirmationAccountToken: token }).catch(err => err.response);
+
+export const apiGetCurrentUser = () => api.get(API_GET_CURRENT_USER).catch(err => err.response);

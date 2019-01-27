@@ -1,16 +1,14 @@
 <template>
   <UserSign title-translation-path="general.signIn">
     <div :class="[$style['form-wrapper']]">
-      <SignInForm />
+      <SignInForm/>
     </div>
   </UserSign>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 import { DASHBOARD_ROUTE } from '@/constants/routesNames';
-import { checkIsSignedIn } from '@/store/currentUser/actions';
+import { checkIsSignedIn } from '@/helpers/currentUser';
 
 import UserSign from '@/components/molecules/UserSign/UserSign.vue';
 import SignInForm from '@/components/organisms/SignInForm/SignInForm.vue';
@@ -26,7 +24,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions({ checkIsSignedIn }),
+    checkIsSignedIn,
   },
 };
 </script>

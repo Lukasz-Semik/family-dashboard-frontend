@@ -1,5 +1,5 @@
-export const isSignedIn = 'isSignedIn';
+export const currentUser = 'currentUser';
 
 export default {
-  [isSignedIn]: state => state.isSignedIn,
+  [currentUser]: state => state.currentUser,
 };
