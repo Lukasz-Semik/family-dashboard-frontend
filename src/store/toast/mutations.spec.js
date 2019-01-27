@@ -1,10 +1,10 @@
 import { state } from '.';
-import mutations, { setToastData, resetToastData } from './mutations';
+import mutations from './mutations';
 
 describe('toast mutations', () => {
-  describe(`${setToastData}`, () => {
+  describe('setToastData mutation', () => {
     it('should properly change state with provided value', () => {
-      mutations[setToastData](state, {
+      mutations.setToastData(state, {
         translationPath: 'translation.path',
         toastType: 'success',
       });
@@ -18,9 +18,9 @@ describe('toast mutations', () => {
     });
   });
 
-  describe(`${resetToastData}`, () => {
+  describe('resetToastData mutation', () => {
     it('should properly change state with provided value', () => {
-      mutations[resetToastData](state);
+      mutations.resetToastData(state);
 
       expect(state).toEqual({
         translatedText: '',

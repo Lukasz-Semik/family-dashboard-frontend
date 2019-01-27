@@ -14,6 +14,7 @@ module.exports = {
     'arrow-parens': 'off',
     'comma-dangle': 'off',
     'object-curly-newline': 'off',
+    'import/no-named-as-default-member': 'off',
     'no-param-reassign': [
       'error',
       {

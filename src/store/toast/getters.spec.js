@@ -1,6 +1,5 @@
-import getters, { isMessageVisible, translationPath, translatedText, toastType } from './getters';
+import getters from './getters';
 
-/* eslint-disable import/no-named-as-default-member */
 describe('toast getters', () => {
   const state = {
     isMessageVisible: true,
@@ -10,20 +9,18 @@ describe('toast getters', () => {
   };
 
   it('should return isMessageVisible', () => {
-    expect(getters[isMessageVisible](state)).toBe(true);
+    expect(getters.isMessageVisible(state)).toBe(true);
   });
 
   it('should return translationPath', () => {
-    expect(getters[translationPath](state)).toBe('translation.path');
+    expect(getters.translationPath(state)).toBe('translation.path');
   });
 
   it('should return translatedText', () => {
-    expect(getters[translatedText](state)).toBe('');
+    expect(getters.translatedText(state)).toBe('');
   });
 
   it('should return toastType', () => {
-    expect(getters[toastType](state)).toBe('error');
+    expect(getters.toastType(state)).toBe('error');
   });
 });
-
-/* eslint-enable */
