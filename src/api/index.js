@@ -26,10 +26,20 @@ api.interceptors.request.use(config => {
     ...config,
     headers: {
       ...headers,
-      authorization: getLocalStorageItem('_token'),
+      authorization: getLocalStorageItem('_token') || '',
     },
   };
 });
+
+api.interceptors.response.use(
+  response => response,
+  error => {
+    // TODO: handle unathorized (401) response
+    console.log(error.response);
+
+    return Promise.reject(error);
+  }
+);
 
 export const apiSignIn = (email, password) =>
   api
