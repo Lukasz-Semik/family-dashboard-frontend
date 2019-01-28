@@ -5,6 +5,7 @@ import mutations from './mutations';
 const state = {
   isSignedIn: false,
   currentUser: {},
+  isFetching: false,
 };
 
 export default {

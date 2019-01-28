@@ -12,7 +12,7 @@
 import { mapActions, mapGetters } from 'vuex';
 
 import { getCurrentUser } from '@/store/currentUser/actions';
-import { currentUser } from '@/store/currentUser/getters';
+import { currentUser, isFetchingCurrentUser } from '@/store/currentUser/getters';
 
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 
@@ -23,6 +23,11 @@ export default {
     TitleElement,
     WithoutFamilyPage,
   },
+  watch: {
+    isFetchingCurrentUser(newVal, oldVal) {
+      console.log({ newVal, oldVal });
+    },
+  },
   created() {
     this.getCurrentUser();
   },
@@ -30,7 +35,7 @@ export default {
     ...mapActions({ getCurrentUser }),
   },
   computed: {
-    ...mapGetters({ currentUser }),
+    ...mapGetters({ currentUser, isFetchingCurrentUser }),
   },
 };
 </script>
