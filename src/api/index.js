@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { get } from 'lodash';
 
 import {
   API_SIGN_IN,
@@ -6,8 +7,10 @@ import {
   API_SIGN_UP,
   API_CONFIRM_ACCOUNT,
   API_GET_CURRENT_USER,
+  API_CREATE_FAMILY,
 } from '@/constants/api';
 import { getLocalStorageItem } from '@/utils/localStorage';
+import { goToUrl } from '@/utils/general';
 
 const baseURL =
   process.env.PROCESS_ENV === 'production'
@@ -34,13 +37,17 @@ api.interceptors.request.use(config => {
 api.interceptors.response.use(
   response => response,
   error => {
-    // TODO: handle unathorized (401) response
-    console.log(error.response);
+    const requestUrl = get(error, 'request.responseURL');
+
+    if (get(error, 'response.status') === 401 && !requestUrl.includes('is-authorized')) {
+      goToUrl('');
+    }
 
     return Promise.reject(error);
   }
 );
 
+// USER API
 export const apiSignIn = (email, password) =>
   api
     .post(API_SIGN_IN, {
@@ -57,3 +64,11 @@ export const apiConfirmAccount = token =>
   api.post(API_CONFIRM_ACCOUNT, { confirmationAccountToken: token }).catch(err => err.response);
 
 export const apiGetCurrentUser = () => api.get(API_GET_CURRENT_USER).catch(err => err.response);
+
+// FAMILY API
+export const apiCreateFamily = familyName =>
+  api
+    .post(API_CREATE_FAMILY, {
+      familyName,
+    })
+    .catch(err => err.response);

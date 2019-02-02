@@ -19,15 +19,20 @@
           <InputElement
             name="familyName"
             type="text"
-            :value="currentUser.lastName"
+            :value="isPristine ? currentUser.lastName : currentFamilyName"
             label-translation-path="dashboard.familyName"
+            @onChange="onFamilyNameChange"
             is-required
             has-centered-text
           />
         </div>
 
         <div :class="[$style['button-wrapper']]">
-          <ButtonElement translationPath="dashboard.createFamily" has-blue-theme/>
+          <ButtonElement
+            @onClick="createFamily"
+            translationPath="dashboard.createFamily"
+            has-blue-theme
+          />
         </div>
       </div>
     </CardElement>
@@ -36,7 +41,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { isEmpty } from 'lodash';
 
+import { apiCreateFamily } from '@/api';
 import { currentUser } from '@/store/currentUser/getters';
 
 import CardElement from '@/components/atoms/CardElement/CardElement.vue';
@@ -53,8 +60,29 @@ export default {
     InputElement,
     ButtonElement,
   },
+  data() {
+    return {
+      currentFamilyName: '',
+      isPristine: true,
+    };
+  },
   computed: {
     ...mapGetters({ currentUser }),
+  },
+  methods: {
+    onFamilyNameChange(payload) {
+      this.currentFamilyName = payload.value;
+
+      if (this.isPristine) this.isPristine = false;
+    },
+    async createFamily() {
+      if (isEmpty(this.currentFamilyName)) return;
+
+      // TODO: create family by action and set family to store.
+      // const response = await apiCreateFamily(this.currentFamilyName);
+
+      console.log(response);
+    },
   },
 };
 </script>
