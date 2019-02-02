@@ -1,3 +1,21 @@
-.title-wrapper {
-  margin: 0.3rem 0 2rem 1rem;
+.content-wrapper {
+  @include flex-center();
+
+  height: 100vh;
+}
+
+.family-creator-wrapper {
+  width: 60rem;
+  height: 50rem;
+  padding: 3rem 5rem;
+}
+
+.family-creator-row {
+  margin: 0.3rem 0 4rem 0;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 8rem;
 }

@@ -97,7 +97,7 @@ export default {
       const { $style, hasCenteredText } = this;
 
       return {
-        [$style['is-centered']]: hasCenteredText,
+        [$style['has-centered-text']]: hasCenteredText,
       };
     },
     validationOptions() {

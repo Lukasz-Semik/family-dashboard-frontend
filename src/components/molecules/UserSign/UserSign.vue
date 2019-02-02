@@ -9,14 +9,14 @@
           is-orange
           is-small
           is-uppercased
-          is-centered
+          has-centered-text
         />
       </CardElement>
     </HomeCardWrapper>
 
     <HomeCardWrapper>
       <CardElement is-hoverable>
-        <slot />
+        <slot/>
       </CardElement>
     </HomeCardWrapper>
   </div>

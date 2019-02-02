@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-click-outside="onClose"
-    @click="isOpen = true"
-  >
+  <div v-click-outside="onClose" @click="isOpen = true">
     <FieldControl
       :name="name"
       :is-focused="isOpen"
@@ -91,7 +88,7 @@ export default {
       const { $style, hasCenteredText } = this;
 
       return {
-        [$style['is-centered']]: hasCenteredText,
+        [$style['has-centered-text']]: hasCenteredText,
       };
     },
   },

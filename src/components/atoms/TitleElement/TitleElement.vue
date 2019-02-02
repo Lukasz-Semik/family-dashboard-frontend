@@ -2,9 +2,7 @@
   <Component
     :is="tag"
     :class="[$style['title'], classNames]"
-  >
-    {{ translatedText || $t(translationPath) }}
-  </Component>
+  >{{ translatedText || $t(translationPath, translationValues) }}</Component>
 </template>
 
 <script>
@@ -22,6 +20,10 @@ export default {
       type: String,
       default: '',
     },
+    translationValues: {
+      type: Object,
+      default: () => {},
+    },
     isOrange: {
       type: Boolean,
       default: false,
@@ -38,23 +40,21 @@ export default {
       type: Boolean,
       default: false,
     },
-    isCentered: {
+    hasCenteredText: {
       type: Boolean,
       default: false,
     },
   },
   computed: {
     classNames() {
-      const {
-        $style, isOrange, isBlack, isSmall, isUppercased, isCentered
-      } = this;
+      const { $style, isOrange, isBlack, isSmall, isUppercased, hasCenteredText } = this;
 
       return {
         [$style['is-black']]: isBlack,
         [$style['is-orange']]: isOrange,
         [$style['is-small']]: isSmall,
         [$style['is-uppercased']]: isUppercased,
-        [$style['is-centered']]: isCentered,
+        [$style['has-centered-text']]: hasCenteredText,
       };
     },
   },
