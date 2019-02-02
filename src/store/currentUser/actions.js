@@ -2,17 +2,17 @@ import { get } from 'lodash';
 
 import { apiGetCurrentUser } from '@/api';
 
-import { setCurrentUser, setIsFetching } from './mutations';
+import { setCurrentUser, setIsFetchingUser } from './mutations';
 
 export const getCurrentUser = 'getCurrentUser';
 
 export default {
   [getCurrentUser]: async ({ commit }) => {
-    commit(setIsFetching, { isFetching: true });
+    commit(setIsFetchingUser, { isFetching: true });
     const response = await apiGetCurrentUser();
     const currentUser = get(response, 'data.currentUser', {});
 
     commit(setCurrentUser, { currentUser });
-    commit(setIsFetching, { isFetching: false });
+    commit(setIsFetchingUser, { isFetching: false });
   },
 };

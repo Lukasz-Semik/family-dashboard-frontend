@@ -1,11 +1,11 @@
 export const setCurrentUser = 'setCurrentUser';
-export const setIsFetching = 'setIsFetching';
+export const setIsFetchingUser = 'setIsFetchingUser';
 
 export default {
   [setCurrentUser]: (state, { currentUser }) => {
     state.currentUser = { ...currentUser };
   },
-  [setIsFetching]: (state, { isFetching }) => {
+  [setIsFetchingUser]: (state, { isFetching }) => {
     state.isFetching = isFetching;
   },
 };

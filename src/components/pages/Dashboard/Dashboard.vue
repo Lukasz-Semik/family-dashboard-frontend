@@ -4,9 +4,11 @@
     <template v-if="!isFetchingCurrentUser">
       <AppSidebar/>
 
-      <div :class="[$style['app-wrapper']]">
+      <div v-if="!currentUser.hasFamily" :class="[$style['app-wrapper']]">
         <WithoutFamilyPage/>
       </div>
+
+      <div v-else>WITH FAMILY PLACEHOLDER cDSADSADSAD ASDASDSA DASDASD ASD ASD</div>
     </template>
   </div>
 </template>

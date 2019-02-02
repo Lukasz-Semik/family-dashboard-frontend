@@ -40,11 +40,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import { isEmpty } from 'lodash';
 
-import { apiCreateFamily } from '@/api';
 import { currentUser } from '@/store/currentUser/getters';
+import { createFamily } from '@/store/currentFamily/actions';
 
 import CardElement from '@/components/atoms/CardElement/CardElement.vue';
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
@@ -78,11 +78,9 @@ export default {
     async createFamily() {
       if (isEmpty(this.currentFamilyName)) return;
 
-      // TODO: create family by action and set family to store.
-      // const response = await apiCreateFamily(this.currentFamilyName);
-
-      console.log(response);
+      await this.createFamily(this.currentFamilyName);
     },
+    ...mapActions({ createFamily }),
   },
 };
 </script>
