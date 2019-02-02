@@ -1,18 +1,17 @@
 <template>
   <div>
-    <LoaderElement v-if="isFetchingCurrentUser" />
-    <template v-if="!isFetchingCurrentUser">
-      <AppSidebar />
+    <div v-if="isFetchingCurrentUser" :class="[$style['loader-wrapper']]">
+      <LoaderElement/>
+    </div>
+    <template v-else>
+      <AppSidebar/>
 
-      <div
-        v-if="!currentUser.hasFamily"
-        :class="[$style['app-wrapper']]"
-      >
-        <WithoutFamilyPage />
+      <div v-if="!currentUser.hasFamily" :class="[$style['app-wrapper']]">
+        <WithoutFamilyPage/>
       </div>
 
       <div v-else>
-        WITH FAMILY PLACEHOLDER cDSADSADSAD ASDASDSA DASDASD ASD ASD
+        <WithFamilyPage/>
       </div>
     </template>
   </div>
@@ -28,10 +27,12 @@ import LoaderElement from '@/components/atoms/LoaderElement/LoaderElement.vue';
 import AppSidebar from '@/components/organisms/AppSidebar/AppSidebar.vue';
 
 import WithoutFamilyPage from './WithoutFamilyPage/WithoutFamilyPage.vue';
+import WithFamilyPage from './WithFamilyPage/WithFamilyPage.vue';
 
 export default {
   components: {
     WithoutFamilyPage,
+    WithFamilyPage,
     AppSidebar,
     LoaderElement,
   },

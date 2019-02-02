@@ -8,6 +8,7 @@ import {
   API_CONFIRM_ACCOUNT,
   API_GET_CURRENT_USER,
   API_CREATE_FAMILY,
+  API_GET_FAMILY,
 } from '@/constants/api';
 import { getLocalStorageItem } from '@/utils/localStorage';
 import { goToUrl } from '@/utils/general';
@@ -72,3 +73,5 @@ export const apiCreateFamily = familyName =>
       familyName,
     })
     .catch(err => err.response);
+
+export const apiGetFamily = () => api.get(API_GET_FAMILY).catch(err => err.response);

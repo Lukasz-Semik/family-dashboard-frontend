@@ -11,3 +11,4 @@ export const API_GET_CURRENT_USER = `${API_USER}/current`;
 // FAMILY API
 const API_FAMILY = `${API}/family`;
 export const API_CREATE_FAMILY = `${API_FAMILY}/create`;
+export const API_GET_FAMILY = `${API_FAMILY}/current`;
