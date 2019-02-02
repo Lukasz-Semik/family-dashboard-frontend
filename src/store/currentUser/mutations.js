@@ -1,7 +1,11 @@
-export const setIsSignedIn = 'setIsSignedIn';
+export const setCurrentUser = 'setCurrentUser';
+export const setIsFetchingUser = 'setIsFetchingUser';
 
 export default {
-  [setIsSignedIn]: (state, { isAuthorized }) => {
-    state.isSignedIn = isAuthorized;
+  [setCurrentUser]: (state, { currentUser }) => {
+    state.currentUser = { ...currentUser };
+  },
+  [setIsFetchingUser]: (state, { isFetching }) => {
+    state.isFetching = isFetching;
   },
 };

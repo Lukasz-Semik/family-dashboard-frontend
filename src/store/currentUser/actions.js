@@ -1,56 +1,18 @@
-import { get, isEmpty } from 'lodash';
+import { get } from 'lodash';
 
-import { apiSignIn, apiCheckIsSignedIn } from '@/api';
-import { setLocalStorageItem, getLocalStorageItem } from '@/utils/localStorage';
+import { apiGetCurrentUser } from '@/api';
 
-import { setIsSignedIn } from './mutations';
+import { setCurrentUser, setIsFetchingUser } from './mutations';
 
-export const signIn = 'signIn';
-export const checkIsSignedIn = 'checkIsSignedIn';
+export const getCurrentUser = 'getCurrentUser';
 
 export default {
-  [signIn]: async ({ commit }, { email, password }) => {
-    try {
-      const response = await apiSignIn(email, password);
+  [getCurrentUser]: async ({ commit }) => {
+    commit(setIsFetchingUser, { isFetching: true });
+    const response = await apiGetCurrentUser();
+    const currentUser = get(response, 'data.currentUser', {});
 
-      const isAuthorized = get(response, 'status') === 200;
-
-      if (isAuthorized) {
-        commit(setIsSignedIn, { isAuthorized });
-        setLocalStorageItem('_token', get(response.data, 'token'));
-      }
-
-      return {
-        isAuthorized,
-      };
-    } catch (error) {
-      return {
-        isAuthorized: false,
-        error,
-      };
-    }
-  },
-  [checkIsSignedIn]: async ({ commit }) => {
-    const token = getLocalStorageItem('_token');
-
-    if (isEmpty(token)) {
-      commit(setIsSignedIn, { isAuthorized: false });
-
-      return false;
-    }
-
-    try {
-      const response = await apiCheckIsSignedIn(token);
-
-      if (get(response, 'status') === 200 && get(response, 'data.isAuthorized')) {
-        commit(setIsSignedIn, { isAuthorized: true });
-        return true;
-      }
-    } catch (error) {
-      commit(setIsSignedIn, { isAuthorized: false });
-      return false;
-    }
-
-    return false;
+    commit(setCurrentUser, { currentUser });
+    commit(setIsFetchingUser, { isFetching: false });
   },
 };

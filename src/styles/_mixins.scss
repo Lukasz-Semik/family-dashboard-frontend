@@ -21,7 +21,7 @@
     color: $medium-gray;
     transition: color 0.3s ease-in;
 
-    &.is-centered {
+    &.has-centered-text {
       text-align: center;
     }
 
@@ -45,7 +45,7 @@
   outline: none;
 }
 
-@mixin flexCenter() {
+@mixin flex-center() {
   display: flex;
   align-items: center;
   justify-content: center;

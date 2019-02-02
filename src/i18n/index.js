@@ -1,11 +1,13 @@
-import general from './general';
-import forms from './forms';
+import dashboard from './dashboard';
 import errors from './errors';
+import forms from './forms';
+import general from './general';
 
 export default {
   en: {
-    general,
-    forms,
+    dashboard,
     errors,
+    forms,
+    general,
   },
 };

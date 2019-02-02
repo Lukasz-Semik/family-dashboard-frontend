@@ -1,5 +1,7 @@
-export const isSignedIn = 'isSignedIn';
+export const currentUser = 'currentUser';
+export const isFetchingCurrentUser = 'isFetchingCurrentUser';
 
 export default {
-  [isSignedIn]: state => state.isSignedIn,
+  [currentUser]: state => state.currentUser,
+  [isFetchingCurrentUser]: state => state.isFetching,
 };

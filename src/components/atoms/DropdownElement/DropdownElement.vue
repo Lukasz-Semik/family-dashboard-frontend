@@ -86,7 +86,7 @@ export default {
       return this.options.map(item => this.$t(item.label));
     },
     inputClassNames() {
-      return this.hasCenteredText ? 'is-centered' : '';
+      return this.hasCenteredText ? 'has-centered-text' : '';
     },
   },
   watch: {
@@ -214,7 +214,7 @@ export default {
   }
 }
 /* stylelint-disable no-descending-specificity */
-.is-centered {
+.has-centered-text {
   .multiselect__placeholder,
   .multiselect__single {
     width: 100%;

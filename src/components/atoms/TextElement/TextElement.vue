@@ -26,13 +26,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    isMedium: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classNames() {
-      const { $style, hasCenteredText } = this;
+      const { $style, hasCenteredText, isMedium } = this;
 
       return {
         [$style['has-centered-text']]: hasCenteredText,
+        [$style['is-medium']]: isMedium,
       };
     },
   },
