@@ -4,15 +4,19 @@
       <div :class="[$style['family-creator-wrapper']]">
         <div :class="[$style['family-creator-row']]">
           <TitleElement
-            :translationValues="{userName: currentUser.firstName}"
-            translationPath="dashboard.welcome"
+            :translation-values="{userName: currentUser.firstName}"
+            translation-path="dashboard.welcome"
             tag="h2"
             has-centered-text
           />
         </div>
 
         <div :class="[$style['family-creator-row']]">
-          <TextElement translationPath="dashboard.welcomeNote" is-medium has-centered-text/>
+          <TextElement
+            translation-path="dashboard.welcomeNote"
+            is-medium
+            has-centered-text
+          />
         </div>
 
         <div :class="[$style['family-creator-row']]">
@@ -21,17 +25,17 @@
             type="text"
             :value="isPristine ? currentUser.lastName : currentFamilyName"
             label-translation-path="dashboard.familyName"
-            @onChange="onFamilyNameChange"
             is-required
             has-centered-text
+            @onChange="onFamilyNameChange"
           />
         </div>
 
         <div :class="[$style['button-wrapper']]">
           <ButtonElement
-            @onClick="createFamily"
-            translationPath="dashboard.createFamily"
+            translation-path="dashboard.createFamily"
             has-blue-theme
+            @onClick="createFamily"
           />
         </div>
       </div>

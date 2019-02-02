@@ -1,5 +1,8 @@
 <template>
-  <div v-click-outside="onClose" @click="isOpen = true">
+  <div
+    v-click-outside="onClose"
+    @click="isOpen = true"
+  >
     <FieldControl
       :name="name"
       :is-focused="isOpen"

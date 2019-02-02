@@ -1,14 +1,19 @@
 <template>
   <div>
-    <LoaderElement v-if="isFetchingCurrentUser"/>
+    <LoaderElement v-if="isFetchingCurrentUser" />
     <template v-if="!isFetchingCurrentUser">
-      <AppSidebar/>
+      <AppSidebar />
 
-      <div v-if="!currentUser.hasFamily" :class="[$style['app-wrapper']]">
-        <WithoutFamilyPage/>
+      <div
+        v-if="!currentUser.hasFamily"
+        :class="[$style['app-wrapper']]"
+      >
+        <WithoutFamilyPage />
       </div>
 
-      <div v-else>WITH FAMILY PLACEHOLDER cDSADSADSAD ASDASDSA DASDASD ASD ASD</div>
+      <div v-else>
+        WITH FAMILY PLACEHOLDER cDSADSADSAD ASDASDSA DASDASD ASD ASD
+      </div>
     </template>
   </div>
 </template>
@@ -19,32 +24,25 @@ import { mapActions, mapGetters } from 'vuex';
 import { getCurrentUser } from '@/store/currentUser/actions';
 import { currentUser, isFetchingCurrentUser } from '@/store/currentUser/getters';
 
-import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
-import LoaderElement from '@/components/atoms/LoaderElement/LoaderElement';
+import LoaderElement from '@/components/atoms/LoaderElement/LoaderElement.vue';
 import AppSidebar from '@/components/organisms/AppSidebar/AppSidebar.vue';
 
-import WithoutFamilyPage from './WithoutFamilyPage/WithoutFamilyPage';
+import WithoutFamilyPage from './WithoutFamilyPage/WithoutFamilyPage.vue';
 
 export default {
   components: {
-    TitleElement,
     WithoutFamilyPage,
     AppSidebar,
     LoaderElement,
   },
-  watch: {
-    isFetchingCurrentUser(newVal, oldVal) {
-      console.log({ newVal, oldVal });
-    },
+  computed: {
+    ...mapGetters({ currentUser, isFetchingCurrentUser }),
   },
   created() {
     this.getCurrentUser();
   },
   methods: {
     ...mapActions({ getCurrentUser }),
-  },
-  computed: {
-    ...mapGetters({ currentUser, isFetchingCurrentUser }),
   },
 };
 </script>

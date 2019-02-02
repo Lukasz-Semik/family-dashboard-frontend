@@ -1,5 +1,9 @@
 <template>
-  <SemipolarSpinner :animation-duration="2000" :size="size" :color="'#f99529'"/>
+  <SemipolarSpinner
+    :animation-duration="2000"
+    :size="size"
+    :color="'#f99529'"
+  />
 </template>
 
 <script>
