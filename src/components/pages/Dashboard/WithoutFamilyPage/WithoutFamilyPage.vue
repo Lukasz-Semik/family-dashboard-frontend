@@ -48,6 +48,7 @@ import { mapGetters, mapActions } from 'vuex';
 import { isEmpty, get } from 'lodash';
 
 import { apiCreateFamily } from '@/api';
+import { DASHBOARD_ROUTE } from '@/constants/routesNames';
 import { currentUser } from '@/store/currentUser/getters';
 import { getCurrentUser } from '@/store/currentUser/actions';
 
@@ -87,6 +88,7 @@ export default {
 
       if (get(response, 'status') === 200) {
         this.getCurrentUser();
+        this.$router.push({ name: DASHBOARD_ROUTE });
       }
     },
     ...mapActions({ getCurrentUser }),

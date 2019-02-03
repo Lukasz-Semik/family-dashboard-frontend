@@ -5,6 +5,7 @@ export const CONFIRM_ROUTE = 'confirmRoute';
 
 // Dashboard routes
 export const DASHBOARD_ROUTE = 'dashboardRoute';
+export const WITHOUT_FAMILY_ROUTE = 'withoutFamilyRoute';
 export const ACCOUNT_SETTINGS_ROUTE = 'accountSettingsRoute';
 export const FAMILY_SETTINGS_ROUTE = 'familySettingsRoute';
 export const TODOS_ROUTE = 'todosRoute';

@@ -30,14 +30,19 @@ export default {
       type: Boolean,
       default: false,
     },
+    isBold: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classNames() {
-      const { $style, hasCenteredText, isMedium } = this;
+      const { $style, hasCenteredText, isMedium, isBold } = this;
 
       return {
         [$style['has-centered-text']]: hasCenteredText,
         [$style['is-medium']]: isMedium,
+        [$style['is-bold']]: isBold,
       };
     },
   },

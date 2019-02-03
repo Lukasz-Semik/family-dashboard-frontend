@@ -38,6 +38,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isBig: {
+      type: Boolean,
+      default: false,
+    },
     isUppercased: {
       type: Boolean,
       default: false,
@@ -49,12 +53,13 @@ export default {
   },
   computed: {
     classNames() {
-      const { $style, isOrange, isBlack, isSmall, isUppercased, hasCenteredText } = this;
+      const { $style, isOrange, isBlack, isSmall, isBig, isUppercased, hasCenteredText } = this;
 
       return {
         [$style['is-black']]: isBlack,
         [$style['is-orange']]: isOrange,
         [$style['is-small']]: isSmall,
+        [$style['is-big']]: isBig,
         [$style['is-uppercased']]: isUppercased,
         [$style['has-centered-text']]: hasCenteredText,
       };

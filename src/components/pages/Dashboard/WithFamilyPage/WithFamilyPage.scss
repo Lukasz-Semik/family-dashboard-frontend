@@ -1,3 +1,18 @@
 .dashboard-wrapper {
   margin-left: 30rem;
 }
+
+.items-wrapper {
+  margin-top: 1rem;
+  padding: 0 6rem;
+}
+
+.items-row {
+  @include flex-center-h();
+}
+
+.irems-col {
+  @include flex-center-h();
+
+  flex-basis: 50%;
+}

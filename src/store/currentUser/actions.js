@@ -14,5 +14,7 @@ export default {
 
     commit(setCurrentUser, { currentUser });
     commit(setIsFetchingUser, { isFetching: false });
+
+    return currentUser;
   },
 };
