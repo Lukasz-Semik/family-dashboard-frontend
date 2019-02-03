@@ -3,7 +3,10 @@
     <CardElement>
       <div :class="[$style['item-inner-wrapper']]">
         <div :class="[$style['header-group']]">
-          <img :src="photoSrc">
+          <img
+            :src="photoSrc"
+            :alt="$t(itemTitle)"
+          >
 
           <TitleElement
             tag="h2"
@@ -56,7 +59,7 @@ import CardElement from '@/components/atoms/CardElement/CardElement.vue';
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 import TextElement from '@/components/atoms/TextElement/TextElement.vue';
 import Link from '@/components/atoms/Link/Link.vue';
-// TODO: alt for images!
+
 export default {
   components: {
     CardElement,
@@ -67,15 +70,19 @@ export default {
   props: {
     itemTitle: {
       type: String,
-      default: '',
+      required: true,
     },
     itemDescription: {
       type: String,
-      default: '',
+      required: true,
     },
     photoSrc: {
       type: String,
-      default: '',
+      required: true,
+    },
+    photoAlt: {
+      type: String,
+      required: true,
     },
     destinationRoute: {
       type: Object,
