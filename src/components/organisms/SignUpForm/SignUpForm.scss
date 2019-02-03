@@ -12,7 +12,11 @@
   .previous-wrapper {
     position: absolute;
     top: 0;
-    left: -15rem;
+    left: -8rem;
+
+    @include atMedium {
+      left: -15rem;
+    }
   }
 }
 

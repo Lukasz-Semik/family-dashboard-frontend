@@ -2,14 +2,19 @@
   @include reset-button();
 
   position: fixed;
-  top: 2rem;
-  right: 5rem;
+  top: 1rem;
+  right: 2rem;
   padding: 1.5rem 2rem;
   font-size: 1.4rem;
   opacity: 1;
   border-radius: 5px;
   box-shadow: $dark-grey-shadow;
   transform: scale(1);
+
+  @include atMedium {
+    top: 2rem;
+    right: 5rem;
+  }
 
   &::after {
     display: inline-block;
