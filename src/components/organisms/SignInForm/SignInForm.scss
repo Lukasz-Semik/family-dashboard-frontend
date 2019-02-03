@@ -2,8 +2,8 @@
   padding: 8rem 0 10rem;
 
   .button-container {
-    display: flex;
-    justify-content: center;
+    @include flex-center-h();
+
     margin-top: 5rem;
     width: 100%;
   }

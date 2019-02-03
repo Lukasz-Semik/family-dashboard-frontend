@@ -10334,6 +10334,11 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-avatar@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/vue-avatar/-/vue-avatar-2.1.7.tgz#00fca25f59ad9311159d55aacc4a98f70a23bd9d"
+  integrity sha512-1nYbgzCHPaQIN+LkOW0VH+2CrB0ljM5aiVaPtHqJ0/Uf8PnHRWLXzO3NFmXy5EPaYRjeLwnmm3ox2zac1AhBtA==
+
 vue-click-outside@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/vue-click-outside/-/vue-click-outside-1.0.7.tgz#cdd2b1605e3c4944784e1794eae4a12a0f700bd6"

@@ -1,6 +1,8 @@
 <template>
   <div :class="[$style['dashboard-wrapper']]">
     <FamilyHeader />
+
+    <RouterView />
   </div>
 </template>
 

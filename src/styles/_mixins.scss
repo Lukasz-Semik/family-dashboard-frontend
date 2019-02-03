@@ -50,3 +50,13 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin flex-center-h() {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-center-v() {
+  display: flex;
+  align-items: center;
+}

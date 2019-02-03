@@ -7,5 +7,12 @@ export default {
   family: {
     name: 'Family name',
     size: 'Family size',
+    familyHead: 'Family head',
+  },
+  nav: {
+    accountSettings: 'Account Settings',
+    familySettings: 'Family Settings',
+    todos: 'Todos',
+    shoppingLists: 'Shopping Lists',
   },
 };

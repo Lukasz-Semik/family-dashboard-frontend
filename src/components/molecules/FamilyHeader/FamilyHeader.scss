@@ -1,6 +1,6 @@
 .family-header {
-  display: flex;
-  justify-content: center;
+  @include flex-center-h();
+
   padding-top: 1rem;
 }
 
