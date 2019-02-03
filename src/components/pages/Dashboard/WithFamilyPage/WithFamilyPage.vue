@@ -1,6 +1,6 @@
 <template>
   <div :class="[$style['dashboard-wrapper']]">
-    <FamilyHeader/>
+    <FamilyHeader />
   </div>
 </template>
 

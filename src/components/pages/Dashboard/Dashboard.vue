@@ -1,17 +1,23 @@
 <template>
   <div>
-    <div v-if="isFetchingCurrentUser" :class="[$style['loader-wrapper']]">
-      <LoaderElement/>
+    <div
+      v-if="isFetchingCurrentUser"
+      :class="[$style['loader-wrapper']]"
+    >
+      <LoaderElement />
     </div>
     <template v-else>
-      <AppSidebar/>
+      <AppSidebar />
 
-      <div v-if="!currentUser.hasFamily" :class="[$style['app-wrapper']]">
-        <WithoutFamilyPage/>
+      <div
+        v-if="!currentUser.hasFamily"
+        :class="[$style['app-wrapper']]"
+      >
+        <WithoutFamilyPage />
       </div>
 
       <div v-else>
-        <WithFamilyPage/>
+        <WithFamilyPage />
       </div>
     </template>
   </div>
