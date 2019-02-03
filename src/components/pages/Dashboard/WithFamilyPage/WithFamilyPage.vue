@@ -1,8 +1,20 @@
 <template>
   <div :class="[$style['dashboard-wrapper']]">
-    <FamilyHeader />
+    <FamilyHeader/>
 
-    <RouterView />
+    <div :class="[$style['items-wrapper']]">
+      <div :class="[$style['items-row']]">
+        <div :class="[$style['irems-col']]">
+          <DashboardItem/>
+        </div>
+
+        <div :class="[$style['irems-col']]">
+          <DashboardItem/>
+        </div>
+      </div>
+    </div>
+
+    <RouterView/>
   </div>
 </template>
 
@@ -12,10 +24,12 @@ import { mapActions } from 'vuex';
 import { getFamily } from '@/store/currentFamily/actions';
 
 import FamilyHeader from '@/components/molecules/FamilyHeader/FamilyHeader.vue';
+import DashboardItem from '@/components/molecules/DashboardItem/DashboardItem.vue';
 
 export default {
   components: {
     FamilyHeader,
+    DashboardItem,
   },
   created() {
     this.getFamily();

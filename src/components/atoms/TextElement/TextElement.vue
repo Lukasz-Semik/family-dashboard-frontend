@@ -2,9 +2,7 @@
   <p
     data-test="text-element"
     :class="[$style['text'], classNames]"
-  >
-    {{ translatedText || $t(translationPath, translationValues) }}
-  </p>
+  >{{ translatedText || $t(translationPath, translationValues) }}</p>
 </template>
 
 <script>
@@ -30,14 +28,19 @@ export default {
       type: Boolean,
       default: false,
     },
+    isBold: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classNames() {
-      const { $style, hasCenteredText, isMedium } = this;
+      const { $style, hasCenteredText, isMedium, isBold } = this;
 
       return {
         [$style['has-centered-text']]: hasCenteredText,
         [$style['is-medium']]: isMedium,
+        [$style['is-bold']]: isBold,
       };
     },
   },

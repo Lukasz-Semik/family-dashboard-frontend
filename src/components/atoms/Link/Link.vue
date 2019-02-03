@@ -3,9 +3,7 @@
     :to="to"
     :class="[$style['link'], classNames]"
     :exact-active-class="$style['is-active']"
-  >
-    {{ translatedText || $t(translationPath) }}
-  </RouterLink>
+  >{{ translatedText || $t(translationPath) }}</RouterLink>
 </template>
 
 <script>
@@ -27,6 +25,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isXBig: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -36,10 +38,11 @@ export default {
   },
   computed: {
     classNames() {
-      const { $style, isBlack } = this;
+      const { $style, isBlack, isXBig } = this;
 
       return {
         [$style['is-black']]: isBlack,
+        [$style['is-x-big']]: isXBig,
       };
     },
   },

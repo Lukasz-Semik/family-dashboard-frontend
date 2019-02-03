@@ -41,9 +41,10 @@ const homeRoute = {
 const dashboardRoute = {
   path: '/dashboard',
   name: DASHBOARD_ROUTE,
-  components: {
-    default: Dashboard,
-  },
+  component: Dashboard,
+  // components: {
+  //   default: Dashboard,
+  // },
   children: [
     {
       path: 'account-settings',
@@ -67,6 +68,12 @@ const dashboardRoute = {
     },
   ],
 };
+
+// const todosRoute = {
+//   path: '/todos',
+//   component: TodosPage,
+//   name: TODOS_ROUTE,
+// };
 
 const confirmRoute = {
   path: '/confirm',

@@ -5,6 +5,10 @@
   color: $dark-green;
   transition: color 0.3s ease-in-out;
 
+  &.is-x-big {
+    font-size: 3rem;
+  }
+
   &.is-black {
     color: $medium-gray;
 
