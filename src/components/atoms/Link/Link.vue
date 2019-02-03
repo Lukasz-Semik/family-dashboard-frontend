@@ -1,7 +1,7 @@
 <template>
   <RouterLink
     :to="to"
-    :class="[$style['link']]"
+    :class="[$style['link'], classNames]"
     :exact-active-class="$style['is-active']"
   >
     {{ translatedText || $t(translationPath) }}
@@ -23,12 +23,25 @@ export default {
       type: String,
       default: '',
     },
+    isBlack: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       isFocused: false,
       isHovered: false,
     };
+  },
+  computed: {
+    classNames() {
+      const { $style, isBlack } = this;
+
+      return {
+        [$style['is-black']]: isBlack,
+      };
+    },
   },
 };
 </script>

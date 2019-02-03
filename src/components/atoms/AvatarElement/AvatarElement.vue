@@ -1,15 +1,24 @@
 <template>
   <div :class="[$style['avatar']]">
     <div :class="[$style['photo']]">
-      <Avatar :username="userName" :size="70" background-color="#ec9130" color="#efe"/>
+      <Avatar
+        :username="userName"
+        :size="70"
+        background-color="#ec9130"
+        color="#efe"
+      />
     </div>
 
-    <p :class="[$style['text']]">{{ userName }}</p>
+    <p :class="[$style['text']]">
+      {{ userName }}
+    </p>
 
     <p
       v-if="isFamilyHead"
       :class="[$style['text'], $style['text--is-small']]"
-    >({{ $t('dashboard.family.familyHead') }})</p>
+    >
+      ({{ $t('dashboard.family.familyHead') }})
+    </p>
   </div>
 </template>
 

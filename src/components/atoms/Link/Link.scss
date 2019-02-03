@@ -5,6 +5,23 @@
   color: $dark-green;
   transition: color 0.3s ease-in-out;
 
+  &.is-black {
+    color: $medium-gray;
+
+    &:visited {
+      color: $medium-gray;
+    }
+
+    &:hover,
+    &:focus {
+      color: $light-gray;
+    }
+
+    &.is-active {
+      color: $dark-green;
+    }
+  }
+
   &::after {
     @include focus-hover-separator-base($dark-green);
   }

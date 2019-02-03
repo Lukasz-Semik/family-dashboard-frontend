@@ -3,6 +3,8 @@
 
   .photo {
     @include flex-center-h();
+
+    margin-bottom: 5px;
   }
 
   .text {
