@@ -3,16 +3,16 @@
     <div :class="[$style['items-wrapper']]">
       <div :class="[$style['items-row']]">
         <div :class="[$style['irems-col']]">
-          <TodoDashboardItem/>
+          <TodoDashboardItem />
         </div>
 
         <div :class="[$style['irems-col']]">
-          <ShoppingListDashboardItem/>
+          <ShoppingListDashboardItem />
         </div>
       </div>
     </div>
 
-    <RouterView/>
+    <RouterView />
   </div>
 </template>
 

@@ -3,7 +3,9 @@
     :to="to"
     :class="[$style['link'], classNames]"
     :exact-active-class="$style['is-active']"
-  >{{ translatedText || $t(translationPath) }}</RouterLink>
+  >
+    {{ translatedText || $t(translationPath) }}
+  </RouterLink>
 </template>
 
 <script>

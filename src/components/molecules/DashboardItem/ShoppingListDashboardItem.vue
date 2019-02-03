@@ -11,7 +11,7 @@
 import shoppingListPhoto from '@/assets/shoppinglist.png';
 import { SHOPPING_LISTS_ROUTE } from '@/constants/routesNames';
 
-import DashboardItem from './DashboardItem';
+import DashboardItem from './DashboardItem.vue';
 
 export default {
   components: {

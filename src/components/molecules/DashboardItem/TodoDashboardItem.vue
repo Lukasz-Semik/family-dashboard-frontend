@@ -11,7 +11,7 @@
 import todoListPhoto from '@/assets/todolist.jpg';
 import { TODOS_ROUTE } from '@/constants/routesNames';
 
-import DashboardItem from './DashboardItem';
+import DashboardItem from './DashboardItem.vue';
 
 export default {
   components: {

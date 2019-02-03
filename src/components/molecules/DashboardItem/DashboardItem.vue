@@ -5,17 +5,26 @@
         <div :class="[$style['header-group']]">
           <img :src="photoSrc">
 
-          <TitleElement tag="h2" :translationPath="itemTitle" is-orange has-centered-text/>
+          <TitleElement
+            tag="h2"
+            :translation-path="itemTitle"
+            is-orange
+            has-centered-text
+          />
         </div>
 
         <div :class="[$style['items-description']]">
-          <TextElement :translationPath="itemDescription" is-medium has-centered-text/>
+          <TextElement
+            :translation-path="itemDescription"
+            is-medium
+            has-centered-text
+          />
         </div>
 
         <div :class="[$style['items-counter']]">
           <TextElement
-            translationPath="dashboard.allItems"
-            :translationValues="{quantity: 0}"
+            translation-path="dashboard.allItems"
+            :translation-values="{quantity: 0}"
             is-bold
             has-centered-text
           />
@@ -23,15 +32,19 @@
 
         <div :class="[$style['items-counter']]">
           <TextElement
-            translationPath="dashboard.notDoneItems"
-            :translationValues="{quantity: 0}"
+            translation-path="dashboard.notDoneItems"
+            :translation-values="{quantity: 0}"
             is-bold
             has-centered-text
           />
         </div>
 
         <div :class="[$style['link-wrapper']]">
-          <Link :to="destinationRoute" translation-path="dashboard.nav.goThere" is-x-big/>
+          <Link
+            :to="destinationRoute"
+            translation-path="dashboard.nav.goThere"
+            is-x-big
+          />
         </div>
       </div>
     </CardElement>
@@ -62,7 +75,7 @@ export default {
     },
     photoSrc: {
       type: String,
-      defautl: '',
+      default: '',
     },
     destinationRoute: {
       type: Object,

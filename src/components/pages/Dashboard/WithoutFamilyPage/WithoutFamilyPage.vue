@@ -12,7 +12,11 @@
         </div>
 
         <div :class="[$style['family-creator-row']]">
-          <TextElement translation-path="dashboard.welcomeNote" is-medium has-centered-text/>
+          <TextElement
+            translation-path="dashboard.welcomeNote"
+            is-medium
+            has-centered-text
+          />
         </div>
 
         <div :class="[$style['family-creator-row']]">
