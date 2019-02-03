@@ -35,7 +35,7 @@
           <ButtonElement
             translation-path="dashboard.createFamily"
             has-blue-theme
-            @onClick="createFamily"
+            @onClick="createNewFamily"
           />
         </div>
       </div>
@@ -45,10 +45,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { isEmpty } from 'lodash';
+import { isEmpty, get } from 'lodash';
 
+import { apiCreateFamily } from '@/api';
 import { currentUser } from '@/store/currentUser/getters';
-import { createFamily } from '@/store/currentFamily/actions';
+import { getCurrentUser } from '@/store/currentUser/actions';
 
 import CardElement from '@/components/atoms/CardElement/CardElement.vue';
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
@@ -79,12 +80,16 @@ export default {
 
       if (this.isPristine) this.isPristine = false;
     },
-    async createFamily() {
+    async createNewFamily() {
       if (isEmpty(this.currentFamilyName)) return;
 
-      await this.createFamily(this.currentFamilyName);
+      const response = await apiCreateFamily(this.currentFamilyName);
+
+      if (get(response, 'status') === 200) {
+        this.getCurrentUser();
+      }
     },
-    ...mapActions({ createFamily }),
+    ...mapActions({ getCurrentUser }),
   },
 };
 </script>

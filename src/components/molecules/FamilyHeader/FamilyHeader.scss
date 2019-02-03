@@ -1,0 +1,19 @@
+.family-header {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.family-header-text {
+  margin-right: 2rem;
+  font-size: 1.5rem;
+  color: $dark-green;
+
+  .label {
+    margin-right: 5px;
+  }
+
+  .value {
+    font-weight: 700;
+  }
+}

@@ -4,4 +4,8 @@ export default {
     You can ask someone to add you, or create own one.`,
   familyName: 'Family name',
   createFamily: 'Create family',
+  family: {
+    name: 'Family name',
+    size: 'Family size',
+  },
 };

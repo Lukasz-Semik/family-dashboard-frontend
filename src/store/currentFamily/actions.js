@@ -1,21 +1,20 @@
 import { get } from 'lodash';
 
-import { apiCreateFamily } from '@/api';
+import { apiGetFamily } from '@/api';
 
 import { setCurrentFamily, setIsFetchingFamily } from './mutations';
 
-export const createFamily = 'createFamily';
+export const getFamily = 'getFamily';
 
 export default {
-  [createFamily]: async ({ commit }, { currentFamilyName }) => {
+  [getFamily]: async ({ commit }) => {
     commit(setIsFetchingFamily, { isFetching: true });
 
-    const response = await apiCreateFamily(currentFamilyName);
+    const response = await apiGetFamily();
 
-    if (get(response, 'status') === 200) {
-      commit(setCurrentFamily, { currentFamily: get(response, 'data.family', {}) });
-    }
-
+    commit(setCurrentFamily, { currentFamily: get(response, 'data.family', {}) });
     commit(setIsFetchingFamily, { isFetching: true });
+
+    return response;
   },
 };
