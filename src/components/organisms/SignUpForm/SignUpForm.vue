@@ -166,9 +166,7 @@ export default {
         return;
       }
 
-      const {
-        firstName, lastName, birthDate, gender, email, password
-      } = this;
+      const { firstName, lastName, birthDate, gender, email, password } = this;
 
       if (this.currentStepIndex === 2) {
         try {

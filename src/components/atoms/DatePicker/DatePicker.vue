@@ -8,7 +8,7 @@
       :is-focused="isOpen"
       :label-translated-text="labelTranslatedText"
       :label-translation-path="labelTranslationPath"
-      :error-msg="errorMsg"
+      :error-msg="isPristine ? '' :errorMsg"
     >
       <Datepicker
         :id="name"
@@ -84,6 +84,7 @@ export default {
       isValid: false,
       errorMsg: '',
       selectedControl: null,
+      isPristine: true,
     };
   },
   computed: {
@@ -98,6 +99,7 @@ export default {
   watch: {
     isSubmissionFailed(newVal, oldVal) {
       if (newVal && !oldVal) {
+        this.isPristine = false;
         this.handleValidate(this.value);
       }
     },
@@ -122,6 +124,7 @@ export default {
     },
     onSelectDate(value) {
       this.selectedControl = value;
+      this.isPristine = false;
 
       this.handleValidate(value);
 
@@ -130,6 +133,7 @@ export default {
     onClose() {
       if (this.isOpen) {
         this.isOpen = false;
+        this.isPristine = false;
 
         this.onSelectDate(this.value);
       }
