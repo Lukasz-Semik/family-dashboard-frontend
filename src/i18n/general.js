@@ -2,6 +2,7 @@ export default {
   appTitle: 'Family Dashboard',
   signIn: 'Sign In',
   signUp: 'Sign Up',
+  signOut: 'Sign Out',
   previous: 'Previous',
   successfulRegister: `We have sent an email to this adress: {email}.
     Please, follow the instructions to confirm your accont :)`,

@@ -7,5 +7,6 @@ export default {
   family: {
     name: 'Family name',
     size: 'Family size',
+    familyHead: 'Family head',
   },
 };

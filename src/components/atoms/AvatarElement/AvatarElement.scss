@@ -1,0 +1,18 @@
+.avatar {
+  display: inline-block;
+
+  .photo {
+    @include flex-center-h();
+  }
+
+  .text {
+    text-align: center;
+    font-size: 1.4rem;
+    color: $medium-gray;
+
+    &--is-small {
+      font-size: 1.1rem;
+      color: $light-gray;
+    }
+  }
+}
