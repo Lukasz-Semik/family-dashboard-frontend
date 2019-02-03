@@ -4,7 +4,7 @@
     :label-translated-text="labelTranslatedText"
     :label-translation-path="labelTranslationPath"
     :is-focused="isFocused"
-    :error-msg="errorMsg"
+    :error-msg="isPristine ? '' : errorMsg"
     :error-msg-values="{msg : errorTranslationValues}"
   >
     <input
@@ -90,6 +90,7 @@ export default {
       isValid: true,
       errorMsg: '',
       errorTranslationValues: '',
+      isPristine: true,
     };
   },
   computed: {
@@ -113,6 +114,7 @@ export default {
     isSubmissionFailed(newVal, oldVal) {
       if (newVal && !oldVal) {
         this.handleValidate(this.value);
+        this.isPristine = false;
       }
     },
   },
@@ -137,6 +139,7 @@ export default {
     },
     onBlur(event) {
       this.isFocused = false;
+      this.isPristine = false;
       this.handleChange(event);
     },
     emitOnChange(value) {

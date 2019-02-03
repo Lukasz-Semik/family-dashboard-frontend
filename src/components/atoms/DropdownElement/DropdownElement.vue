@@ -4,7 +4,7 @@
     :label-translated-text="labelTranslatedText"
     :label-translation-path="labelTranslationPath"
     :is-focused="isFocused"
-    :error-msg="errorMsg"
+    :error-msg="isPristine ? '' : errorMsg"
   >
     <div :class="inputClassNames">
       <DropdownElement
@@ -79,6 +79,7 @@ export default {
       isFocused: false,
       isValid: false,
       errorMsg: '',
+      isPristine: true,
     };
   },
   computed: {
@@ -92,6 +93,7 @@ export default {
   watch: {
     isSubmissionFailed(newVal, oldVal) {
       if (newVal && !oldVal) {
+        this.isPristine = false;
         this.handleValidate(this.value);
       }
     },
@@ -111,6 +113,7 @@ export default {
   methods: {
     onClose() {
       this.isFocused = false;
+      this.isPristine = false;
 
       this.handleChange(this.selected);
     },
@@ -129,7 +132,7 @@ export default {
         value: get(
           find(this.options, option => this.$t(option.label) === selectedOption),
           'value',
-          null,
+          null
         ),
         name: this.name,
         isValid: this.isValid,
