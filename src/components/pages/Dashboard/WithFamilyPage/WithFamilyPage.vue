@@ -1,15 +1,13 @@
 <template>
-  <div :class="[$style['dashboard-wrapper']]">
-    <FamilyHeader/>
-
+  <div>
     <div :class="[$style['items-wrapper']]">
       <div :class="[$style['items-row']]">
         <div :class="[$style['irems-col']]">
-          <DashboardItem/>
+          <TodoDashboardItem/>
         </div>
 
         <div :class="[$style['irems-col']]">
-          <DashboardItem/>
+          <ShoppingListDashboardItem/>
         </div>
       </div>
     </div>
@@ -23,13 +21,13 @@ import { mapActions } from 'vuex';
 
 import { getFamily } from '@/store/currentFamily/actions';
 
-import FamilyHeader from '@/components/molecules/FamilyHeader/FamilyHeader.vue';
-import DashboardItem from '@/components/molecules/DashboardItem/DashboardItem.vue';
+import TodoDashboardItem from '@/components/molecules/DashboardItem/TodoDashboardItem.vue';
+import ShoppingListDashboardItem from '@/components/molecules/DashboardItem/ShoppingListDashboardItem.vue';
 
 export default {
   components: {
-    FamilyHeader,
-    DashboardItem,
+    TodoDashboardItem,
+    ShoppingListDashboardItem,
   },
   created() {
     this.getFamily();

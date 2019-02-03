@@ -2,6 +2,7 @@ import {
   SIGN_IN_ROUTE,
   SIGN_UP_ROUTE,
   DASHBOARD_ROUTE,
+  WITHOUT_FAMILY_ROUTE,
   CONFIRM_ROUTE,
   ACCOUNT_SETTINGS_ROUTE,
   TODOS_ROUTE,
@@ -14,6 +15,8 @@ import SignInPage from '@/components/pages/HomeElement/SignInPage/SignInPage.vue
 import SignUpPage from '@/components/pages/HomeElement/SignUpPage/SignUpPage.vue';
 import ConfirmPage from '@/components/pages/ConfirmPage/ConfirmPage.vue';
 import Dashboard from '@/components/pages/Dashboard/Dashboard.vue';
+import WithFamilyPage from '@/components/pages/Dashboard/WithFamilyPage/WithFamilyPage.vue';
+import WithoutFamilyPage from '@/components/pages/Dashboard/WithoutFamilyPage/WithoutFamilyPage.vue';
 import AccountSettingsPage from '@/components/pages/Dashboard/SubPages/AccountSettingsPage/AccountSettingsPage.vue';
 import FamilySettingsPage from '@/components/pages/Dashboard/SubPages/FamilySettingsPage/FamilySettingsPage.vue';
 import TodosPage from '@/components/pages/Dashboard/SubPages/TodosPage/TodosPage.vue';
@@ -40,12 +43,18 @@ const homeRoute = {
 
 const dashboardRoute = {
   path: '/dashboard',
-  name: DASHBOARD_ROUTE,
   component: Dashboard,
-  // components: {
-  //   default: Dashboard,
-  // },
   children: [
+    {
+      path: '',
+      component: WithFamilyPage,
+      name: DASHBOARD_ROUTE,
+    },
+    {
+      path: 'without-family',
+      component: WithoutFamilyPage,
+      name: WITHOUT_FAMILY_ROUTE,
+    },
     {
       path: 'account-settings',
       component: AccountSettingsPage,
@@ -68,12 +77,6 @@ const dashboardRoute = {
     },
   ],
 };
-
-// const todosRoute = {
-//   path: '/todos',
-//   component: TodosPage,
-//   name: TODOS_ROUTE,
-// };
 
 const confirmRoute = {
   path: '/confirm',

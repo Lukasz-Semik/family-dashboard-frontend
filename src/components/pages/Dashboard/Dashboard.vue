@@ -1,23 +1,16 @@
 <template>
   <div>
-    <div
-      v-if="isFetchingCurrentUser"
-      :class="[$style['loader-wrapper']]"
-    >
-      <LoaderElement />
+    <div v-if="isFetchingCurrentUser" :class="[$style['loader-wrapper']]">
+      <LoaderElement/>
     </div>
+
     <template v-else>
-      <AppSidebar />
+      <AppSidebar/>
 
-      <div
-        v-if="!currentUser.hasFamily"
-        :class="[$style['app-wrapper']]"
-      >
-        <WithoutFamilyPage />
-      </div>
+      <div :class="[$style['dashboard-wrapper']]">
+        <FamilyHeader v-if="currentUser.hasFamily"/>
 
-      <div v-else>
-        <WithFamilyPage />
+        <RouterView/>
       </div>
     </template>
   </div>
@@ -28,7 +21,9 @@ import { mapActions, mapGetters } from 'vuex';
 
 import { getCurrentUser } from '@/store/currentUser/actions';
 import { currentUser, isFetchingCurrentUser } from '@/store/currentUser/getters';
+import { WITHOUT_FAMILY_ROUTE } from '@/constants/routesNames';
 
+import FamilyHeader from '@/components/molecules/FamilyHeader/FamilyHeader.vue';
 import LoaderElement from '@/components/atoms/LoaderElement/LoaderElement.vue';
 import AppSidebar from '@/components/organisms/AppSidebar/AppSidebar.vue';
 
@@ -41,12 +36,17 @@ export default {
     WithFamilyPage,
     AppSidebar,
     LoaderElement,
+    FamilyHeader,
   },
   computed: {
     ...mapGetters({ currentUser, isFetchingCurrentUser }),
   },
-  created() {
-    this.getCurrentUser();
+  async created() {
+    const { hasFamily } = await this.getCurrentUser();
+
+    if (!hasFamily) {
+      this.$router.push({ name: WITHOUT_FAMILY_ROUTE });
+    }
   },
   methods: {
     ...mapActions({ getCurrentUser }),
