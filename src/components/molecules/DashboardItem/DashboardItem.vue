@@ -1,6 +1,6 @@
 <template>
   <div :class="[$style['item-wrapper']]">
-    <CardElement>
+    <CardElement is-hoverable>
       <div :class="[$style['item-inner-wrapper']]">
         <div :class="[$style['header-group']]">
           <img
@@ -77,10 +77,6 @@ export default {
       required: true,
     },
     photoSrc: {
-      type: String,
-      required: true,
-    },
-    photoAlt: {
       type: String,
       required: true,
     },
