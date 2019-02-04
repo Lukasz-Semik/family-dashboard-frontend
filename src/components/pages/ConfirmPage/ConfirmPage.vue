@@ -8,6 +8,7 @@
       <TitleElement
         tag="h2"
         :translation-path="msg"
+        has-centered-text
         is-black
       />
     </div>

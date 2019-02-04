@@ -11,4 +11,5 @@ export default {
   signUpThx: 'Thank you for signing up :D',
   underConfirmation: 'Your account is confirming...',
   next: 'Next',
+  close: 'Close',
 };

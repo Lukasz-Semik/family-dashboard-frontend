@@ -1,71 +1,89 @@
 <template>
-  <div :class="[$style['app-sidebar']]">
-    <RouterLink :to="dashboardRoute">
-      <div :class="[$style['title-wrapper']]">
-        <TitleElement
-          translation-path="general.appTitle"
-          is-small
-          has-centered-text
-        />
-      </div>
-    </RouterLink>
+  <div>
+    <div :class="[$style['app-sidebar'], navClassNames]">
+      <RouterLink :to="dashboardRoute">
+        <div :class="[$style['title-wrapper']]">
+          <TitleElement
+            translation-path="general.appTitle"
+            is-small
+            has-centered-text
+          />
+        </div>
+      </RouterLink>
 
-    <div :class="[$style['avatar-wrapper']]">
-      <AvatarElement />
-    </div>
-
-    <nav
-      v-if="hasFamily"
-      :class="[$style['sidebar-nav']]"
-    >
-      <div :class="$style['nav-item']">
-        <Link
-          :to="todosRoute"
-          translation-path="dashboard.nav.todos"
-          is-black
-        />
+      <div :class="[$style['avatar-wrapper']]">
+        <AvatarElement />
       </div>
 
-      <div :class="$style['nav-item']">
-        <Link
-          :to="shoppingListsRoute"
-          translation-path="dashboard.nav.shoppingLists"
-          is-black
-        />
-      </div>
-
-      <div
-        v-if="isFamilyHead"
-        :class="$style['nav-item']"
+      <nav
+        v-if="hasFamily"
+        :class="[$style['sidebar-nav']]"
       >
-        <Link
-          :to="familySettingsRoute"
-          translation-path="dashboard.nav.familySettings"
-          is-black
+        <div :class="$style['nav-item']">
+          <Link
+            :to="todosRoute"
+            translation-path="dashboard.nav.todos"
+            is-black
+          />
+        </div>
+
+        <div :class="$style['nav-item']">
+          <Link
+            :to="shoppingListsRoute"
+            translation-path="dashboard.nav.shoppingLists"
+            is-black
+          />
+        </div>
+
+        <div
+          v-if="isFamilyHead"
+          :class="$style['nav-item']"
+        >
+          <Link
+            :to="familySettingsRoute"
+            translation-path="dashboard.nav.familySettings"
+            is-black
+          />
+        </div>
+
+        <div :class="$style['nav-item']">
+          <Link
+            :to="accountSettingsRoute"
+            translation-path="dashboard.nav.accountSettings"
+            is-black
+          />
+        </div>
+      </nav>
+
+      <div :class="[$style['sign-out-wrapper']]">
+        <ButtonElement
+          translation-path="general.signOut"
+          @onClick="signOut"
         />
       </div>
-
-      <div :class="$style['nav-item']">
-        <Link
-          :to="accountSettingsRoute"
-          translation-path="dashboard.nav.accountSettings"
-          is-black
-        />
-      </div>
-    </nav>
-
-    <div :class="[$style['sign-out-wrapper']]">
-      <ButtonElement
-        translation-path="general.signOut"
-        @onClick="signOut"
-      />
     </div>
+
+    <button
+      :class="[$style['hamburger']]"
+      @click="toggleNav"
+    >
+      <div :class="[$style['line'], $style['line--top'], hamburgerClassNames]" />
+      <div :class="[$style['line'], $style['line--mid'], hamburgerClassNames]" />
+      <div :class="[$style['line'], $style['line--bot'], hamburgerClassNames]" />
+      <div :class="[$style['cross'], hamburgerClassNames]">
+        <img
+          :src="closeIcon"
+          alt="general.close"
+        >
+      </div>
+    </button>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 
+import closeIconSrc from '@/assets/close.png';
 import { currentUser } from '@/store/currentUser/getters';
 import { goToUrl } from '@/utils/general';
 import { removeLocalStorageItem } from '@/utils/localStorage';
@@ -96,6 +114,8 @@ export default {
       familySettingsRoute: { name: FAMILY_SETTINGS_ROUTE },
       todosRoute: { name: TODOS_ROUTE },
       shoppingListsRoute: { name: SHOPPING_LISTS_ROUTE },
+      isVisible: false,
+      closeIcon: closeIconSrc,
     };
   },
   computed: {
@@ -111,11 +131,29 @@ export default {
     hasFamily() {
       return this.currentUser.hasFamily;
     },
+    hamburgerClassNames() {
+      const { $style, isVisible } = this;
+
+      return {
+        [$style['is-hamburger']]: !isVisible,
+      };
+    },
+
+    navClassNames() {
+      const { $style, isVisible } = this;
+
+      return {
+        [$style['is-visible']]: isVisible,
+      };
+    },
   },
   methods: {
     signOut() {
       removeLocalStorageItem('_token');
       goToUrl('');
+    },
+    toggleNav() {
+      this.isVisible = !this.isVisible;
     },
   },
 };
