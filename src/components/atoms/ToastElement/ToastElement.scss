@@ -11,7 +11,7 @@
   box-shadow: $dark-grey-shadow;
   transform: scale(1);
 
-  @include atMedium {
+  @include at-medium {
     top: 2rem;
     right: 5rem;
   }

@@ -61,8 +61,8 @@
   align-items: center;
 }
 
-@mixin atMedium() {
-  @media (min-width: 650px) {
+@mixin at-medium() {
+  @media (min-width: 1025px) {
     @content;
   }
 }
