@@ -6,6 +6,7 @@
     >
       <InputElement
         v-if="field.fieldType === 'input'"
+        data-test="input-element"
         :name="field.name"
         :type="field.type || 'text'"
         :value="field.value"
@@ -62,14 +63,6 @@ export default {
     DropdownElement,
   },
   props: {
-    email: {
-      type: String,
-      default: '',
-    },
-    password: {
-      type: String,
-      default: '',
-    },
     fields: {
       type: Array,
       default: () => [],

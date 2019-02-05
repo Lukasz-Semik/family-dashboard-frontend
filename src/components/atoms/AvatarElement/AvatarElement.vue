@@ -2,6 +2,7 @@
   <div :class="[$style['avatar']]">
     <div :class="[$style['photo']]">
       <Avatar
+        data-test="avatar"
         :username="userName"
         :size="70"
         background-color="#ec9130"
@@ -9,7 +10,10 @@
       />
     </div>
 
-    <p :class="[$style['text']]">
+    <p
+      data-test="avatar-label"
+      :class="[$style['text']]"
+    >
       {{ userName }}
     </p>
 
