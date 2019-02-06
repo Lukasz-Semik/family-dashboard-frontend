@@ -3,31 +3,19 @@
     <CardElement is-hoverable>
       <div :class="[$style['item-inner-wrapper']]">
         <div :class="[$style['header-group']]">
-          <img
-            :src="photoSrc"
-            :alt="$t(itemTitle)"
-          >
+          <img :src="photoSrc" :alt="$t(itemTitle)">
 
-          <TitleElement
-            tag="h2"
-            :translation-path="itemTitle"
-            is-orange
-            has-centered-text
-          />
+          <TitleElement tag="h2" :translation-path="itemTitle" is-orange has-centered-text/>
         </div>
 
         <div :class="[$style['items-description']]">
-          <TextElement
-            :translation-path="itemDescription"
-            is-medium
-            has-centered-text
-          />
+          <TextElement :translation-path="itemDescription" is-medium has-centered-text/>
         </div>
 
         <div :class="[$style['items-counter']]">
           <TextElement
             translation-path="dashboard.allItems"
-            :translation-values="{quantity: 0}"
+            :translation-values="{quantity: this.allItemsQty}"
             is-bold
             has-centered-text
           />
@@ -36,18 +24,14 @@
         <div :class="[$style['items-counter']]">
           <TextElement
             translation-path="dashboard.notDoneItems"
-            :translation-values="{quantity: 0}"
+            :translation-values="{quantity: this.notDoneItemsQty}"
             is-bold
             has-centered-text
           />
         </div>
 
         <div :class="[$style['link-wrapper']]">
-          <Link
-            :to="destinationRoute"
-            translation-path="dashboard.nav.goThere"
-            is-x-big
-          />
+          <Link :to="destinationRoute" translation-path="dashboard.nav.goThere" is-x-big/>
         </div>
       </div>
     </CardElement>
@@ -79,6 +63,14 @@ export default {
     photoSrc: {
       type: String,
       required: true,
+    },
+    allItemsQty: {
+      type: Number,
+      default: 0,
+    },
+    notDoneItemsQty: {
+      type: Number,
+      default: 0,
     },
     destinationRoute: {
       type: Object,
