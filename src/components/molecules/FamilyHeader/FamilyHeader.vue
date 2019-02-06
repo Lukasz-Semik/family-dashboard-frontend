@@ -14,7 +14,7 @@
         {{ $t('dashboard.family.size') }}:
       </span>
       <span :class="[$style['value']]">
-        {{ users }}
+        {{ usersCounter }}
       </span>
     </p>
   </div>
@@ -29,7 +29,7 @@ import { currentFamily } from '@/store/currentFamily/getters';
 export default {
   computed: {
     ...mapGetters({ currentFamily }),
-    users() {
+    usersCounter() {
       return get(this.currentFamily, 'users.length', 0);
     },
   },

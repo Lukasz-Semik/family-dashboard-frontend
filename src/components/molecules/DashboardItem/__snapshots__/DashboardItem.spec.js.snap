@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DashboardItem /> should 1`] = `
+<div class="item-wrapper">
+  <cardelement-stub ishoverable="true">
+    <div class="item-inner-wrapper">
+      <div class="header-group"><img src="some.img" alt="itemTitle.path">
+        <titleelement-stub tag="h2" translatedtext="" translationpath="itemTitle.path" isorange="true" hascenteredtext="true"></titleelement-stub>
+      </div>
+      <div class="items-description">
+        <textelement-stub translatedtext="" translationpath="itemDescription.path" hascenteredtext="true" ismedium="true"></textelement-stub>
+      </div>
+      <div class="items-counter">
+        <textelement-stub translatedtext="" translationpath="dashboard.allItems" translationvalues="[object Object]" hascenteredtext="true" isbold="true"></textelement-stub>
+      </div>
+      <div class="items-counter">
+        <textelement-stub translatedtext="" translationpath="dashboard.notDoneItems" translationvalues="[object Object]" hascenteredtext="true" isbold="true"></textelement-stub>
+      </div>
+      <div class="link-wrapper">
+        <link-stub to="[object Object]" translatedtext="" translationpath="dashboard.nav.goThere" isxbig="true"></link-stub>
+      </div>
+    </div>
+  </cardelement-stub>
+</div>
+`;
