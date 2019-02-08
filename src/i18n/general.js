@@ -12,4 +12,9 @@ export default {
   underConfirmation: 'Your account is confirming...',
   next: 'Next',
   close: 'Close',
+  title: 'Title',
+  createdBy: 'Created By',
+  deadline: 'Deadline',
+  remove: 'Remove',
+  done: 'Done',
 };

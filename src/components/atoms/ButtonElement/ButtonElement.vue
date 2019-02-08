@@ -4,9 +4,7 @@
     :type="type"
     :class="[$style.button, classNames]"
     @click="handleClick"
-  >
-    {{ translatedText || $t(translationPath) }}
-  </button>
+  >{{ translatedText || $t(translationPath) }}</button>
 </template>
 
 <script>
@@ -32,14 +30,36 @@ export default {
       type: Boolean,
       default: false,
     },
+    isInline: {
+      type: Boolean,
+      default: false,
+    },
+    isHoveredRed: {
+      type: Boolean,
+      default: false,
+    },
+    isHoveredGreen: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classNames() {
-      const { $style, hasBlueTheme, hasPreviousTheme } = this;
+      const {
+        $style,
+        hasBlueTheme,
+        hasPreviousTheme,
+        isInline,
+        isHoveredRed,
+        isHoveredGreen,
+      } = this;
 
       return {
         [$style['has-blue-theme']]: hasBlueTheme,
         [$style['has-previous-theme']]: hasPreviousTheme,
+        [$style['is-inline']]: isInline,
+        [$style['is-hovered-red']]: isHoveredRed,
+        [$style['is-hovered-green']]: isHoveredGreen,
       };
     },
   },

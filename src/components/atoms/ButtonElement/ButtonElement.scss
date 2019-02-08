@@ -7,6 +7,20 @@
   text-align: center;
   font-size: 1.6rem;
   border-radius: 3px;
+  transition: color 0.3s ease-in-out;
+
+  &.is-inline {
+    display: inline;
+    width: auto;
+  }
+
+  &.is-hovered-red:hover {
+    color: $main-red;
+  }
+
+  &.is-hovered-green:hover {
+    color: $dark-green;
+  }
 
   &.has-blue-theme {
     background-color: $main-blue;
@@ -23,7 +37,6 @@
     display: inline;
     font-size: 1.4rem;
     color: $main-blue;
-    transition: color 0.3s ease-in-out;
 
     &:hover {
       color: $dark-green;
