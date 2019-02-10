@@ -1,29 +1,44 @@
+@mixin dark-theme-hover {
+  &:hover,
+  &:focus {
+    color: $light-gray;
+  }
+
+  &.is-active {
+    color: $dark-green;
+  }
+}
+
 .link {
   position: relative;
   font-size: 1.5rem;
   font-weight: 600;
   color: $dark-green;
   transition: color 0.3s ease-in-out;
+  $root: &;
 
   &.is-x-big {
     font-size: 3rem;
   }
 
   &.is-black {
+    color: $black;
+
+    &:visited {
+      color: $black;
+    }
+
+    @include dark-theme-hover();
+  }
+
+  &.is-gray {
     color: $medium-gray;
 
     &:visited {
       color: $medium-gray;
     }
 
-    &:hover,
-    &:focus {
-      color: $light-gray;
-    }
-
-    &.is-active {
-      color: $dark-green;
-    }
+    @include dark-theme-hover();
   }
 
   &::after {

@@ -8,7 +8,9 @@
 
     <li :class="[$style['item']]" :key="todo.id" v-for="todo in todos">
       <div :class="[$style['col-title'], $style['is-flex']]">
-        <div :class="[$style['title-text']]">{{ todo.title }}</div>
+        <div :class="[$style['title-text']]">
+          <Link :to="getRoute(todo.id)" :translatedText="todo.title" is-black/>
+        </div>
 
         <div :class="[$style['buttons-wrapper']]">
           <ButtonElement
@@ -40,17 +42,19 @@
 import { mapActions, mapGetters } from 'vuex';
 import moment from 'moment';
 
-import { TODOS_ROUTE } from '@/constants/routesNames';
+import { TODO_ROUTE } from '@/constants/routesNames';
 import { getTodos } from '@/store/todos/actions';
 import { todos } from '@/store/todos/getters';
 
 import AvatarElement from '@/components/atoms/AvatarElement/AvatarElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
+import Link from '@/components/atoms/Link/Link.vue';
 
 export default {
   components: {
     AvatarElement,
     ButtonElement,
+    Link,
   },
   created() {
     this.getTodos();
@@ -74,6 +78,9 @@ export default {
     },
     onDone(id) {
       console.log(id);
+    },
+    getRoute(id) {
+      return { name: TODO_ROUTE, params: { todoId: id } };
     },
   },
 };

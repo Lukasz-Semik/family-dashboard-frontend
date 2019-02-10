@@ -29,7 +29,10 @@
 
 .title-text {
   @include flex-center-v();
-  font-size: 2rem;
+
+  a {
+    font-size: 2rem;
+  }
 }
 
 .col {
