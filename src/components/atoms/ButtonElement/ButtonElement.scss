@@ -12,6 +12,7 @@
   &.is-inline {
     display: inline;
     width: auto;
+    padding: 0.5rem;
   }
 
   &.is-hovered-red:hover {
@@ -22,10 +23,24 @@
     color: $dark-green;
   }
 
+  &.is-small {
+    font-size: 1.3rem;
+  }
+
   &.has-blue-theme {
     background-color: $main-blue;
     color: $white;
     box-shadow: $grey-shadow;
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: $dark-grey-shadow;
+    }
+  }
+
+  &.has-gray-theme {
+    background-color: $light-green;
+    box-shadow: $blue-shadow;
     transition: box-shadow 0.3s ease-in-out;
 
     &:hover {

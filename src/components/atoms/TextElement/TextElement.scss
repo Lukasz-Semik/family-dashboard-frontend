@@ -15,4 +15,12 @@
   &.is-bold {
     font-weight: 400;
   }
+
+  &.is-black {
+    color: $black;
+  }
+
+  &.is-green {
+    color: $dark-green;
+  }
 }

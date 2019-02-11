@@ -16,6 +16,8 @@
           <ButtonElement
             translationPath="general.remove"
             :onClick="onRemove(todo.id)"
+            has-gray-theme
+            is-small
             is-inline
             is-hovered-red
           />
@@ -23,6 +25,8 @@
           <ButtonElement
             translationPath="general.done"
             :onClick="onDone(todo.id)"
+            has-gray-theme
+            is-small
             is-inline
             is-hovered-green
           />
@@ -71,7 +75,7 @@ export default {
       return `${todo.author.firstName} ${todo.author.lastName}`;
     },
     getDate(date) {
-      return date ? moment(date).format('MM dd YYYY') : '-';
+      return date ? moment(date).format('DD MMM YYYY') : '-';
     },
     onRemove(id) {
       console.log(id);

@@ -28,7 +28,9 @@
       color: $black;
     }
 
-    @include dark-theme-hover();
+    &.is-active {
+      color: $dark-green;
+    }
   }
 
   &.is-gray {

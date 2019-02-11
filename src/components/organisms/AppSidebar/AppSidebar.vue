@@ -13,15 +13,25 @@
 
       <nav v-if="hasFamily" :class="[$style['sidebar-nav']]">
         <div :class="$style['nav-item']">
-          <Link :to="todosRoute" translation-path="dashboard.nav.todos" is-gray/>
+          <Link :to="todosRoute" translation-path="dashboard.nav.todos" is-gray has-subpages/>
         </div>
 
         <div :class="$style['nav-item']">
-          <Link :to="shoppingListsRoute" translation-path="dashboard.nav.shoppingLists" is-gray/>
+          <Link
+            :to="shoppingListsRoute"
+            translation-path="dashboard.nav.shoppingLists"
+            is-gray
+            has-subpages
+          />
         </div>
 
         <div v-if="isFamilyHead" :class="$style['nav-item']">
-          <Link :to="familySettingsRoute" translation-path="dashboard.nav.familySettings" is-gray/>
+          <Link
+            :to="familySettingsRoute"
+            translation-path="dashboard.nav.familySettings"
+            is-gray
+            has-subpages
+          />
         </div>
 
         <div :class="$style['nav-item']">
@@ -29,6 +39,7 @@
             :to="accountSettingsRoute"
             translation-path="dashboard.nav.accountSettings"
             is-gray
+            has-subpages
           />
         </div>
       </nav>

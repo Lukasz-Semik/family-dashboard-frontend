@@ -1,5 +1,5 @@
 <template>
-  <div :class="[$style['wrapper']]">
+  <div>
     <TitleElement translationPath="todos.title" is-black is-big/>
 
     <TodosList/>
@@ -17,5 +17,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" module src="./TodosPage.scss" />
