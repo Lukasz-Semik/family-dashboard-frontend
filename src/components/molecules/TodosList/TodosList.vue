@@ -9,7 +9,12 @@
     <li :class="[$style['item']]" :key="todo.id" v-for="todo in todos">
       <div :class="[$style['col-title'], $style['is-flex']]">
         <div :class="[$style['title-text']]">
-          <Link :to="getRoute(todo.id)" :translatedText="todo.title" is-black/>
+          <Link
+            :to="getRoute(todo.id)"
+            :translatedText="todo.title"
+            :is-crossed="todo.isDone"
+            is-black
+          />
         </div>
 
         <div :class="[$style['buttons-wrapper']]">

@@ -1,0 +1,13 @@
+.row {
+  @include flex-center-v();
+
+  margin-top: 5rem;
+}
+
+.col {
+  flex-basis: 33.33%;
+}
+
+.avatar-wrapper {
+  margin: 1rem 0;
+}

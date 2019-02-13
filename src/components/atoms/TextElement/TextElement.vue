@@ -32,6 +32,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isSmall: {
+      type: Boolean,
+      default: false,
+    },
     isMedium: {
       type: Boolean,
       default: false,
@@ -43,7 +47,7 @@ export default {
   },
   computed: {
     classNames() {
-      const { $style, hasCenteredText, isMedium, isBold, isBlack, isGreen } = this;
+      const { $style, hasCenteredText, isSmall, isMedium, isBold, isBlack, isGreen } = this;
 
       return {
         [$style['has-centered-text']]: hasCenteredText,
@@ -51,6 +55,7 @@ export default {
         [$style['is-bold']]: isBold,
         [$style['is-black']]: isBlack,
         [$style['is-green']]: isGreen,
+        [$style['is-small']]: isSmall,
       };
     },
   },

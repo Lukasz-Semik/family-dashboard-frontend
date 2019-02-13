@@ -34,6 +34,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isCrossed: {
+      type: Boolean,
+      default: false,
+    },
     hasSubpages: {
       type: Boolean,
       default: false,
@@ -50,12 +54,13 @@ export default {
       return this.hasSubpages ? this.$style['is-active'] : '';
     },
     classNames() {
-      const { $style, isGray, isBlack, isXBig } = this;
+      const { $style, isGray, isBlack, isXBig, isCrossed } = this;
 
       return {
         [$style['is-gray']]: isGray,
         [$style['is-black']]: isBlack,
         [$style['is-x-big']]: isXBig,
+        [$style['is-crossed']]: isCrossed,
       };
     },
   },

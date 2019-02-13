@@ -21,6 +21,10 @@
     font-size: 3rem;
   }
 
+  &.is-crossed {
+    text-decoration: line-through;
+  }
+
   &.is-black {
     color: $black;
 

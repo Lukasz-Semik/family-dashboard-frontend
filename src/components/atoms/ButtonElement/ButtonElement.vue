@@ -63,7 +63,7 @@ export default {
         isHoveredGreen,
         isSmall,
       } = this;
-      console.log(hasGrayTheme);
+
       return {
         [$style['has-blue-theme']]: hasBlueTheme,
         [$style['has-previous-theme']]: hasPreviousTheme,

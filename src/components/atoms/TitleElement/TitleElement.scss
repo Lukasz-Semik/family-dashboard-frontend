@@ -18,6 +18,10 @@
     font-size: 4rem;
   }
 
+  &.is-crossed {
+    text-decoration: line-through;
+  }
+
   &.is-uppercased {
     text-transform: uppercase;
   }

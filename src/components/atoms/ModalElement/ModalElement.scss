@@ -16,6 +16,7 @@
 }
 
 .modal-inner-wrapper {
+  position: relative;
   width: 60rem;
   max-width: 95vw;
   margin: 0px auto;
@@ -27,6 +28,19 @@
 
   &:hover {
     box-shadow: $blue-shadow;
+  }
+}
+
+.close-modal-button {
+  @include reset-button();
+
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  img {
+    width: 3rem;
+    height: 3rem;
   }
 }
 

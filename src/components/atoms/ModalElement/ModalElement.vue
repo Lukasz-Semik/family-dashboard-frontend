@@ -6,7 +6,11 @@
   >
     <div :class="[$style['modal-mask']]">
       <div :class="[$style['modal-wrapper']]">
-        <div :class="[$style['modal-inner-wrapper']]">
+        <div v-click-outside="onClose" :class="[$style['modal-inner-wrapper']]">
+          <button :class="[$style['close-modal-button']]" @click="onClose">
+            <img :src="closeIcon">
+          </button>
+
           <div :class="[$style['modal-header']]">
             <TitleElement
               :translationPath="titleTranslationPath"
@@ -21,7 +25,7 @@
 
           <div v-if="!isButtonHidden" :class="[$style['modal-footer']]">
             <ButtonElement
-              @onClick="$emit('onClose')"
+              @onClick="handleMainButtonClick"
               :translationPath="buttonTranslationPath"
               :translatedText="buttonTranslatedText"
               has-blue-theme
@@ -34,6 +38,10 @@
 </template>
 
 <script>
+import ClickOutside from 'vue-click-outside';
+import { isFunction } from 'lodash';
+
+import closeIconSrc from '@/assets/close.png';
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 
@@ -41,6 +49,31 @@ export default {
   components: {
     TitleElement,
     ButtonElement,
+  },
+  directives: {
+    ClickOutside,
+  },
+  created() {
+    document.addEventListener('keyup', this.onKeyUp);
+  },
+  data() {
+    return {
+      closeIcon: closeIconSrc,
+    };
+  },
+  methods: {
+    onClose() {
+      this.$emit('onClose');
+    },
+    handleMainButtonClick() {
+      this.$emit('mainButtonClicked');
+      this.onClose();
+    },
+    onKeyUp(e) {
+      if (e.key === 'Escape') {
+        this.onClose();
+      }
+    },
   },
   props: {
     titleTranslationPath: {
