@@ -6,14 +6,8 @@
   >
     <div :class="[$style['modal-mask']]">
       <div :class="[$style['modal-wrapper']]">
-        <div
-          v-click-outside="onClose"
-          :class="[$style['modal-inner-wrapper']]"
-        >
-          <button
-            :class="[$style['close-modal-button']]"
-            @click="onClose"
-          >
+        <div v-click-outside="onClose" :class="[$style['modal-inner-wrapper']]">
+          <button :class="[$style['close-modal-button']]" @click="onClose">
             <img :src="closeIcon">
           </button>
 
@@ -26,13 +20,10 @@
           </div>
 
           <div :class="[$style['modal-body']]">
-            <slot name="body" />
+            <slot name="body"/>
           </div>
 
-          <div
-            v-if="!isButtonHidden"
-            :class="[$style['modal-footer']]"
-          >
+          <div v-if="!isButtonHidden" :class="[$style['modal-footer']]">
             <ButtonElement
               :translation-path="buttonTranslationPath"
               :translated-text="buttonTranslatedText"
@@ -96,7 +87,7 @@ export default {
       this.$emit('onClose');
     },
     handleMainButtonClick() {
-      this.$emit('mainButtonClicked');
+      this.$emit('onMainButtonClick');
       this.onClose();
     },
     onKeyUp(e) {
