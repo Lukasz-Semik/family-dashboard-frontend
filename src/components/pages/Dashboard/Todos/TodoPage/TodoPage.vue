@@ -10,7 +10,12 @@
     />
 
     <div :class="[$style['title-wrapper']]">
-      <TitleElement tag="h2" :translatedText="currentTodo.title" :is-crossed="currentTodo.isDone" is-black/>
+      <TitleElement
+        tag="h2"
+        :translatedText="currentTodo.title"
+        :is-crossed="currentTodo.isDone"
+        is-black
+      />
     </div>
 
     <div :class="[$style['todo-row']]">
@@ -28,7 +33,7 @@
       :created-at="createdAt"
       :updater-name="updaterName"
       :updated-at="updatedAt"
-      :execturo-name="execturoName"
+      :executor-name="executorName"
     />
 
     <ModalElement
@@ -110,7 +115,7 @@ export default {
     updatedAt() {
       return this.getDate(this.currentTodo.updatedAt);
     },
-    execturoName() {
+    executorName() {
       return this.getName('executor');
     },
     deadline() {

@@ -11,20 +11,19 @@
     </div>
 
     <div :class="[$style['col']]">
-      <template v-if="Boolean(updaterName)">
-        <TextElement translationPath="general.updatedBy" is-bold is-green/>
+      <template v-if="Boolean(updaterName) || Boolean(executorName)">
+        <TextElement
+          :translationPath="`general.${executorName ? 'doneBy' : 'updatedBy'}`"
+          is-bold
+          is-green
+        />
         <div :class="[$style['avatar-wrapper']]">
-          <AvatarElement :size="40" :providedUserName="updaterName" is-flex has-black-text/>
-        </div>
-        <TextElement :translatedText="updatedAt" is-small is-bold/>
-      </template>
-    </div>
-
-    <div :class="[$style['col']]">
-      <template v-if="Boolean(execturoName)">
-        <TextElement translationPath="general.doneBy" is-bold is-green/>
-        <div :class="[$style['avatar-wrapper']]">
-          <AvatarElement :size="40" :providedUserName="execturoName" is-flex has-black-text/>
+          <AvatarElement
+            :size="40"
+            :providedUserName="executorName ? executorName : updaterName"
+            is-flex
+            has-black-text
+          />
         </div>
         <TextElement :translatedText="updatedAt" is-small is-bold/>
       </template>
@@ -58,7 +57,7 @@ export default {
       type: String,
       default: '',
     },
-    execturoName: {
+    executorName: {
       type: String,
       default: '',
     },

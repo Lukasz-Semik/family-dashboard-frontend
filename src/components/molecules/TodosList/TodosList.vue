@@ -6,7 +6,7 @@
       <div :class="[$style['col']]">{{ $t('general.deadline') }}</div>
     </li>
 
-    <li :class="[$style['item']]" :key="todo.id" v-for="todo in todos">
+    <li :class="[$style['item']]" :key="todo.id" v-for="todo in sortedTodos">
       <div :class="[$style['col-title'], $style['is-flex']]">
         <div :class="[$style['title-text']]">
           <Link
@@ -53,7 +53,7 @@ import moment from 'moment';
 
 import { TODO_ROUTE } from '@/constants/routesNames';
 import { getTodos } from '@/store/todos/actions';
-import { todos } from '@/store/todos/getters';
+import { sortedTodos } from '@/store/todos/getters';
 
 import AvatarElement from '@/components/atoms/AvatarElement/AvatarElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
@@ -68,11 +68,8 @@ export default {
   created() {
     this.getTodos();
   },
-  data() {
-    return {};
-  },
   computed: {
-    ...mapGetters({ todos }),
+    ...mapGetters({ sortedTodos }),
   },
   methods: {
     ...mapActions({ getTodos }),
