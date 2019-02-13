@@ -2,15 +2,7 @@
 
 exports[`<FamilyHeader should render proper header 1`] = `
 <div class="family-header">
-  <p class="family-header-text"><span class="label">
-      dashboard.family.name:
-    </span> <span class="value">
-
-    </span></p>
-  <p class="family-header-text"><span class="label">
-      dashboard.family.size:
-    </span> <span class="value">
-      2
-    </span></p>
+  <p class="family-header-text"><span class="label">dashboard.family.name:</span> <span class="value"></span></p>
+  <p class="family-header-text"><span class="label">dashboard.family.size:</span> <span class="value">2</span></p>
 </div>
 `;

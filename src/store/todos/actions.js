@@ -11,7 +11,7 @@ export default {
     commit(setIsFetchingTodos, { isFetching: true });
     const response = await apiGetTodos();
     commit(setTodos, { todos: get(response, 'data.todos', []) });
-    commit(setIsFetchingTodos, { isFetching: true });
+    commit(setIsFetchingTodos, { isFetching: false });
 
     return response;
   },

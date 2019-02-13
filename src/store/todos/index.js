@@ -2,7 +2,7 @@ import getters from './getters';
 import actions from './actions';
 import mutations from './mutations';
 
-const state = {
+export const state = {
   todos: [],
   isFetching: false,
 };

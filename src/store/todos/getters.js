@@ -13,8 +13,8 @@ export default {
       state.todos.filter(todo => !isEmpty(todo.deadline) && !todo.isDone),
       todo => todo.deadline
     ),
-    ...state.todos.filter(todo => isEmpty(todo.deadline)),
+    ...state.todos.filter(todo => isEmpty(todo.deadline) && !todo.isDone),
     ...state.todos.filter(todo => todo.isDone),
   ],
-  [isFetchingTodos]: state => state.isFetchingTodos,
+  [isFetchingTodos]: state => state.isFetching,
 };
