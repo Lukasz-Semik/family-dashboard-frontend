@@ -2,30 +2,47 @@
   <div :class="[$style['row']]">
     <div :class="[$style['col']]">
       <template v-if="Boolean(authorName)">
-        <TextElement translationPath="general.createdBy" is-bold is-green/>
-        <div :class="[$style['avatar-wrapper']]">
-          <AvatarElement :size="40" :providedUserName="authorName" is-flex has-black-text/>
-        </div>
-        <TextElement :translatedText="createdAt" is-small is-bold/>
-      </template>
-    </div>
-
-    <div :class="[$style['col']]">
-      <template v-if="Boolean(updaterName) || Boolean(executorName)">
         <TextElement
-          :translationPath="`general.${executorName ? 'doneBy' : 'updatedBy'}`"
+          translation-path="general.createdBy"
           is-bold
           is-green
         />
         <div :class="[$style['avatar-wrapper']]">
           <AvatarElement
             :size="40"
-            :providedUserName="executorName ? executorName : updaterName"
+            :provided-user-name="authorName"
             is-flex
             has-black-text
           />
         </div>
-        <TextElement :translatedText="updatedAt" is-small is-bold/>
+        <TextElement
+          :translated-text="createdAt"
+          is-small
+          is-bold
+        />
+      </template>
+    </div>
+
+    <div :class="[$style['col']]">
+      <template v-if="Boolean(updaterName) || Boolean(executorName)">
+        <TextElement
+          :translation-path="`general.${executorName ? 'doneBy' : 'updatedBy'}`"
+          is-bold
+          is-green
+        />
+        <div :class="[$style['avatar-wrapper']]">
+          <AvatarElement
+            :size="40"
+            :provided-user-name="executorName ? executorName : updaterName"
+            is-flex
+            has-black-text
+          />
+        </div>
+        <TextElement
+          :translated-text="updatedAt"
+          is-small
+          is-bold
+        />
       </template>
     </div>
   </div>

@@ -23,9 +23,6 @@ export default {
   components: {
     DashboardItem,
   },
-  created() {
-    this.getTodos();
-  },
   data() {
     return {
       todosRoute: { name: TODOS_ROUTE },
@@ -37,6 +34,9 @@ export default {
       return this.todos.filter(todo => !todo.isDone).length;
     },
     ...mapGetters({ todos }),
+  },
+  created() {
+    this.getTodos();
   },
   methods: {
     ...mapActions({ getTodos }),

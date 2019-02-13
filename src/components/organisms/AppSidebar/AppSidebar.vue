@@ -3,17 +3,29 @@
     <div :class="[$style['app-sidebar'], navClassNames]">
       <RouterLink :to="dashboardRoute">
         <div :class="[$style['title-wrapper']]">
-          <TitleElement translation-path="general.appTitle" is-small has-centered-text/>
+          <TitleElement
+            translation-path="general.appTitle"
+            is-small
+            has-centered-text
+          />
         </div>
       </RouterLink>
 
       <div :class="[$style['avatar-wrapper']]">
-        <AvatarElement/>
+        <AvatarElement />
       </div>
 
-      <nav v-if="hasFamily" :class="[$style['sidebar-nav']]">
+      <nav
+        v-if="hasFamily"
+        :class="[$style['sidebar-nav']]"
+      >
         <div :class="$style['nav-item']">
-          <Link :to="todosRoute" translation-path="dashboard.nav.todos" is-gray has-subpages/>
+          <Link
+            :to="todosRoute"
+            translation-path="dashboard.nav.todos"
+            is-gray
+            has-subpages
+          />
         </div>
 
         <div :class="$style['nav-item']">
@@ -25,7 +37,10 @@
           />
         </div>
 
-        <div v-if="isFamilyHead" :class="$style['nav-item']">
+        <div
+          v-if="isFamilyHead"
+          :class="$style['nav-item']"
+        >
           <Link
             :to="familySettingsRoute"
             translation-path="dashboard.nav.familySettings"
@@ -45,16 +60,25 @@
       </nav>
 
       <div :class="[$style['sign-out-wrapper']]">
-        <ButtonElement translation-path="general.signOut" @onClick="signOut"/>
+        <ButtonElement
+          translation-path="general.signOut"
+          @onClick="signOut"
+        />
       </div>
     </div>
 
-    <button :class="[$style['hamburger']]" @click="toggleNav">
-      <div :class="[$style['line'], $style['line--top'], hamburgerClassNames]"/>
-      <div :class="[$style['line'], $style['line--mid'], hamburgerClassNames]"/>
-      <div :class="[$style['line'], $style['line--bot'], hamburgerClassNames]"/>
+    <button
+      :class="[$style['hamburger']]"
+      @click="toggleNav"
+    >
+      <div :class="[$style['line'], $style['line--top'], hamburgerClassNames]" />
+      <div :class="[$style['line'], $style['line--mid'], hamburgerClassNames]" />
+      <div :class="[$style['line'], $style['line--bot'], hamburgerClassNames]" />
       <div :class="[$style['cross'], hamburgerClassNames]">
-        <img :src="closeIcon" alt="general.close">
+        <img
+          :src="closeIcon"
+          alt="general.close"
+        >
       </div>
     </button>
   </div>

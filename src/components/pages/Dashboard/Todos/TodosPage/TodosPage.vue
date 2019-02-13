@@ -1,8 +1,12 @@
 <template>
   <div>
-    <TitleElement translationPath="todos.title" is-black is-big/>
+    <TitleElement
+      translation-path="todos.title"
+      is-black
+      is-big
+    />
 
-    <TodosList/>
+    <TodosList />
   </div>
 </template>
 

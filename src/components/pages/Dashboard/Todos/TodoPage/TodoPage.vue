@@ -1,31 +1,49 @@
 <template>
   <div>
     <ButtonElement
-      @onClick="showModal = true"
-      translationPath="todos.edit"
+      translation-path="todos.edit"
       is-hovered-green
       has-gray-theme
       is-inline
       is-small
+      @onClick="showModal = true"
     />
 
     <div :class="[$style['title-wrapper']]">
       <TitleElement
         tag="h2"
-        :translatedText="currentTodo.title"
+        :translated-text="currentTodo.title"
         :is-crossed="currentTodo.isDone"
         is-black
       />
     </div>
 
     <div :class="[$style['todo-row']]">
-      <TextElement translationPath="general.description" is-bold is-green/>
-      <TextElement :translatedText="this.description" is-medium is-bold is-black/>
+      <TextElement
+        translation-path="general.description"
+        is-bold
+        is-green
+      />
+      <TextElement
+        :translated-text="description"
+        is-medium
+        is-bold
+        is-black
+      />
     </div>
 
     <div :class="[$style['todo-row']]">
-      <TextElement translationPath="general.deadline" is-bold is-green/>
-      <TextElement :translatedText="this.deadline" is-medium is-bold is-black/>
+      <TextElement
+        translation-path="general.deadline"
+        is-bold
+        is-green
+      />
+      <TextElement
+        :translated-text="deadline"
+        is-medium
+        is-bold
+        is-black
+      />
     </div>
 
     <ItemUsersDetails
@@ -38,9 +56,9 @@
 
     <ModalElement
       v-if="showModal"
-      @onClose="showModal = false"
       title-translated-text="Example Title"
       button-translated-text="Button"
+      @onClose="showModal = false"
     />
   </div>
 </template>
@@ -66,22 +84,6 @@ export default {
     ButtonElement,
     TextElement,
     ItemUsersDetails,
-  },
-  created() {
-    this.getTodos();
-  },
-  methods: {
-    ...mapActions({ getTodos }),
-    getName(role) {
-      if (isEmpty(this.currentTodo) || isEmpty(this.currentTodo[role])) return '';
-
-      const { firstName, lastName } = this.currentTodo[role];
-
-      return `${firstName} ${lastName}`;
-    },
-    getDate(date) {
-      return date ? moment(date).format('DD MMM YYYY') : '-';
-    },
   },
   data() {
     return {
@@ -126,6 +128,22 @@ export default {
         : '-';
     },
     ...mapGetters({ todoById }),
+  },
+  created() {
+    this.getTodos();
+  },
+  methods: {
+    ...mapActions({ getTodos }),
+    getName(role) {
+      if (isEmpty(this.currentTodo) || isEmpty(this.currentTodo[role])) return '';
+
+      const { firstName, lastName } = this.currentTodo[role];
+
+      return `${firstName} ${lastName}`;
+    },
+    getDate(date) {
+      return date ? moment(date).format('DD MMM YYYY') : '-';
+    },
   },
 };
 </script>
