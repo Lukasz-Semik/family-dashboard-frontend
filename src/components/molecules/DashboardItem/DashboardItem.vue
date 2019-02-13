@@ -27,7 +27,7 @@
         <div :class="[$style['items-counter']]">
           <TextElement
             translation-path="dashboard.allItems"
-            :translation-values="{quantity: 0}"
+            :translation-values="{quantity: allItemsQty}"
             is-bold
             has-centered-text
           />
@@ -36,7 +36,7 @@
         <div :class="[$style['items-counter']]">
           <TextElement
             translation-path="dashboard.notDoneItems"
-            :translation-values="{quantity: 0}"
+            :translation-values="{quantity: notDoneItemsQty}"
             is-bold
             has-centered-text
           />
@@ -79,6 +79,14 @@ export default {
     photoSrc: {
       type: String,
       required: true,
+    },
+    allItemsQty: {
+      type: Number,
+      default: 0,
+    },
+    notDoneItemsQty: {
+      type: Number,
+      default: 0,
     },
     destinationRoute: {
       type: Object,

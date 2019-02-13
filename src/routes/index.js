@@ -6,6 +6,7 @@ import {
   CONFIRM_ROUTE,
   ACCOUNT_SETTINGS_ROUTE,
   TODOS_ROUTE,
+  TODO_ROUTE,
   FAMILY_SETTINGS_ROUTE,
   SHOPPING_LISTS_ROUTE,
 } from '@/constants/routesNames';
@@ -19,7 +20,9 @@ import WithFamilyPage from '@/components/pages/Dashboard/WithFamilyPage/WithFami
 import WithoutFamilyPage from '@/components/pages/Dashboard/WithoutFamilyPage/WithoutFamilyPage.vue';
 import AccountSettingsPage from '@/components/pages/Dashboard/SubPages/AccountSettingsPage/AccountSettingsPage.vue';
 import FamilySettingsPage from '@/components/pages/Dashboard/SubPages/FamilySettingsPage/FamilySettingsPage.vue';
-import TodosPage from '@/components/pages/Dashboard/SubPages/TodosPage/TodosPage.vue';
+import Todos from '@/components/pages/Dashboard/Todos/Todos.vue';
+import TodosPage from '@/components/pages/Dashboard/Todos/TodosPage/TodosPage.vue';
+import TodoPage from '@/components/pages/Dashboard/Todos/TodoPage/TodoPage.vue';
 import ShoppingListsPage from '@/components/pages/Dashboard/SubPages/ShoppingListsPage/ShoppingListsPage.vue';
 
 const homeRoute = {
@@ -67,8 +70,19 @@ const dashboardRoute = {
     },
     {
       path: 'todos',
-      component: TodosPage,
-      name: TODOS_ROUTE,
+      component: Todos,
+      children: [
+        {
+          path: '',
+          component: TodosPage,
+          name: TODOS_ROUTE,
+        },
+        {
+          path: ':todoId',
+          component: TodoPage,
+          name: TODO_ROUTE,
+        },
+      ],
     },
     {
       path: 'shopping-lists',

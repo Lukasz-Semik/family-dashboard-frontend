@@ -21,10 +21,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { get } from 'lodash';
+import { mapGetters, mapActions } from 'vuex';
+import { get, isEmpty } from 'lodash';
 
 import { currentFamily } from '@/store/currentFamily/getters';
+import { getFamily } from '@/store/currentFamily/actions';
 
 export default {
   computed: {
@@ -32,6 +33,12 @@ export default {
     usersCounter() {
       return get(this.currentFamily, 'users.length', 0);
     },
+  },
+  created() {
+    if (isEmpty(this.currentFamily)) this.getFamily();
+  },
+  methods: {
+    ...mapActions({ getFamily }),
   },
 };
 </script>

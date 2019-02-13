@@ -23,7 +23,8 @@
           <Link
             :to="todosRoute"
             translation-path="dashboard.nav.todos"
-            is-black
+            is-gray
+            has-subpages
           />
         </div>
 
@@ -31,7 +32,8 @@
           <Link
             :to="shoppingListsRoute"
             translation-path="dashboard.nav.shoppingLists"
-            is-black
+            is-gray
+            has-subpages
           />
         </div>
 
@@ -42,7 +44,8 @@
           <Link
             :to="familySettingsRoute"
             translation-path="dashboard.nav.familySettings"
-            is-black
+            is-gray
+            has-subpages
           />
         </div>
 
@@ -50,7 +53,8 @@
           <Link
             :to="accountSettingsRoute"
             translation-path="dashboard.nav.accountSettings"
-            is-black
+            is-gray
+            has-subpages
           />
         </div>
       </nav>

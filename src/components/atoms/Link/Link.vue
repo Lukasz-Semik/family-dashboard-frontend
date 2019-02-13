@@ -3,6 +3,7 @@
     :to="to"
     :class="[$style['link'], classNames]"
     :exact-active-class="$style['is-active']"
+    :active-class="activeClassName"
   >
     {{ translatedText || $t(translationPath) }}
   </RouterLink>
@@ -23,11 +24,23 @@ export default {
       type: String,
       default: '',
     },
+    isGray: {
+      type: Boolean,
+      default: false,
+    },
     isBlack: {
       type: Boolean,
       default: false,
     },
     isXBig: {
+      type: Boolean,
+      default: false,
+    },
+    isCrossed: {
+      type: Boolean,
+      default: false,
+    },
+    hasSubpages: {
       type: Boolean,
       default: false,
     },
@@ -39,12 +52,17 @@ export default {
     };
   },
   computed: {
+    activeClassName() {
+      return this.hasSubpages ? this.$style['is-active'] : '';
+    },
     classNames() {
-      const { $style, isBlack, isXBig } = this;
+      const { $style, isGray, isBlack, isXBig, isCrossed } = this;
 
       return {
+        [$style['is-gray']]: isGray,
         [$style['is-black']]: isBlack,
         [$style['is-x-big']]: isXBig,
+        [$style['is-crossed']]: isCrossed,
       };
     },
   },

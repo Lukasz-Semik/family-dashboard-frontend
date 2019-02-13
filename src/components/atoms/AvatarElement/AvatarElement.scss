@@ -12,9 +12,26 @@
     font-size: 1.4rem;
     color: $medium-gray;
 
-    &--is-small {
+    &.is-small {
       font-size: 1.1rem;
       color: $light-gray;
+    }
+
+    &.is-black {
+      color: $black;
+    }
+  }
+
+  &.is-flex {
+    display: inline-flex;
+    align-items: center;
+
+    .photo {
+      margin-right: 1rem;
+    }
+
+    .text {
+      transform: translateY(-3px);
     }
   }
 }

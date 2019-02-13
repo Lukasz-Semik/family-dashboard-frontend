@@ -50,10 +50,23 @@ export default {
       type: Boolean,
       default: false,
     },
+    isCrossed: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classNames() {
-      const { $style, isOrange, isBlack, isSmall, isBig, isUppercased, hasCenteredText } = this;
+      const {
+        $style,
+        isOrange,
+        isBlack,
+        isSmall,
+        isBig,
+        isCrossed,
+        isUppercased,
+        hasCenteredText,
+      } = this;
 
       return {
         [$style['is-black']]: isBlack,
@@ -61,6 +74,7 @@ export default {
         [$style['is-small']]: isSmall,
         [$style['is-big']]: isBig,
         [$style['is-uppercased']]: isUppercased,
+        [$style['is-crossed']]: isCrossed,
         [$style['has-centered-text']]: hasCenteredText,
       };
     },

@@ -2,7 +2,7 @@ import { state } from '.';
 import mutations from './mutations';
 
 describe('currentUser mutations', () => {
-  describe('setToastData mutation', () => {
+  describe('setCurrentUser mutation', () => {
     it('should properly change state with provided value', () => {
       mutations.setCurrentUser(state, {
         currentUser: { firstName: 'Lukasz' },

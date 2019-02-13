@@ -28,18 +28,52 @@ export default {
       type: Boolean,
       default: false,
     },
+    hasGrayTheme: {
+      type: Boolean,
+      default: false,
+    },
     hasPreviousTheme: {
+      type: Boolean,
+      default: false,
+    },
+    isInline: {
+      type: Boolean,
+      default: false,
+    },
+    isHoveredRed: {
+      type: Boolean,
+      default: false,
+    },
+    isHoveredGreen: {
+      type: Boolean,
+      default: false,
+    },
+    isSmall: {
       type: Boolean,
       default: false,
     },
   },
   computed: {
     classNames() {
-      const { $style, hasBlueTheme, hasPreviousTheme } = this;
+      const {
+        $style,
+        hasBlueTheme,
+        hasPreviousTheme,
+        hasGrayTheme,
+        isInline,
+        isHoveredRed,
+        isHoveredGreen,
+        isSmall,
+      } = this;
 
       return {
         [$style['has-blue-theme']]: hasBlueTheme,
         [$style['has-previous-theme']]: hasPreviousTheme,
+        [$style['has-gray-theme']]: hasGrayTheme,
+        [$style['is-inline']]: isInline,
+        [$style['is-hovered-red']]: isHoveredRed,
+        [$style['is-hovered-green']]: isHoveredGreen,
+        [$style['is-small']]: isSmall,
       };
     },
   },
