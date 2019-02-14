@@ -81,3 +81,5 @@ export const apiGetFamily = () => api.get(API_GET_FAMILY).catch(err => err.respo
 export const apiGetTodos = () => api.get(API_TODOS).catch(err => err.response);
 
 export const apiCreateTodo = payload => api.post(API_TODOS, payload).catch(err => err.response);
+
+export const apiDeleteAllTodos = () => api.delete(API_TODOS).catch(err => err.response);

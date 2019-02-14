@@ -21,4 +21,5 @@ export default {
   deadline: 'Deadline',
   remove: 'Remove',
   done: 'Done',
+  confirm: 'Confirm',
 };
