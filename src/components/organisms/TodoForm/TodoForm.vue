@@ -4,7 +4,7 @@
       <div :class="[$style['wrapper']]">
         <FormRow>
           <InputElement
-            name="todoTitle"
+            name="title"
             :value="titleValue"
             label-translation-path="todos.todoTitle"
             placeholder-translation-path="todos.todoTitlePlaceholder"
@@ -17,7 +17,7 @@
 
         <FormRow>
           <InputElement
-            name="todoDescription"
+            name="description"
             :value="descriptionValue"
             label-translation-path="todos.todoDescription"
             placeholder-translation-path="todos.todoDescriptionPlaceholder"
@@ -29,7 +29,7 @@
 
         <FormRow>
           <DatePicker
-            name="todoDeadline"
+            name="deadline"
             :value="deadlineValue"
             label-translation-path="todos.todoDeadline"
             placeholder-translation-path="todos.todoDeadlinePlaceholder"

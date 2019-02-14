@@ -77,4 +77,7 @@ export const apiCreateFamily = familyName =>
 
 export const apiGetFamily = () => api.get(API_GET_FAMILY).catch(err => err.response);
 
+// TODOS API
 export const apiGetTodos = () => api.get(API_TODOS).catch(err => err.response);
+
+export const apiCreateTodo = payload => api.post(API_TODOS, payload).catch(err => err.response);

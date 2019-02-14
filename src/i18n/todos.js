@@ -10,4 +10,5 @@ export default {
   todoDescriptionPlaceholder: 'e.g. We should go to gallery',
   todoDeadline: 'Todo deadline',
   todoDeadlinePlaceholder: 'When you need to have this task finished?',
+  todoCreated: 'Todos has been successfully created',
 };

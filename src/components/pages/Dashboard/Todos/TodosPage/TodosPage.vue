@@ -1,10 +1,18 @@
 <template>
   <div>
-    <TitleElement translation-path="todos.title" is-black is-big/>
+    <TitleElement
+      translation-path="todos.title"
+      is-black
+      is-big
+    />
 
-    <ButtonElement @onClick="isModalOpen = true" translationPath="todos.create" has-blue-theme/>
+    <ButtonElement
+      translation-path="todos.create"
+      has-blue-theme
+      @onClick="isModalOpen = true"
+    />
 
-    <TodosList/>
+    <TodosList />
 
     <ModalElement
       v-if="isModalOpen"
@@ -15,9 +23,10 @@
     >
       <template slot="body">
         <TodoForm
-          :description-value="todoDescription"
-          :title-value="todoTitle"
-          :deadlineValue="todoDeadline"
+          :description-value="description"
+          :title-value="title"
+          :deadline-value="deadline"
+          :is-submission-failed="isSubmissionFailed"
           @onChange="handleFieldChange"
         />
       </template>
@@ -26,6 +35,12 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
+import { apiCreateTodo } from '@/api';
+import { showToast } from '@/store/toast/actions';
+import { getTodos } from '@/store/todos/actions';
+
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import ModalElement from '@/components/atoms/ModalElement/ModalElement.vue';
@@ -43,19 +58,37 @@ export default {
   data() {
     return {
       isModalOpen: false,
-      todoTitle: '',
-      todoDescription: '',
-      todoDeadline: null,
+      title: '',
+      description: '',
+      deadline: null,
+      isSubmissionFailed: false,
+      errors: {},
     };
   },
   methods: {
+    ...mapActions({ showToast, getTodos }),
     handleFieldChange(payload) {
-      const { value, name } = payload;
+      const { value, name, isValid } = payload;
 
       this[name] = value;
+      this.errors[name] = !isValid;
     },
-    onSubmit() {
-      const { todoTitle, todoDescription, todoDeadline } = this;
+    async onSubmit() {
+      const { title, description, deadline } = this;
+      this.isSubmissionFailed = false;
+
+      if (this.errors.title) {
+        this.isSubmissionFailed = true;
+        return;
+      }
+
+      const response = await apiCreateTodo({ title, description, deadline });
+
+      if (response.status === 200) {
+        await this.getTodos();
+        this.isModalOpen = false;
+        this.showToast({ text: 'todos.todoCreated' });
+      }
     },
   },
 };

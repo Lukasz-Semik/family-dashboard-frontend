@@ -1,12 +1,22 @@
 <template>
   <ul>
     <li :class="[$style['header']]">
-      <div :class="[$style['col-title']]">{{ $t('general.title') }}</div>
-      <div :class="[$style['col']]">{{ $t('general.createdBy' ) }}</div>
-      <div :class="[$style['col']]">{{ $t('general.deadline') }}</div>
+      <div :class="[$style['col-title']]">
+        {{ $t('general.title') }}
+      </div>
+      <div :class="[$style['col']]">
+        {{ $t('general.createdBy' ) }}
+      </div>
+      <div :class="[$style['col']]">
+        {{ $t('general.deadline') }}
+      </div>
     </li>
 
-    <li v-for="todo in sortedTodos" :key="todo.id" :class="[$style['item']]">
+    <li
+      v-for="todo in sortedTodos"
+      :key="todo.id"
+      :class="[$style['item']]"
+    >
       <div :class="[$style['col-title'], $style['is-flex']]">
         <div :class="[$style['title-text']]">
           <Link
@@ -20,29 +30,36 @@
         <div :class="[$style['buttons-wrapper']]">
           <ButtonElement
             translation-path="general.remove"
-            @onClick="onRemove(todo.id)"
             has-gray-theme
             is-small
             is-inline
             is-hovered-red
+            @onClick="onRemove(todo.id)"
           />
 
           <ButtonElement
             translation-path="general.done"
-            @onClick="onDone(todo.id)"
             has-gray-theme
             is-small
             is-inline
             is-hovered-green
+            @onClick="onDone(todo.id)"
           />
         </div>
       </div>
 
       <div :class="[$style['col']]">
-        <AvatarElement :size="35" :provided-user-name="getUserName(todo)" is-flex has-black-text/>
+        <AvatarElement
+          :size="35"
+          :provided-user-name="getUserName(todo)"
+          is-flex
+          has-black-text
+        />
       </div>
 
-      <div :class="[$style['col']]">{{ getDate(todo.deadline) }}</div>
+      <div :class="[$style['col']]">
+        {{ getDate(todo.deadline) }}
+      </div>
     </li>
   </ul>
 </template>
