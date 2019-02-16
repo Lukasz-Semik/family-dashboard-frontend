@@ -10,6 +10,7 @@ export default {
   gotIt: 'Got It',
   signUpThx: 'Thank you for signing up :D',
   underConfirmation: 'Your account is confirming...',
+  haveBeenAdded: 'You have been added to family.',
   description: 'Description',
   next: 'Next',
   close: 'Close',

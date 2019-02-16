@@ -2,6 +2,7 @@ export const SIGN_IN_ROUTE = 'signInRoute';
 export const SIGN_UP_ROUTE = 'signUpRoute';
 
 export const CONFIRM_ROUTE = 'confirmRoute';
+export const CONFIRM_BEING_ADDED_ROUTE = 'confirmBeingAddedRoute';
 
 // Dashboard routes
 export const DASHBOARD_ROUTE = 'dashboardRoute';

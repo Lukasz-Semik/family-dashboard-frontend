@@ -17,6 +17,10 @@
       color: $light-gray;
     }
 
+    &.is-big {
+      font-size: 2rem;
+    }
+
     &.is-black {
       color: $black;
     }

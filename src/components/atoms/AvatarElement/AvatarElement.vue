@@ -10,19 +10,12 @@
       />
     </div>
 
-    <p
-      data-test="avatar-label"
-      :class="[$style['text'], textClassNames]"
-    >
-      {{ userName }}
-    </p>
+    <p data-test="avatar-label" :class="[$style['text'], textClassNames]">{{ userName }}</p>
 
     <p
       v-if="isFamilyHead"
       :class="[$style['text'], $style['is-small']]"
-    >
-      ({{ $t('dashboard.family.familyHead') }})
-    </p>
+    >({{ $t('dashboard.family.familyHead') }})</p>
   </div>
 </template>
 
@@ -45,6 +38,10 @@ export default {
     size: {
       type: Number,
       default: 70,
+    },
+    hasBigText: {
+      type: Boolean,
+      default: false,
     },
     isFlex: {
       type: Boolean,
@@ -73,10 +70,11 @@ export default {
       };
     },
     textClassNames() {
-      const { $style, hasBlackText } = this;
+      const { $style, hasBlackText, hasBigText } = this;
 
       return {
         [$style['is-black']]: hasBlackText,
+        [$style['is-big']]: hasBigText,
       };
     },
   },

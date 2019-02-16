@@ -1,25 +1,7 @@
 <template>
-  <div :class="[$style['confirm-wrapper']]">
-    <div :class="[$style['app-title-wrapper']]">
-      <TitleElement translation-path="general.appTitle" />
-    </div>
-
-    <div :class="[$style['message-wrapper']]">
-      <TitleElement
-        tag="h2"
-        :translation-path="msg"
-        has-centered-text
-        is-black
-      />
-    </div>
-
-    <ButtonElement
-      :is-disabled="isConfirming"
-      translation-path="general.signIn"
-      has-blue-theme
-      @onClick="goToSignIn"
-    />
-  </div>
+  <ConfirmPageWrapper @onClick="goToSignIn" :is-confirming="isConfirming">
+    <TitleElement tag="h2" :translation-path="msg" has-centered-text is-black/>
+  </ConfirmPageWrapper>
 </template>
 
 <script>
@@ -28,17 +10,18 @@ import { get } from 'lodash';
 import { apiConfirmAccount } from '@/api';
 import { SIGN_IN_ROUTE } from '@/constants/routesNames';
 
-import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
+import ConfirmPageWrapper from '@/components/atoms/Wrappers/ConfirmPageWrapper/ConfirmPageWrapper.vue';
 
 export default {
   components: {
-    ButtonElement,
     TitleElement,
+    ConfirmPageWrapper,
   },
   data() {
     return {
       msg: 'general.underConfirmation',
+      isConfirming: true,
     };
   },
   created() {
@@ -57,6 +40,7 @@ export default {
       } catch (err) {
         this.msg = 'general.confirmationFail';
       }
+      this.isConfirming = false;
     },
     goToSignIn() {
       this.$router.push({ name: SIGN_IN_ROUTE });
@@ -64,5 +48,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" module src="./ConfirmPage.scss" />
