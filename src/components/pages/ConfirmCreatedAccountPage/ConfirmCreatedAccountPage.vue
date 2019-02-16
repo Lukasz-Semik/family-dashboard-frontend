@@ -1,6 +1,14 @@
 <template>
-  <ConfirmPageWrapper @onClick="goToSignIn" :is-confirming="isConfirming">
-    <TitleElement tag="h2" :translation-path="msg" has-centered-text is-black/>
+  <ConfirmPageWrapper
+    :is-confirming="isConfirming"
+    @onClick="goToSignIn"
+  >
+    <TitleElement
+      tag="h2"
+      :translation-path="msg"
+      has-centered-text
+      is-black
+    />
   </ConfirmPageWrapper>
 </template>
 

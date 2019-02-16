@@ -3,43 +3,57 @@
     <TitleElement
       tag="h2"
       translation-path="family.familyTitle"
-      :translationValues="{familyName: currentFamily.name}"
+      :translation-values="{familyName: currentFamily.name}"
       is-black
     />
 
     <div :class="[$style['button-wrapper']]">
-      <ButtonElement translation-path="family.addUser" @onClick="showModal = true" has-blue-theme/>
+      <ButtonElement
+        translation-path="family.addUser"
+        has-blue-theme
+        @onClick="showModal = true"
+      />
     </div>
 
-    <div :class="[$style['avatar-wrapper']]" :key="member" v-for="member in familyMembers">
-      <AvatarElement :size="60" :provided-user-name="member" is-flex has-black-text has-big-text/>
+    <div
+      v-for="member in familyMembers"
+      :key="member"
+      :class="[$style['avatar-wrapper']]"
+    >
+      <AvatarElement
+        :size="60"
+        :provided-user-name="member"
+        is-flex
+        has-black-text
+        has-big-text
+      />
     </div>
 
     <ModalElement
       v-if="showModal"
-      titleTranslationPath="family.addUser"
-      buttonTranslationPath="family.addUser"
+      title-translation-path="family.addUser"
+      button-translation-path="family.addUser"
       @onClose="showModal = false"
       @onMainButtonClick="onExistingUserInvite"
     >
       <template slot="body">
         <div :class="[$style['form-wrapper']]">
           <ButtonElement
-            @onClick="onFormToggle"
             translated-text="do zmiany"
             is-inline
             is-small
             has-gray-theme
+            @onClick="onFormToggle"
           />
           <InputElement
             v-if="isAddingExistingUser"
             name="email"
-            placeholderTranslationPath="family.inviteExistinUserPlaceholder"
-            labelTranslationPath="family.inviteExistinUserLabel"
+            placeholder-translation-path="family.inviteExistinUserPlaceholder"
+            label-translation-path="family.inviteExistinUserLabel"
             :value="email"
-            @onChange="onChange"
             is-required
             is-email-required
+            @onChange="onChange"
           />
         </div>
       </template>
@@ -69,9 +83,6 @@ export default {
     InputElement,
     AvatarElement,
   },
-  created() {
-    this.getFamily();
-  },
   data() {
     return {
       showModal: false,
@@ -86,6 +97,9 @@ export default {
 
       return users.map(user => `${user.firstName} ${user.lastName}`);
     },
+  },
+  created() {
+    this.getFamily();
   },
   methods: {
     ...mapActions({ getFamily, showToast }),

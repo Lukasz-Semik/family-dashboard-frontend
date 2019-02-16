@@ -1,11 +1,11 @@
 <template>
   <div :class="[$style['confirm-wrapper']]">
     <div :class="[$style['app-title-wrapper']]">
-      <TitleElement translation-path="general.appTitle"/>
+      <TitleElement translation-path="general.appTitle" />
     </div>
 
     <div :class="[$style['message-wrapper']]">
-      <slot/>
+      <slot />
     </div>
 
     <ButtonElement
@@ -18,11 +18,6 @@
 </template>
 
 <script>
-import { get } from 'lodash';
-
-import { apiConfirmAccount } from '@/api';
-import { SIGN_IN_ROUTE } from '@/constants/routesNames';
-
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 

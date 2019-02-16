@@ -10,12 +10,19 @@
       />
     </div>
 
-    <p data-test="avatar-label" :class="[$style['text'], textClassNames]">{{ userName }}</p>
+    <p
+      data-test="avatar-label"
+      :class="[$style['text'], textClassNames]"
+    >
+      {{ userName }}
+    </p>
 
     <p
       v-if="isFamilyHead"
       :class="[$style['text'], $style['is-small']]"
-    >({{ $t('dashboard.family.familyHead') }})</p>
+    >
+      ({{ $t('dashboard.family.familyHead') }})
+    </p>
   </div>
 </template>
 
