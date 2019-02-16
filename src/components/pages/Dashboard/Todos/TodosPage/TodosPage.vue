@@ -5,7 +5,7 @@
     <ButtonElement
       translation-path="todos.create"
       has-blue-theme
-      @onClick="isCreateTodoModalOpen = true"
+      @onClick="isCreateModalOpen = true"
     />
 
     <div v-if="todos.length > 0" :class="[$style['remove-all-button-wrapper']]">
@@ -20,23 +20,7 @@
 
     <TodosList/>
 
-    <ModalElement
-      v-if="isCreateTodoModalOpen"
-      title-translation-path="todos.create"
-      button-translation-path="forms.shared.submit"
-      @onMainButtonClick="onSubmit"
-      @onClose="isCreateTodoModalOpen = false"
-    >
-      <template slot="body">
-        <TodoForm
-          :description-value="description"
-          :title-value="title"
-          :deadline-value="deadline"
-          :is-submission-failed="isSubmissionFailed"
-          @onChange="handleFieldChange"
-        />
-      </template>
-    </ModalElement>
+    <TodoFormModal :is-open="isCreateModalOpen" @closeTodoModal="isCreateModalOpen = false"/>
 
     <ModalElement
       v-if="isRemoveAllModalOpen"
@@ -51,7 +35,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
-import { apiCreateTodo, apiDeleteAllTodos } from '@/api';
+import { apiDeleteAllTodos } from '@/api';
 import { showToast } from '@/store/toast/actions';
 import { getTodos } from '@/store/todos/actions';
 import { todos } from '@/store/todos/getters';
@@ -60,11 +44,11 @@ import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import ModalElement from '@/components/atoms/ModalElement/ModalElement.vue';
 import TodosList from '@/components/molecules/TodosList/TodosList.vue';
-import TodoForm from '@/components/organisms/TodoForm/TodoForm.vue';
+import TodoFormModal from '@/components/organisms/TodoFormModal/TodoFormModal.vue';
 
 export default {
   components: {
-    TodoForm,
+    TodoFormModal,
     TodosList,
     TitleElement,
     ButtonElement,
@@ -75,43 +59,12 @@ export default {
   },
   data() {
     return {
-      isCreateTodoModalOpen: false,
       isRemoveAllModalOpen: false,
-      title: '',
-      description: '',
-      deadline: null,
-      isSubmissionFailed: false,
-      errors: {},
+      isCreateModalOpen: false,
     };
   },
   methods: {
     ...mapActions({ showToast, getTodos }),
-    handleFieldChange(payload) {
-      const { value, name, isValid } = payload;
-
-      this[name] = value;
-      this.errors[name] = !isValid;
-    },
-    async onSubmit() {
-      const { title, description, deadline } = this;
-      this.isSubmissionFailed = false;
-
-      if (this.errors.title) {
-        this.isSubmissionFailed = true;
-        return;
-      }
-
-      const response = await apiCreateTodo({ title, description, deadline });
-
-      if (response.status === 200) {
-        await this.getTodos();
-        this.isCreateTodoModalOpen = false;
-        this.showToast({ text: 'todos.todoCreated' });
-        this.title = '';
-        this.description = '';
-        this.deadline = null;
-      }
-    },
     async onRemoveAll() {
       const response = await apiDeleteAllTodos();
 

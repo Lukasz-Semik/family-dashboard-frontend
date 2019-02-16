@@ -36,11 +36,10 @@
       :executor-name="executorName"
     />
 
-    <ModalElement
-      v-if="showModal"
-      title-translated-text="Example Title"
-      button-translated-text="Button"
-      @onClose="showModal = false"
+    <TodoFormModal
+      :provided-todo="currentTodo"
+      :is-open="showModal"
+      @closeTodoModal="showModal = false"
     />
   </div>
 </template>
@@ -55,21 +54,21 @@ import { TODOS_ROUTE } from '@/constants/routesNames';
 import { todoById } from '@/store/todos/getters';
 import { getTodos } from '@/store/todos/actions';
 
-import ModalElement from '@/components/atoms/ModalElement/ModalElement.vue';
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import TextElement from '@/components/atoms/TextElement/TextElement.vue';
 import ItemUsersDetails from '@/components/molecules/ItemUsersDetails/ItemUsersDetails.vue';
 import ActionButtons from '@/components/molecules/ActionButtons/ActionButtons.vue';
+import TodoFormModal from '@/components/organisms/TodoFormModal/TodoFormModal.vue';
 
 export default {
   components: {
     TitleElement,
-    ModalElement,
     ButtonElement,
     TextElement,
     ItemUsersDetails,
     ActionButtons,
+    TodoFormModal,
   },
   data() {
     return {

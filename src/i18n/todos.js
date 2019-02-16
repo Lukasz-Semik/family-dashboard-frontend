@@ -15,6 +15,7 @@ export default {
   todoDeadlinePlaceholder: 'When you need to have this task finished?',
   todoCreated: 'Todos has been successfully created',
   todoDeleted: 'Todo has been successfully deleted',
+  todoEdited: 'Todo has been successfully edited',
   removeAll: 'Remove all todos',
   confirmationMessage: 'Are you sure you want to remove all todos?',
   allremoved: 'All todos has been successfully removed',
