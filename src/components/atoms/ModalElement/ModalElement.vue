@@ -96,8 +96,7 @@ export default {
       this.$emit('onClose');
     },
     handleMainButtonClick() {
-      this.$emit('mainButtonClicked');
-      this.onClose();
+      this.$emit('onMainButtonClick');
     },
     onKeyUp(e) {
       if (e.key === 'Escape') {

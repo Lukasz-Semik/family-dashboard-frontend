@@ -15,3 +15,4 @@ export const API_GET_FAMILY = `${API_FAMILY}/current`;
 
 // TODOS API
 export const API_TODOS = `${API}/todos`;
+export const API_TODO = id => `${API_TODOS}/${id}`;

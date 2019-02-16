@@ -10,6 +10,7 @@ import {
   API_CREATE_FAMILY,
   API_GET_FAMILY,
   API_TODOS,
+  API_TODO,
 } from '@/constants/api';
 import { getLocalStorageItem } from '@/utils/localStorage';
 import { goToUrl } from '@/utils/general';
@@ -77,4 +78,14 @@ export const apiCreateFamily = familyName =>
 
 export const apiGetFamily = () => api.get(API_GET_FAMILY).catch(err => err.response);
 
+// TODOS API
 export const apiGetTodos = () => api.get(API_TODOS).catch(err => err.response);
+
+export const apiCreateTodo = payload => api.post(API_TODOS, payload).catch(err => err.response);
+
+export const apiDeleteAllTodos = () => api.delete(API_TODOS).catch(err => err.response);
+
+export const apiPatchTodo = (id, params) =>
+  api.patch(API_TODO(id), params).catch(err => err.response);
+
+export const apiDeleteTodo = id => api.delete(API_TODO(id)).catch(err => err.response);

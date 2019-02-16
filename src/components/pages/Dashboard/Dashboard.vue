@@ -1,5 +1,7 @@
 <template>
   <div>
+    <ToastElement />
+
     <div
       v-if="isFetchingCurrentUser"
       :class="[$style['loader-wrapper']]"
@@ -26,8 +28,9 @@ import { getCurrentUser } from '@/store/currentUser/actions';
 import { currentUser, isFetchingCurrentUser } from '@/store/currentUser/getters';
 import { WITHOUT_FAMILY_ROUTE } from '@/constants/routesNames';
 
-import FamilyHeader from '@/components/molecules/FamilyHeader/FamilyHeader.vue';
 import LoaderElement from '@/components/atoms/LoaderElement/LoaderElement.vue';
+import ToastElement from '@/components/atoms/ToastElement/ToastElement.vue';
+import FamilyHeader from '@/components/molecules/FamilyHeader/FamilyHeader.vue';
 import AppSidebar from '@/components/organisms/AppSidebar/AppSidebar.vue';
 
 export default {
@@ -35,6 +38,7 @@ export default {
     AppSidebar,
     LoaderElement,
     FamilyHeader,
+    ToastElement,
   },
   computed: {
     ...mapGetters({ currentUser, isFetchingCurrentUser }),

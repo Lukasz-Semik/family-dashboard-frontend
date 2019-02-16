@@ -41,7 +41,7 @@
   &.has-gray-theme {
     background-color: $light-green;
     box-shadow: $blue-shadow;
-    transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
 
     &:hover {
       box-shadow: $dark-grey-shadow;

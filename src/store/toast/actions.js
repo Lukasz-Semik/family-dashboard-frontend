@@ -14,6 +14,6 @@ export default {
 
     commit(setToastData, { ...commitPayload, toastType });
 
-    setTimeout(() => commit(resetToastData), 5000);
+    setTimeout(() => commit(resetToastData), 3000);
   },
 };

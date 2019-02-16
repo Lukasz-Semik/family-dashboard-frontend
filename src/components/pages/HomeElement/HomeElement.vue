@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ToastElement translated-text="some fucking notification" />
+    <ToastElement />
 
     <div :class="[$style['title-wrapper']]">
       <TitleElement translation-path="general.appTitle" />
