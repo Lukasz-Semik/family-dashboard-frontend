@@ -8,7 +8,7 @@
       @onClick="isCreateTodoModalOpen = true"
     />
 
-    <div :class="[$style['remove-all-button-wrapper']]">
+    <div v-if="todos.length > 0" :class="[$style['remove-all-button-wrapper']]">
       <ButtonElement
         translation-path="todos.removeAll"
         @onClick="isRemoveAllModalOpen = true"
@@ -49,11 +49,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 import { apiCreateTodo, apiDeleteAllTodos } from '@/api';
 import { showToast } from '@/store/toast/actions';
 import { getTodos } from '@/store/todos/actions';
+import { todos } from '@/store/todos/getters';
 
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
@@ -68,6 +69,9 @@ export default {
     TitleElement,
     ButtonElement,
     ModalElement,
+  },
+  computed: {
+    ...mapGetters({ todos }),
   },
   data() {
     return {

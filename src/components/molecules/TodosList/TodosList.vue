@@ -29,12 +29,12 @@
             />
 
             <ButtonElement
-              translation-path="general.done"
+              :translation-path="`general.${todo.isDone ? 'undone' : 'done'}`"
               has-gray-theme
               is-small
               is-inline
               is-hovered-green
-              @onClick="onDone(todo.id)"
+              @onClick="onToggleDone(todo.id, todo.isDone)"
             />
           </div>
         </div>
@@ -56,9 +56,11 @@
 import { mapActions, mapGetters } from 'vuex';
 import moment from 'moment';
 
+import { apiDeleteTodo, apiPatchTodo } from '@/api';
 import { TODO_ROUTE } from '@/constants/routesNames';
 import { getTodos } from '@/store/todos/actions';
 import { sortedTodos } from '@/store/todos/getters';
+import { showToast } from '@/store/toast/actions';
 
 import AvatarElement from '@/components/atoms/AvatarElement/AvatarElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
@@ -79,18 +81,26 @@ export default {
     this.getTodos();
   },
   methods: {
-    ...mapActions({ getTodos }),
+    ...mapActions({ getTodos, showToast }),
     getUserName(todo) {
       return `${todo.author.firstName} ${todo.author.lastName}`;
     },
     getDate(date) {
       return date ? moment(date).format('DD MMM YYYY') : '-';
     },
-    onRemove(id) {
-      console.log(id);
+    async onRemove(id) {
+      const response = await apiDeleteTodo(id);
+
+      if (response.status === 200) {
+        this.getTodos();
+      }
     },
-    onDone(id) {
-      console.log(id);
+    async onToggleDone(id, isDone) {
+      const response = await apiPatchTodo(id, { isDone: !isDone });
+
+      if (response.status === 200) {
+        this.getTodos();
+      }
     },
     getRoute(id) {
       return { name: TODO_ROUTE, params: { todoId: id } };

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <ButtonElement
-      translation-path="todos.edit"
-      is-hovered-green
-      has-gray-theme
-      is-inline
-      is-small
-      @onClick="showModal = true"
+    <ActionButtons
+      edit-translation-path="todos.edit"
+      remove-translation-path="todos.remove"
+      :done-translation-path="doneTranslation"
+      @openModal="showModal = true"
+      @toggleDone="onToggleDone"
+      @remove="onRemove"
     />
 
     <div :class="[$style['title-wrapper']]">
@@ -19,31 +19,13 @@
     </div>
 
     <div :class="[$style['todo-row']]">
-      <TextElement
-        translation-path="general.description"
-        is-bold
-        is-green
-      />
-      <TextElement
-        :translated-text="description"
-        is-medium
-        is-bold
-        is-black
-      />
+      <TextElement translation-path="general.description" is-bold is-green/>
+      <TextElement :translated-text="description" is-medium is-bold is-black/>
     </div>
 
     <div :class="[$style['todo-row']]">
-      <TextElement
-        translation-path="general.deadline"
-        is-bold
-        is-green
-      />
-      <TextElement
-        :translated-text="deadline"
-        is-medium
-        is-bold
-        is-black
-      />
+      <TextElement translation-path="general.deadline" is-bold is-green/>
+      <TextElement :translated-text="deadline" is-medium is-bold is-black/>
     </div>
 
     <ItemUsersDetails
@@ -68,6 +50,8 @@ import { mapGetters, mapActions } from 'vuex';
 import { isEmpty } from 'lodash';
 import moment from 'moment';
 
+import { apiDeleteTodo, apiPatchTodo } from '@/api';
+import { TODOS_ROUTE } from '@/constants/routesNames';
 import { todoById } from '@/store/todos/getters';
 import { getTodos } from '@/store/todos/actions';
 
@@ -76,6 +60,7 @@ import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import TextElement from '@/components/atoms/TextElement/TextElement.vue';
 import ItemUsersDetails from '@/components/molecules/ItemUsersDetails/ItemUsersDetails.vue';
+import ActionButtons from '@/components/molecules/ActionButtons/ActionButtons.vue';
 
 export default {
   components: {
@@ -84,6 +69,7 @@ export default {
     ButtonElement,
     TextElement,
     ItemUsersDetails,
+    ActionButtons,
   },
   data() {
     return {
@@ -118,7 +104,10 @@ export default {
       return this.getDate(this.currentTodo.updatedAt);
     },
     executorName() {
-      return this.getName('executor');
+      return this.currentTodo.isDone ? this.getName('executor') : '';
+    },
+    doneTranslation() {
+      return `todos.${this.currentTodo.isDone ? 'unDoneTodo' : 'doneTodo'}`;
     },
     deadline() {
       const { deadline } = this.currentTodo;
@@ -143,6 +132,22 @@ export default {
     },
     getDate(date) {
       return date ? moment(date).format('DD MMM YYYY') : '-';
+    },
+    async onToggleDone() {
+      const response = await apiPatchTodo(this.currentTodo.id, {
+        isDone: !this.currentTodo.isDone,
+      });
+
+      if (response.status === 200) {
+        this.getTodos();
+      }
+    },
+    async onRemove() {
+      const response = await apiDeleteTodo(this.currentTodo.id);
+
+      if (response.status === 200) {
+        this.$router.push({ name: TODOS_ROUTE });
+      }
     },
   },
 };
