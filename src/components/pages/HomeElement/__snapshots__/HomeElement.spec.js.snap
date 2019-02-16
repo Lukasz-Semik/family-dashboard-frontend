@@ -2,7 +2,7 @@
 
 exports[`<HomeElement/> should render properly 1`] = `
 <div>
-  <toastelement-stub translated-text="some fucking notification"></toastelement-stub>
+  <toastelement-stub></toastelement-stub>
   <div class="title-wrapper">
     <titleelement-stub tag="h1" translatedtext="" translationpath="general.appTitle"></titleelement-stub>
   </div>
