@@ -2,12 +2,22 @@
   <div>
     <ul v-if="sortedTodos.length > 0">
       <li :class="[$style['header']]">
-        <div :class="[$style['col-title']]">{{ $t('general.title') }}</div>
-        <div :class="[$style['col']]">{{ $t('general.createdBy' ) }}</div>
-        <div :class="[$style['col']]">{{ $t('general.deadline') }}</div>
+        <div :class="[$style['col-title']]">
+          {{ $t('general.title') }}
+        </div>
+        <div :class="[$style['col']]">
+          {{ $t('general.createdBy' ) }}
+        </div>
+        <div :class="[$style['col']]">
+          {{ $t('general.deadline') }}
+        </div>
       </li>
 
-      <li v-for="todo in sortedTodos" :key="todo.id" :class="[$style['item']]">
+      <li
+        v-for="todo in sortedTodos"
+        :key="todo.id"
+        :class="[$style['item']]"
+      >
         <div :class="[$style['col-title'], $style['is-flex']]">
           <div :class="[$style['title-text']]">
             <Link
@@ -40,14 +50,27 @@
         </div>
 
         <div :class="[$style['col']]">
-          <AvatarElement :size="35" :provided-user-name="getUserName(todo)" is-flex has-black-text/>
+          <AvatarElement
+            :size="35"
+            :provided-user-name="getUserName(todo)"
+            is-flex
+            has-black-text
+          />
         </div>
 
-        <div :class="[$style['col']]">{{ getDate(todo.deadline) }}</div>
+        <div :class="[$style['col']]">
+          {{ getDate(todo.deadline) }}
+        </div>
       </li>
     </ul>
     <div v-else>
-      <TextElement translation-path="todos.noTodos" is-bold is-green has-centered-text is-big/>
+      <TextElement
+        translation-path="todos.noTodos"
+        is-bold
+        is-green
+        has-centered-text
+        is-big
+      />
     </div>
   </div>
 </template>

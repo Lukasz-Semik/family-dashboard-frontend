@@ -21,7 +21,6 @@
 <script>
 import { mapActions } from 'vuex';
 import { isEmpty } from 'lodash';
-import moment from 'moment';
 
 import { apiCreateTodo, apiPatchTodo } from '@/api';
 
@@ -47,6 +46,17 @@ export default {
       default: () => {},
     },
   },
+  data() {
+    return {
+      isEditing: false,
+      showModal: false,
+      title: '',
+      description: '',
+      deadline: null,
+      isSubmissionFailed: false,
+      errors: {},
+    };
+  },
   watch: {
     isOpen(newVal, oldVal) {
       if (newVal && !oldVal) {
@@ -60,17 +70,6 @@ export default {
         }
       }
     },
-  },
-  data() {
-    return {
-      isEditing: false,
-      showModal: false,
-      title: '',
-      description: '',
-      deadline: null,
-      isSubmissionFailed: false,
-      errors: {},
-    };
   },
   methods: {
     ...mapActions({ showToast, getTodos }),

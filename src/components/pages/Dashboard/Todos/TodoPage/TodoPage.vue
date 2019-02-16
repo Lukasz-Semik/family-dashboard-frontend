@@ -19,13 +19,31 @@
     </div>
 
     <div :class="[$style['todo-row']]">
-      <TextElement translation-path="general.description" is-bold is-green/>
-      <TextElement :translated-text="description" is-medium is-bold is-black/>
+      <TextElement
+        translation-path="general.description"
+        is-bold
+        is-green
+      />
+      <TextElement
+        :translated-text="description"
+        is-medium
+        is-bold
+        is-black
+      />
     </div>
 
     <div :class="[$style['todo-row']]">
-      <TextElement translation-path="general.deadline" is-bold is-green/>
-      <TextElement :translated-text="deadline" is-medium is-bold is-black/>
+      <TextElement
+        translation-path="general.deadline"
+        is-bold
+        is-green
+      />
+      <TextElement
+        :translated-text="deadline"
+        is-medium
+        is-bold
+        is-black
+      />
     </div>
 
     <ItemUsersDetails
@@ -55,7 +73,6 @@ import { todoById } from '@/store/todos/getters';
 import { getTodos } from '@/store/todos/actions';
 
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
-import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import TextElement from '@/components/atoms/TextElement/TextElement.vue';
 import ItemUsersDetails from '@/components/molecules/ItemUsersDetails/ItemUsersDetails.vue';
 import ActionButtons from '@/components/molecules/ActionButtons/ActionButtons.vue';
@@ -64,7 +81,6 @@ import TodoFormModal from '@/components/organisms/TodoFormModal/TodoFormModal.vu
 export default {
   components: {
     TitleElement,
-    ButtonElement,
     TextElement,
     ItemUsersDetails,
     ActionButtons,

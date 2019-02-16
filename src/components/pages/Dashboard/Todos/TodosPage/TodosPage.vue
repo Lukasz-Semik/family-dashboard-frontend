@@ -1,6 +1,10 @@
 <template>
   <div :class="[$style['wrapper']]">
-    <TitleElement translation-path="todos.title" is-black is-big/>
+    <TitleElement
+      translation-path="todos.title"
+      is-black
+      is-big
+    />
 
     <ButtonElement
       translation-path="todos.create"
@@ -8,19 +12,25 @@
       @onClick="isCreateModalOpen = true"
     />
 
-    <div v-if="todos.length > 0" :class="[$style['remove-all-button-wrapper']]">
+    <div
+      v-if="todos.length > 0"
+      :class="[$style['remove-all-button-wrapper']]"
+    >
       <ButtonElement
         translation-path="todos.removeAll"
-        @onClick="isRemoveAllModalOpen = true"
         is-hovered-red
         has-gray-theme
         is-inline
+        @onClick="isRemoveAllModalOpen = true"
       />
     </div>
 
-    <TodosList/>
+    <TodosList />
 
-    <TodoFormModal :is-open="isCreateModalOpen" @closeTodoModal="isCreateModalOpen = false"/>
+    <TodoFormModal
+      :is-open="isCreateModalOpen"
+      @closeTodoModal="isCreateModalOpen = false"
+    />
 
     <ModalElement
       v-if="isRemoveAllModalOpen"
@@ -54,14 +64,14 @@ export default {
     ButtonElement,
     ModalElement,
   },
-  computed: {
-    ...mapGetters({ todos }),
-  },
   data() {
     return {
       isRemoveAllModalOpen: false,
       isCreateModalOpen: false,
     };
+  },
+  computed: {
+    ...mapGetters({ todos }),
   },
   methods: {
     ...mapActions({ showToast, getTodos }),

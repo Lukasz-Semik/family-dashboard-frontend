@@ -2,7 +2,9 @@
   <p
     data-test="text-element"
     :class="[$style['text'], classNames]"
-  >{{ translatedText || $t(translationPath, translationValues) }}</p>
+  >
+    {{ translatedText || $t(translationPath, translationValues) }}
+  </p>
 </template>
 
 <script>
