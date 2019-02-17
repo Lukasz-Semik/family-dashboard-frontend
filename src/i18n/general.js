@@ -9,8 +9,11 @@ export default {
   confirmationFail: "Ups... We couldn't confirm your account. Your token could be expired.",
   gotIt: 'Got It',
   signUpThx: 'Thank you for signing up :D',
+  accountConfirmed: 'Your account has been confirmed.',
   underConfirmation: 'Your account is confirming...',
   haveBeenAdded: 'You have been added to family.',
+  haveBeenInvited: `You have been invited to family. To finish registration, please
+    put your new password and click confirm.`,
   description: 'Description',
   next: 'Next',
   close: 'Close',

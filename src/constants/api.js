@@ -9,6 +9,7 @@ export const API_CONFIRM_ACCOUNT = `${API_USER}/confirm`;
 export const API_CONFIRM_INVITED = `${API_USER}/confirm-invited`;
 export const API_GET_CURRENT_USER = `${API_USER}/current`;
 export const API_INVITE_EXISTING_USER = `${API_USER}/add-to-family`;
+export const API_INVITE_NEW_USER = `${API_USER}/invite`;
 
 // FAMILY API
 const API_FAMILY = `${API}/family`;

@@ -3,6 +3,7 @@ export const SIGN_UP_ROUTE = 'signUpRoute';
 
 export const CONFIRM_ROUTE = 'confirmRoute';
 export const CONFIRM_BEING_ADDED_ROUTE = 'confirmBeingAddedRoute';
+export const CONFIRM_INVITATION_ROUTE = 'confirmInvitationRoute';
 
 // Dashboard routes
 export const DASHBOARD_ROUTE = 'dashboardRoute';

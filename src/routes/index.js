@@ -5,6 +5,7 @@ import {
   WITHOUT_FAMILY_ROUTE,
   CONFIRM_ROUTE,
   CONFIRM_BEING_ADDED_ROUTE,
+  CONFIRM_INVITATION_ROUTE,
   ACCOUNT_SETTINGS_ROUTE,
   TODOS_ROUTE,
   TODO_ROUTE,
@@ -17,6 +18,7 @@ import SignInPage from '@/components/pages/HomeElement/SignInPage/SignInPage.vue
 import SignUpPage from '@/components/pages/HomeElement/SignUpPage/SignUpPage.vue';
 import ConfirmCreatedAccountPage from '@/components/pages/ConfirmCreatedAccountPage/ConfirmCreatedAccountPage.vue';
 import ConfirmBeingAddedPage from '@/components/pages/ConfirmBeingAddedPage/ConfirmBeingAddedPage.vue';
+import ConfirmInvitationPage from '@/components/pages/ConfirmInvitationPage/ConfirmInvitationPage.vue';
 import Dashboard from '@/components/pages/Dashboard/Dashboard.vue';
 import WithFamilyPage from '@/components/pages/Dashboard/WithFamilyPage/WithFamilyPage.vue';
 import WithoutFamilyPage from '@/components/pages/Dashboard/WithoutFamilyPage/WithoutFamilyPage.vue';
@@ -106,4 +108,16 @@ const confirmBeingAddedRoute = {
   component: ConfirmBeingAddedPage,
 };
 
-export default [homeRoute, dashboardRoute, confirmRoute, confirmBeingAddedRoute];
+const confirmInvitationRoute = {
+  path: '/confirm-invitation',
+  name: CONFIRM_INVITATION_ROUTE,
+  component: ConfirmInvitationPage,
+};
+
+export default [
+  homeRoute,
+  dashboardRoute,
+  confirmRoute,
+  confirmBeingAddedRoute,
+  confirmInvitationRoute,
+];

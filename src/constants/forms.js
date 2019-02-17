@@ -35,6 +35,21 @@ export const userNamesFields = [
   },
 ];
 
+export const genderOptions = [
+  {
+    value: 'male',
+    label: 'forms.userSign.gender.options.male',
+  },
+  {
+    value: 'female',
+    label: 'forms.userSign.gender.options.female',
+  },
+  {
+    value: 'other',
+    label: 'forms.userSign.gender.options.other',
+  },
+];
+
 export const userDetailsFields = [
   {
     name: 'birthDate',
@@ -49,19 +64,6 @@ export const userDetailsFields = [
     fieldType: 'dropdown',
     labelTranslationPath: 'forms.userSign.gender.label',
     placeholderTranslationPath: 'forms.userSign.gender.placeholder',
-    options: [
-      {
-        value: 'male',
-        label: 'forms.userSign.gender.options.male',
-      },
-      {
-        value: 'female',
-        label: 'forms.userSign.gender.options.female',
-      },
-      {
-        value: 'other',
-        label: 'forms.userSign.gender.options.other',
-      },
-    ],
+    options: genderOptions,
   },
 ];

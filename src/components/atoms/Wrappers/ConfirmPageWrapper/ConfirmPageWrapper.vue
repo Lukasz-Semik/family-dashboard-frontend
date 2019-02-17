@@ -10,7 +10,7 @@
 
     <ButtonElement
       :is-disabled="isConfirming"
-      translation-path="general.signIn"
+      :translation-path="buttonTranslationPath"
       has-blue-theme
       @onClick="$emit('onClick')"
     />
@@ -30,6 +30,10 @@ export default {
     isConfirming: {
       type: Boolean,
       default: false,
+    },
+    buttonTranslationPath: {
+      type: String,
+      default: 'general.signIn',
     },
   },
 };
