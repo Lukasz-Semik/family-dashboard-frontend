@@ -46,6 +46,10 @@ export default {
       type: Number,
       default: 70,
     },
+    hasBigText: {
+      type: Boolean,
+      default: false,
+    },
     isFlex: {
       type: Boolean,
       default: false,
@@ -73,10 +77,11 @@ export default {
       };
     },
     textClassNames() {
-      const { $style, hasBlackText } = this;
+      const { $style, hasBlackText, hasBigText } = this;
 
       return {
         [$style['is-black']]: hasBlackText,
+        [$style['is-big']]: hasBigText,
       };
     },
   },

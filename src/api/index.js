@@ -6,7 +6,10 @@ import {
   API_CHECK_IS_SIGNED_IN,
   API_SIGN_UP,
   API_CONFIRM_ACCOUNT,
+  API_CONFIRM_INVITED,
   API_GET_CURRENT_USER,
+  API_INVITE_EXISTING_USER,
+  API_INVITE_NEW_USER,
   API_CREATE_FAMILY,
   API_GET_FAMILY,
   API_TODOS,
@@ -65,6 +68,15 @@ export const apiSignUp = payload => api.post(API_SIGN_UP, payload).catch(err => 
 
 export const apiConfirmAccount = token =>
   api.post(API_CONFIRM_ACCOUNT, { confirmationAccountToken: token }).catch(err => err.response);
+
+export const apiAddExistingUser = email =>
+  api.patch(API_INVITE_EXISTING_USER, { email }).catch(err => err.response);
+
+export const apiInviteNewUser = payload =>
+  api.post(API_INVITE_NEW_USER, payload).catch(err => err.response);
+
+export const apiConfirmInvited = (token, password) =>
+  api.post(API_CONFIRM_INVITED, { invitationToken: token, password }).catch(err => err.response);
 
 export const apiGetCurrentUser = () => api.get(API_GET_CURRENT_USER).catch(err => err.response);
 

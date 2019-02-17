@@ -37,10 +37,7 @@
           />
         </div>
 
-        <div
-          v-if="isFamilyHead"
-          :class="$style['nav-item']"
-        >
+        <div :class="$style['nav-item']">
           <Link
             :to="familySettingsRoute"
             translation-path="dashboard.nav.familySettings"
@@ -129,9 +126,7 @@ export default {
 
       return `${firstName} ${lastName}`;
     },
-    isFamilyHead() {
-      return this.currentUser.isFamilyHead;
-    },
+
     hasFamily() {
       return this.currentUser.hasFamily;
     },
