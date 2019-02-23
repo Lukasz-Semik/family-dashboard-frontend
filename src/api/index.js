@@ -14,6 +14,8 @@ import {
   API_GET_FAMILY,
   API_TODOS,
   API_TODO,
+  API_SHOPPING_LISTS,
+  API_SHOPPING_LIST,
 } from '@/constants/api';
 import { getLocalStorageItem } from '@/utils/localStorage';
 import { goToUrl } from '@/utils/general';
@@ -101,3 +103,9 @@ export const apiPatchTodo = (id, params) =>
   api.patch(API_TODO(id), params).catch(err => err.response);
 
 export const apiDeleteTodo = id => api.delete(API_TODO(id)).catch(err => err.response);
+
+// SHOPPING LISTS API
+export const apiGetShoppingLists = () => api.get(API_SHOPPING_LISTS).catch(err => err.reposne);
+
+export const apiDeleteShoppingList = id =>
+  api.delete(API_SHOPPING_LIST(id)).catch(err => err.response);

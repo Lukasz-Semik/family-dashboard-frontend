@@ -1,32 +1,22 @@
 <template>
   <div>
     <ul v-if="sortedTodos.length > 0">
-      <li :class="[$style['header']]">
-        <div :class="[$style['col-title']]">
-          {{ $t('general.title') }}
-        </div>
-        <div :class="[$style['col']]">
-          {{ $t('general.createdBy' ) }}
-        </div>
-        <div :class="[$style['col']]">
-          {{ $t('general.deadline') }}
-        </div>
-      </li>
+      <ListHeader>
+        <ColMain>{{ $t('general.title') }}</ColMain>
+        <ColSecondary>{{ $t('general.createdBy' ) }}</ColSecondary>
+        <ColSecondary>{{ $t('general.deadline') }}</ColSecondary>
+      </ListHeader>
 
-      <li
-        v-for="todo in sortedTodos"
-        :key="todo.id"
-        :class="[$style['item']]"
-      >
-        <div :class="[$style['col-title'], $style['is-flex']]">
-          <div :class="[$style['title-text']]">
+      <ListItem v-for="todo in sortedTodos" :key="todo.id">
+        <ColMain>
+          <TitleText>
             <Link
               :to="getRoute(todo.id)"
               :translated-text="todo.title"
               :is-crossed="todo.isDone"
               is-black
             />
-          </div>
+          </TitleText>
 
           <div :class="[$style['buttons-wrapper']]">
             <ButtonElement
@@ -47,30 +37,17 @@
               @onClick="onToggleDone(todo.id, todo.isDone)"
             />
           </div>
-        </div>
+        </ColMain>
 
-        <div :class="[$style['col']]">
-          <AvatarElement
-            :size="35"
-            :provided-user-name="getUserName(todo)"
-            is-flex
-            has-black-text
-          />
-        </div>
+        <ColSecondary>
+          <AvatarElement :size="35" :provided-user-name="getUserName(todo)" is-flex has-black-text/>
+        </ColSecondary>
 
-        <div :class="[$style['col']]">
-          {{ getDate(todo.deadline) }}
-        </div>
-      </li>
+        <ColSecondary>{{ getDate(todo.deadline) }}</ColSecondary>
+      </ListItem>
     </ul>
     <div v-else>
-      <TextElement
-        translation-path="todos.noTodos"
-        is-bold
-        is-green
-        has-centered-text
-        is-big
-      />
+      <TextElement translation-path="todos.noTodos" is-bold is-green has-centered-text is-big/>
     </div>
   </div>
 </template>
@@ -89,6 +66,11 @@ import AvatarElement from '@/components/atoms/AvatarElement/AvatarElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import Link from '@/components/atoms/Link/Link.vue';
 import TextElement from '@/components/atoms/TextElement/TextElement.vue';
+import ListHeader from '@/components/atoms/ItemsList/ListHeader.vue';
+import ListItem from '@/components/atoms/ItemsList/ListItem.vue';
+import ColMain from '@/components/atoms/ItemsList/ColMain.vue';
+import ColSecondary from '@/components/atoms/ItemsList/ColSecondary.vue';
+import TitleText from '@/components/atoms/ItemsList/TitleText.vue';
 
 export default {
   components: {
@@ -96,6 +78,11 @@ export default {
     ButtonElement,
     TextElement,
     Link,
+    ListHeader,
+    ListItem,
+    ColMain,
+    ColSecondary,
+    TitleText,
   },
   computed: {
     ...mapGetters({ sortedTodos }),

@@ -23,6 +23,7 @@ export default {
   doneBy: 'Done by',
   createdAt: 'Created at:',
   deadline: 'Deadline',
+  deadlineItems: 'Deadline / Qty',
   remove: 'Remove',
   done: 'Done',
   undone: 'Undone',

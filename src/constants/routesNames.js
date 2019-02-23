@@ -17,3 +17,4 @@ export const TODO_ROUTE = 'todoRoute';
 
 // Shopping lists routes
 export const SHOPPING_LISTS_ROUTE = 'shoppingListsRoute';
+export const SHOPPING_LIST_ROUTE = 'shoppingListRoute';
