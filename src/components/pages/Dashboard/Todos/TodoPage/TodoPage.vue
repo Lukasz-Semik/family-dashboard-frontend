@@ -19,31 +19,13 @@
     </div>
 
     <div :class="[$style['todo-row']]">
-      <TextElement
-        translation-path="general.description"
-        is-bold
-        is-green
-      />
-      <TextElement
-        :translated-text="description"
-        is-medium
-        is-bold
-        is-black
-      />
+      <TextElement translation-path="general.description" is-bold is-green/>
+      <TextElement :translated-text="description" is-medium is-bold is-black/>
     </div>
 
     <div :class="[$style['todo-row']]">
-      <TextElement
-        translation-path="general.deadline"
-        is-bold
-        is-green
-      />
-      <TextElement
-        :translated-text="deadline"
-        is-medium
-        is-bold
-        is-black
-      />
+      <TextElement translation-path="general.deadline" is-bold is-green/>
+      <TextElement :translated-text="deadline" is-medium is-bold is-black/>
     </div>
 
     <ItemUsersDetails
@@ -71,6 +53,8 @@ import { apiDeleteTodo, apiPatchTodo } from '@/api';
 import { TODOS_ROUTE } from '@/constants/routesNames';
 import { todoById } from '@/store/todos/getters';
 import { getTodos } from '@/store/todos/actions';
+import { getFullDeadline, getDate } from '@/helpers/date';
+import { getName } from '@/helpers/userNames';
 
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 import TextElement from '@/components/atoms/TextElement/TextElement.vue';
@@ -107,16 +91,16 @@ export default {
       return isEmpty(currentTodo) ? {} : currentTodo;
     },
     authorName() {
-      return this.getName('author');
+      return getName('author', this.currentTodo);
     },
     createdAt() {
-      return this.getDate(this.currentTodo.createdAt);
+      return getDate(this.currentTodo.createdAt);
     },
     updaterName() {
-      return this.getName('updater');
+      return getName('updater', this.currentTodo);
     },
     updatedAt() {
-      return this.getDate(this.currentTodo.updatedAt);
+      return getDate(this.currentTodo.updatedAt);
     },
     executorName() {
       return this.currentTodo.isDone ? this.getName('executor') : '';
@@ -125,11 +109,7 @@ export default {
       return `todos.${this.currentTodo.isDone ? 'unDoneTodo' : 'doneTodo'}`;
     },
     deadline() {
-      const { deadline } = this.currentTodo;
-
-      return deadline
-        ? `${moment(deadline).format('DD MMM YYYY')} - ${moment(deadline).fromNow()}`
-        : '-';
+      return getFullDeadline(this.currentTodo.deadline);
     },
     ...mapGetters({ todoById }),
   },
@@ -138,16 +118,6 @@ export default {
   },
   methods: {
     ...mapActions({ getTodos }),
-    getName(role) {
-      if (isEmpty(this.currentTodo) || isEmpty(this.currentTodo[role])) return '';
-
-      const { firstName, lastName } = this.currentTodo[role];
-
-      return `${firstName} ${lastName}`;
-    },
-    getDate(date) {
-      return date ? moment(date).format('DD MMM YYYY') : '-';
-    },
     async onToggleDone() {
       const response = await apiPatchTodo(this.currentTodo.id, {
         isDone: !this.currentTodo.isDone,

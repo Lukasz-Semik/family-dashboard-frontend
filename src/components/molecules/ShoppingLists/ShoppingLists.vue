@@ -63,6 +63,7 @@ import { SHOPPING_LIST_ROUTE } from '@/constants/routesNames';
 import { getShoppingLists } from '@/store/shoppingLists/actions';
 import { sortedShoppingLists, shoppingListById } from '@/store/shoppingLists/getters';
 import { showToast } from '@/store/toast/actions';
+import { getDate } from '@/helpers/date';
 
 import AvatarElement from '@/components/atoms/AvatarElement/AvatarElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
@@ -100,7 +101,7 @@ export default {
     getDeadlineQty(id) {
       const { deadline, items } = this.shoppingListById(id);
 
-      return `${deadline ? moment(deadline).format('DD MMM YYYY') : '-'} / ${items.length}`;
+      return `${getDate(deadline)} / ${items.length}`;
     },
     async onRemove(id) {
       const response = await apiDeleteShoppingList(id);
