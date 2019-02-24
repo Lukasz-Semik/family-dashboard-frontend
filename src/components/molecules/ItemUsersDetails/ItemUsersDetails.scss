@@ -6,6 +6,10 @@
   &.has-no-margin-top {
     margin-top: 0;
   }
+
+  &.is-column {
+    flex-direction: column;
+  }
 }
 
 .col {

@@ -107,5 +107,10 @@ export const apiDeleteTodo = id => api.delete(API_TODO(id)).catch(err => err.res
 // SHOPPING LISTS API
 export const apiGetShoppingLists = () => api.get(API_SHOPPING_LISTS).catch(err => err.reposne);
 
+export const apiGetShoppingList = id => api.get(API_SHOPPING_LIST(id)).catch(err => err.response);
+
+export const apiPatchShoppingList = (id, payload) =>
+  api.patch(API_SHOPPING_LIST(id), payload).catch(err => err.response);
+
 export const apiDeleteShoppingList = id =>
   api.delete(API_SHOPPING_LIST(id)).catch(err => err.response);

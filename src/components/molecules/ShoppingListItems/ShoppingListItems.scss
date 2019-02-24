@@ -1,0 +1,14 @@
+.shopping-list-button {
+  @include reset-button();
+
+  margin: 0.5rem 0;
+  font-size: 2rem;
+
+  &.is-done {
+    text-decoration: line-through;
+  }
+}
+
+.active-items-list {
+  margin-bottom: 2rem;
+}

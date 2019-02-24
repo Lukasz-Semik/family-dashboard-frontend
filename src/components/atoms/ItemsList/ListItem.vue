@@ -1,6 +1,6 @@
 <template>
   <li :class="[$style['item']]">
-    <slot/>
+    <slot />
   </li>
 </template>
 

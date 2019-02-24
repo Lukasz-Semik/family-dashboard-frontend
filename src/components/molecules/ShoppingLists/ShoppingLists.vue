@@ -7,7 +7,10 @@
         <ColSecondary>{{ $t('general.deadlineItems') }}</ColSecondary>
       </ListHeader>
 
-      <ListItem v-for="shoppingList in sortedShoppingLists" :key="shoppingList.id">
+      <ListItem
+        v-for="shoppingList in sortedShoppingLists"
+        :key="shoppingList.id"
+      >
         <ColMain>
           <TitleText>
             <Link
@@ -56,7 +59,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import moment from 'moment';
 
 import { apiDeleteShoppingList } from '@/api';
 import { SHOPPING_LIST_ROUTE } from '@/constants/routesNames';

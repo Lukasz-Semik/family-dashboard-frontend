@@ -7,7 +7,10 @@
         <ColSecondary>{{ $t('general.deadline') }}</ColSecondary>
       </ListHeader>
 
-      <ListItem v-for="todo in sortedTodos" :key="todo.id">
+      <ListItem
+        v-for="todo in sortedTodos"
+        :key="todo.id"
+      >
         <ColMain>
           <TitleText>
             <Link
@@ -40,14 +43,25 @@
         </ColMain>
 
         <ColSecondary>
-          <AvatarElement :size="35" :provided-user-name="getUserName(todo)" is-flex has-black-text/>
+          <AvatarElement
+            :size="35"
+            :provided-user-name="getUserName(todo)"
+            is-flex
+            has-black-text
+          />
         </ColSecondary>
 
         <ColSecondary>{{ getDate(todo.deadline) }}</ColSecondary>
       </ListItem>
     </ul>
     <div v-else>
-      <TextElement translation-path="todos.noTodos" is-bold is-green has-centered-text is-big/>
+      <TextElement
+        translation-path="todos.noTodos"
+        is-bold
+        is-green
+        has-centered-text
+        is-big
+      />
     </div>
   </div>
 </template>

@@ -2,11 +2,24 @@
   <div :class="[$style['row'], classNames]">
     <div :class="[$style['col']]">
       <template v-if="Boolean(authorName)">
-        <TextElement translation-path="general.createdBy" is-bold is-green/>
+        <TextElement
+          translation-path="general.createdBy"
+          is-bold
+          is-green
+        />
         <div :class="[$style['avatar-wrapper']]">
-          <AvatarElement :size="40" :provided-user-name="authorName" is-flex has-black-text/>
+          <AvatarElement
+            :size="40"
+            :provided-user-name="authorName"
+            is-flex
+            has-black-text
+          />
         </div>
-        <TextElement :translated-text="createdAt" is-small is-bold/>
+        <TextElement
+          :translated-text="createdAt"
+          is-small
+          is-bold
+        />
       </template>
     </div>
 
@@ -25,7 +38,11 @@
             has-black-text
           />
         </div>
-        <TextElement :translated-text="updatedAt" is-small is-bold/>
+        <TextElement
+          :translated-text="updatedAt"
+          is-small
+          is-bold
+        />
       </template>
     </div>
   </div>
@@ -65,13 +82,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    isColumn: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classNames() {
-      const { $style, hasNoMarginTop } = this;
+      const { $style, hasNoMarginTop, isColumn } = this;
 
       return {
         [$style['has-no-margin-top']]: hasNoMarginTop,
+        [$style['is-column']]: isColumn,
       };
     },
   },

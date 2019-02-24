@@ -19,13 +19,31 @@
     </div>
 
     <div :class="[$style['todo-row']]">
-      <TextElement translation-path="general.description" is-bold is-green/>
-      <TextElement :translated-text="description" is-medium is-bold is-black/>
+      <TextElement
+        translation-path="general.description"
+        is-bold
+        is-green
+      />
+      <TextElement
+        :translated-text="description"
+        is-medium
+        is-bold
+        is-black
+      />
     </div>
 
     <div :class="[$style['todo-row']]">
-      <TextElement translation-path="general.deadline" is-bold is-green/>
-      <TextElement :translated-text="deadline" is-medium is-bold is-black/>
+      <TextElement
+        translation-path="general.deadline"
+        is-bold
+        is-green
+      />
+      <TextElement
+        :translated-text="deadline"
+        is-medium
+        is-bold
+        is-black
+      />
     </div>
 
     <ItemUsersDetails
@@ -47,7 +65,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { isEmpty } from 'lodash';
-import moment from 'moment';
 
 import { apiDeleteTodo, apiPatchTodo } from '@/api';
 import { TODOS_ROUTE } from '@/constants/routesNames';

@@ -1,6 +1,6 @@
 <template>
   <SubPageWrapper>
-    <RouterView/>
+    <RouterView />
   </SubPageWrapper>
 </template>
 
@@ -13,4 +13,3 @@ export default {
   },
 };
 </script>
-

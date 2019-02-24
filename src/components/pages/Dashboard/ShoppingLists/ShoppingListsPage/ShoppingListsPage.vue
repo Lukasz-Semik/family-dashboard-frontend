@@ -1,7 +1,11 @@
 <template>
   <div>
-    <TitleElement translation-path="shoppingLists.title" is-black is-big/>
-    <ShoppingLists/>
+    <TitleElement
+      translation-path="shoppingLists.title"
+      is-black
+      is-big
+    />
+    <ShoppingLists />
   </div>
 </template>
 

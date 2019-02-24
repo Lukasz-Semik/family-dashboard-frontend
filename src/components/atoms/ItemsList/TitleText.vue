@@ -1,6 +1,6 @@
 <template>
   <div :class="[$style['title-text']]">
-    <slot/>
+    <slot />
   </div>
 </template>
 
