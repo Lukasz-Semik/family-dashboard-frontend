@@ -1,5 +1,5 @@
 <template>
-  <div :class="[$style['row']]">
+  <div :class="[$style['row'], classNames]">
     <div :class="[$style['col']]">
       <template v-if="Boolean(authorName)">
         <TextElement
@@ -77,6 +77,24 @@ export default {
     executorName: {
       type: String,
       default: '',
+    },
+    hasNoMarginTop: {
+      type: Boolean,
+      default: false,
+    },
+    isColumn: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    classNames() {
+      const { $style, hasNoMarginTop, isColumn } = this;
+
+      return {
+        [$style['has-no-margin-top']]: hasNoMarginTop,
+        [$style['is-column']]: isColumn,
+      };
     },
   },
 };

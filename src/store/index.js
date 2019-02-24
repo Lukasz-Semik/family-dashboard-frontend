@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import currentFamily from './currentFamily';
 import currentUser from './currentUser';
+import shoppingLists from './shoppingLists';
 import toast from './toast';
 import todos from './todos';
 
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
   modules: {
     currentFamily,
     currentUser,
+    shoppingLists,
     toast,
     todos,
   },

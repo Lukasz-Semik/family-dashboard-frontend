@@ -1,43 +1,34 @@
 <template>
   <div>
-    <ul v-if="sortedTodos.length > 0">
+    <ul v-if="sortedShoppingLists.length > 0">
       <ListHeader>
         <ColMain>{{ $t('general.title') }}</ColMain>
         <ColSecondary>{{ $t('general.createdBy' ) }}</ColSecondary>
-        <ColSecondary>{{ $t('general.deadline') }}</ColSecondary>
+        <ColSecondary>{{ $t('general.deadlineItems') }}</ColSecondary>
       </ListHeader>
 
       <ListItem
-        v-for="todo in sortedTodos"
-        :key="todo.id"
+        v-for="shoppingList in sortedShoppingLists"
+        :key="shoppingList.id"
       >
         <ColMain>
           <TitleText>
             <Link
-              :to="getRoute(todo.id)"
-              :translated-text="todo.title"
-              :is-crossed="todo.isDone"
+              :to="getRoute(shoppingList.id)"
+              :translated-text="shoppingList.title"
+              :is-crossed="shoppingList.isDone"
               is-black
             />
           </TitleText>
 
-          <div :class="[$style['buttons-wrapper']]">
+          <div>
             <ButtonElement
               translation-path="general.remove"
               has-gray-theme
               is-small
               is-inline
               is-hovered-red
-              @onClick="onRemove(todo.id)"
-            />
-
-            <ButtonElement
-              :translation-path="`general.${todo.isDone ? 'undone' : 'done'}`"
-              has-gray-theme
-              is-small
-              is-inline
-              is-hovered-green
-              @onClick="onToggleDone(todo.id, todo.isDone)"
+              @onClick="onRemove(shoppingList.id)"
             />
           </div>
         </ColMain>
@@ -45,18 +36,18 @@
         <ColSecondary>
           <AvatarElement
             :size="35"
-            :provided-user-name="getUserName(todo)"
+            :provided-user-name="getUserName(shoppingList)"
             is-flex
             has-black-text
           />
         </ColSecondary>
 
-        <ColSecondary>{{ getDate(todo.deadline) }}</ColSecondary>
+        <ColSecondary>{{ getDeadlineQty(shoppingList.id) }}</ColSecondary>
       </ListItem>
     </ul>
     <div v-else>
       <TextElement
-        translation-path="todos.noTodos"
+        translation-path="shoppingLists.noShoppingLists"
         is-bold
         is-green
         has-centered-text
@@ -68,13 +59,13 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import moment from 'moment';
 
-import { apiDeleteTodo, apiPatchTodo } from '@/api';
-import { TODO_ROUTE } from '@/constants/routesNames';
-import { getTodos } from '@/store/todos/actions';
-import { sortedTodos } from '@/store/todos/getters';
+import { apiDeleteShoppingList } from '@/api';
+import { SHOPPING_LIST_ROUTE } from '@/constants/routesNames';
+import { getShoppingLists } from '@/store/shoppingLists/actions';
+import { sortedShoppingLists, shoppingListById } from '@/store/shoppingLists/getters';
 import { showToast } from '@/store/toast/actions';
+import { getDate } from '@/helpers/date';
 
 import AvatarElement from '@/components/atoms/AvatarElement/AvatarElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
@@ -99,38 +90,31 @@ export default {
     TitleText,
   },
   computed: {
-    ...mapGetters({ sortedTodos }),
+    ...mapGetters({ sortedShoppingLists, shoppingListById }),
   },
   created() {
-    this.getTodos();
+    this.getShoppingLists();
   },
   methods: {
-    ...mapActions({ getTodos, showToast }),
-    getUserName(todo) {
-      return `${todo.author.firstName} ${todo.author.lastName}`;
+    ...mapActions({ getShoppingLists, showToast }),
+    getUserName(shoppingList) {
+      return `${shoppingList.author.firstName} ${shoppingList.author.lastName}`;
     },
-    getDate(date) {
-      return date ? moment(date).format('DD MMM YYYY') : '-';
+    getDeadlineQty(id) {
+      const { deadline, items } = this.shoppingListById(id);
+
+      return `${getDate(deadline)} / ${items.length}`;
     },
     async onRemove(id) {
-      const response = await apiDeleteTodo(id);
+      const response = await apiDeleteShoppingList(id);
 
       if (response.status === 200) {
-        this.getTodos();
-      }
-    },
-    async onToggleDone(id, isDone) {
-      const response = await apiPatchTodo(id, { isDone: !isDone });
-
-      if (response.status === 200) {
-        this.getTodos();
+        this.getShoppingLists();
       }
     },
     getRoute(id) {
-      return { name: TODO_ROUTE, params: { todoId: id } };
+      return { name: SHOPPING_LIST_ROUTE, params: { shoppingListId: id } };
     },
   },
 };
 </script>
-
-<style lang="scss" module src="./TodosList.scss" />
