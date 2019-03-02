@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-click-outside="onClose"
-    @click="isOpen = true"
-  >
+  <div v-click-outside="onClose" @click="isOpen = true">
     <FieldControl
       :name="name"
       :is-focused="isOpen"
@@ -76,6 +73,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isTransparent: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -89,10 +90,11 @@ export default {
   },
   computed: {
     inputClassNames() {
-      const { $style, hasCenteredText } = this;
+      const { $style, hasCenteredText, isTransparent } = this;
 
       return {
         [$style['has-centered-text']]: hasCenteredText,
+        [$style['is-transparent']]: isTransparent,
       };
     },
   },

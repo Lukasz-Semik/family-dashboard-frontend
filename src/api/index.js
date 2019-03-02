@@ -109,6 +109,9 @@ export const apiGetShoppingLists = () => api.get(API_SHOPPING_LISTS).catch(err =
 
 export const apiGetShoppingList = id => api.get(API_SHOPPING_LIST(id)).catch(err => err.response);
 
+export const apiCreteShoppingList = payload =>
+  api.post(API_SHOPPING_LISTS, payload).catch(err => err.response);
+
 export const apiPatchShoppingList = (id, payload) =>
   api.patch(API_SHOPPING_LIST(id), payload).catch(err => err.response);
 

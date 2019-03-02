@@ -1,66 +1,31 @@
 <template>
   <div>
     <div>
-      <TitleElement
-        tag="h2"
-        translation-path="shoppingLists.activeItems"
-        is-black
-        is-small
-      />
+      <TitleElement tag="h2" translation-path="shoppingLists.activeItems" is-black is-small/>
     </div>
 
-    <ul
-      v-if="activeItems.length > 0"
-      :class="[$style['active-items-list']]"
-    >
-      <li
-        v-for="item in activeItems"
-        :key="item.id"
-      >
-        <Item
-          :item="item"
-          @clickItem="onItemClick"
-        />
+    <ul v-if="activeItems.length > 0" :class="[$style['active-items-list']]">
+      <li v-for="item in activeItems" :key="item.id">
+        <Item :item="item" @clickItem="onItemClick"/>
       </li>
     </ul>
 
-    <div v-else>
-      <TextElement
-        translation-path="shoppingLists.noActiveItems"
-        is-bold
-        is-green
-        is-medium
-      />
+    <div v-else :class="$style['has-margin-bottom']">
+      <TextElement translation-path="shoppingLists.noActiveItems" is-bold is-green is-medium/>
     </div>
 
     <div>
-      <TitleElement
-        tag="h2"
-        translation-path="shoppingLists.takenItems"
-        is-black
-        is-small
-      />
+      <TitleElement tag="h2" translation-path="shoppingLists.takenItems" is-black is-small/>
     </div>
 
     <ul v-if="takenItems.length > 0">
-      <li
-        v-for="item in takenItems"
-        :key="item.id"
-      >
-        <Item
-          :item="item"
-          @clickItem="onItemClick"
-        />
+      <li v-for="item in takenItems" :key="item.id">
+        <Item :item="item" @clickItem="onItemClick"/>
       </li>
     </ul>
 
     <div v-else>
-      <TextElement
-        translation-path="shoppingLists.noTakenItems"
-        is-bold
-        is-green
-        is-medium
-      />
+      <TextElement translation-path="shoppingLists.noTakenItems" is-bold is-green is-medium/>
     </div>
   </div>
 </template>

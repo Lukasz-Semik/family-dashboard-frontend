@@ -4,9 +4,7 @@
     :type="type"
     :class="[$style.button, classNames]"
     @click="handleClick"
-  >
-    {{ translatedText || $t(translationPath) }}
-  </button>
+  >{{ translatedText || $t(translationPath) }}</button>
 </template>
 
 <script>
@@ -52,6 +50,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isArrowHidden: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classNames() {
@@ -64,6 +66,7 @@ export default {
         isHoveredRed,
         isHoveredGreen,
         isSmall,
+        isArrowHidden,
       } = this;
 
       return {
@@ -74,6 +77,7 @@ export default {
         [$style['is-hovered-red']]: isHoveredRed,
         [$style['is-hovered-green']]: isHoveredGreen,
         [$style['is-small']]: isSmall,
+        [$style['is-arrow-hidden']]: isArrowHidden,
       };
     },
   },

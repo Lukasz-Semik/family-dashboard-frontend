@@ -16,17 +16,8 @@
       </div>
 
       <div>
-        <TextElement
-          translation-path="general.deadline"
-          is-bold
-          is-green
-        />
-        <TextElement
-          :translated-text="deadline"
-          is-medium
-          is-bold
-          is-black
-        />
+        <TextElement translation-path="general.deadline" is-bold is-green/>
+        <TextElement :translated-text="deadline" is-medium is-bold is-black/>
 
         <div>
           <ItemUsersDetails
@@ -36,6 +27,7 @@
             :updated-at="updatedAt"
             :executor-name="executorName"
             has-no-margin-top
+            is-not-centered
             is-column
           />
         </div>

@@ -1,1 +1,9 @@
 @include input-orange-theme();
+
+.is-transparent {
+  background-color: transparent;
+
+  &::placeholder {
+    color: $black;
+  }
+}
