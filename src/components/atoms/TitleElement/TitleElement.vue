@@ -2,7 +2,9 @@
   <Component
     :is="tag"
     :class="[$style['title'], classNames]"
-  >{{ translatedText || $t(translationPath, translationValues) }}</Component>
+  >
+    {{ translatedText || $t(translationPath, translationValues) }}
+  </Component>
 </template>
 
 <script>

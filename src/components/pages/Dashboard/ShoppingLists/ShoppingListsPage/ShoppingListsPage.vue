@@ -1,6 +1,10 @@
 <template>
   <div>
-    <TitleElement translation-path="shoppingLists.title" is-black is-big/>
+    <TitleElement
+      translation-path="shoppingLists.title"
+      is-black
+      is-big
+    />
 
     <ButtonElement
       :translation-path="isCreating ? 'general.back' : 'shoppingLists.create'"
@@ -10,9 +14,12 @@
       @onClick="isCreating=!isCreating"
     />
 
-    <CreateShoppingList v-if="isCreating" @finishCreating="isCreating = false"/>
+    <CreateShoppingList
+      v-if="isCreating"
+      @finishCreating="isCreating = false"
+    />
 
-    <ShoppingLists v-else/>
+    <ShoppingLists v-else />
   </div>
 </template>
 

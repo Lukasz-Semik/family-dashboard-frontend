@@ -16,8 +16,17 @@
       </div>
 
       <div>
-        <TextElement translation-path="general.deadline" is-bold is-green/>
-        <TextElement :translated-text="deadline" is-medium is-bold is-black/>
+        <TextElement
+          translation-path="general.deadline"
+          is-bold
+          is-green
+        />
+        <TextElement
+          :translated-text="deadline"
+          is-medium
+          is-bold
+          is-black
+        />
 
         <div>
           <ItemUsersDetails

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <ButtonElement translation-path="shoppingLists.create" has-blue-theme @onClick="onSubmit"/>
+    <ButtonElement
+      translation-path="shoppingLists.create"
+      has-blue-theme
+      @onClick="onSubmit"
+    />
 
     <div :class="[$style['wrapper']]">
       <div :class="[$style['field']]">
@@ -52,17 +56,28 @@
     </div>
 
     <ul>
-      <ErrorMsg v-if="hasEmptyListError || hasExistingItemError" :translationPath="itemsError"/>
+      <ErrorMsg
+        v-if="hasEmptyListError || hasExistingItemError"
+        :translation-path="itemsError"
+      />
 
-      <li :class="[$style['item']]" :key="item.id" v-for="item in items">
-        <TextElement :translated-text="item.name" is-black is-medium/>
+      <li
+        v-for="shoppingItem in items"
+        :key="shoppingItem.id"
+        :class="[$style['item']]"
+      >
+        <TextElement
+          :translated-text="shoppingItem.name"
+          is-black
+          is-medium
+        />
         <ButtonElement
           translation-path="general.remove"
           has-gray-theme
           is-small
           is-inline
           is-hovered-red
-          @onClick="onRemove(item.id)"
+          @onClick="onRemove(shoppingItem.id)"
         />
       </li>
     </ul>
@@ -108,6 +123,8 @@ export default {
       if (this.hasEmptyListError) {
         return 'errors.emptyList';
       }
+
+      return '';
     },
   },
   methods: {
