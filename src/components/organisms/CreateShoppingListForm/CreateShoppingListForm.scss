@@ -1,0 +1,19 @@
+.wrapper {
+  @include flex-center-v();
+  margin-top: 3rem;
+}
+
+.field {
+  width: 35rem;
+
+  &:first-of-type {
+    margin-right: 5rem;
+  }
+}
+
+.item {
+  @include flex-center-h();
+  justify-content: space-between;
+  max-width: 40rem;
+  margin-top: 2rem;
+}

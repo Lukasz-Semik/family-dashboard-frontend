@@ -24,7 +24,10 @@
       </li>
     </ul>
 
-    <div v-else>
+    <div
+      v-else
+      :class="$style['has-margin-bottom']"
+    >
       <TextElement
         translation-path="shoppingLists.noActiveItems"
         is-bold

@@ -10,6 +10,10 @@
   &.is-column {
     flex-direction: column;
   }
+
+  &.is-not-centered {
+    align-items: flex-start;
+  }
 }
 
 .col {

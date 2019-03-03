@@ -63,5 +63,9 @@
       top: -2px;
       display: inline-block;
     }
+
+    &.is-arrow-hidden::before {
+      display: none;
+    }
   }
 }

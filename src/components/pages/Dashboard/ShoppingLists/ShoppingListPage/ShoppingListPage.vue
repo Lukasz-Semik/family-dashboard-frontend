@@ -36,6 +36,7 @@
             :updated-at="updatedAt"
             :executor-name="executorName"
             has-no-margin-top
+            is-not-centered
             is-column
           />
         </div>

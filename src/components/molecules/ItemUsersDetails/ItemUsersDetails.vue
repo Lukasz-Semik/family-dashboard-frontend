@@ -86,14 +86,19 @@ export default {
       type: Boolean,
       default: false,
     },
+    isNotCentered: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classNames() {
-      const { $style, hasNoMarginTop, isColumn } = this;
+      const { $style, hasNoMarginTop, isColumn, isNotCentered } = this;
 
       return {
         [$style['has-no-margin-top']]: hasNoMarginTop,
         [$style['is-column']]: isColumn,
+        [$style['is-not-centered']]: isNotCentered,
       };
     },
   },

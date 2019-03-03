@@ -83,6 +83,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isTransparent: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -95,10 +99,11 @@ export default {
   },
   computed: {
     inputClassNames() {
-      const { $style, hasCenteredText } = this;
+      const { $style, hasCenteredText, isTransparent } = this;
 
       return {
         [$style['has-centered-text']]: hasCenteredText,
+        [$style['is-transparent']]: isTransparent,
       };
     },
     validationOptions() {

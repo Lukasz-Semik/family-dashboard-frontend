@@ -6,4 +6,12 @@ export default {
   takenItems: 'Items already taken:',
   noActiveItems: 'All items taken :)',
   noTakenItems: 'No items',
+  create: 'Create Shopping List',
+  shoppingListTitle: 'Shoppint list title',
+  shoppingListTitlePlaceholder: 'E.g. weekend party',
+  shoppingListDeadline: 'Shopping List Deadline',
+  shoppingListDeadlinePlaceholder: 'When do you need those stuff?',
+  item: 'Item',
+  itemPlaceholder: 'E.g. Eggs',
+  addItem: 'Add Item',
 };
