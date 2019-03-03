@@ -14,4 +14,5 @@ export default {
   item: 'Item',
   itemPlaceholder: 'E.g. Eggs',
   addItem: 'Add Item',
+  edit: 'Edit',
 };

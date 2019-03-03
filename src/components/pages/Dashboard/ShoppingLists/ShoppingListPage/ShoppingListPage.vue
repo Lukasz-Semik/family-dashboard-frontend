@@ -1,5 +1,14 @@
 <template>
   <div>
+    <ButtonElement
+      translation-path="shoppingLists.edit"
+      is-hovered-green
+      has-gray-theme
+      is-inline
+      is-small
+      @onClick="isEditing = !isEditing"
+    />
+
     <TitleElement
       tag="h2"
       :translated-text="currentShoppingList.title"
@@ -7,41 +16,38 @@
       is-black
     />
 
-    <div :class="[$style['shopping-list-row']]">
-      <div :class="$style['items']">
-        <ShoppingListItems
-          :shopping-list="currentShoppingList"
-          @updateShoppingList="onUpdateShoppingList"
-        />
-      </div>
+    <div v-if="isEditing">
+      <EditShoppingListForm :current-shopping-list="currentShoppingList"/>
+    </div>
 
-      <div>
-        <TextElement
-          translation-path="general.deadline"
-          is-bold
-          is-green
-        />
-        <TextElement
-          :translated-text="deadline"
-          is-medium
-          is-bold
-          is-black
-        />
-
-        <div>
-          <ItemUsersDetails
-            :author-name="authorName"
-            :created-at="createdAt"
-            :updater-name="updaterName"
-            :updated-at="updatedAt"
-            :executor-name="executorName"
-            has-no-margin-top
-            is-not-centered
-            is-column
+    <template v-else>
+      <div :class="[$style['shopping-list-row']]">
+        <div :class="$style['items']">
+          <ShoppingListItems
+            :shopping-list="currentShoppingList"
+            @updateShoppingList="onUpdateShoppingList"
           />
         </div>
+
+        <div>
+          <TextElement translation-path="general.deadline" is-bold is-green/>
+          <TextElement :translated-text="deadline" is-medium is-bold is-black/>
+
+          <div>
+            <ItemUsersDetails
+              :author-name="authorName"
+              :created-at="createdAt"
+              :updater-name="updaterName"
+              :updated-at="updatedAt"
+              :executor-name="executorName"
+              has-no-margin-top
+              is-not-centered
+              is-column
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -56,15 +62,19 @@ import { getName } from '@/helpers/userNames';
 
 import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 import TextElement from '@/components/atoms/TextElement/TextElement.vue';
+import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import ItemUsersDetails from '@/components/molecules/ItemUsersDetails/ItemUsersDetails.vue';
 import ShoppingListItems from '@/components/molecules/ShoppingListItems/ShoppingListItems.vue';
+import EditShoppingListForm from '@/components/organisms/EditShoppingListForm.vue/EditShoppingListForm.vue';
 
 export default {
   components: {
     TitleElement,
     TextElement,
+    ButtonElement,
     ItemUsersDetails,
     ShoppingListItems,
+    EditShoppingListForm,
   },
   computed: {
     ...mapGetters({ shoppingListById }),
@@ -93,6 +103,11 @@ export default {
     executorName() {
       return this.currentShoppingList.isDone ? getName('executor', this.currentShoppingList) : '';
     },
+  },
+  data() {
+    return {
+      isEditing: false,
+    };
   },
   created() {
     this.getShoppingLists();

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ButtonElement translation-path="shoppingLists.create" has-blue-theme @onClick="onSubmit"/>
+    <ButtonElement translation-path="general.save" has-blue-theme @onClick="onSubmit"/>
 
     <ShoppingListFieldsGroup
       :title="title"
@@ -30,6 +30,12 @@ export default {
     ButtonElement,
     ShoppingListFieldsGroup,
   },
+  props: {
+    currentShoppingList: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {
       title: '',
@@ -40,6 +46,18 @@ export default {
       hasExistingItemError: false,
       isSubmissionFailed: false,
     };
+  },
+  created() {
+    if (isEmpty(this.currentShoppingList)) return;
+
+    const { title, item, deadline, items } = this.currentShoppingList;
+
+    Object.assign(this, {
+      title,
+      item,
+      deadline: new Date(deadline),
+      items,
+    });
   },
   computed: {
     itemsError() {
@@ -55,6 +73,11 @@ export default {
     },
   },
   methods: {
+    onRemove(id) {
+      const filteredItems = this.items.filter(item => id !== item.id);
+
+      this.items = filteredItems;
+    },
     onChange(payload) {
       const { value, name } = payload;
 
@@ -81,11 +104,7 @@ export default {
 
       this.item = '';
     },
-    onRemove(id) {
-      const filteredItems = this.items.filter(item => item.id !== id);
-      this.items = filteredItems;
-    },
-    async onSubmit() {
+    onSubmit() {
       this.isSubmissionFailed = false;
 
       const { title, deadline, items } = this;
@@ -102,22 +121,8 @@ export default {
       }
 
       if (!isValid) return;
-
-      const response = await apiCreteShoppingList({ title, deadline, items });
-
-      if (response.status === 200) {
-        Object.assign(this, {
-          title: '',
-          item: '',
-          deadline: null,
-          items: [],
-          hasEmptyListError: false,
-          isSubmissionFailed: false,
-        });
-
-        this.$emit('finishCreating');
-      }
     },
   },
 };
 </script>
+
