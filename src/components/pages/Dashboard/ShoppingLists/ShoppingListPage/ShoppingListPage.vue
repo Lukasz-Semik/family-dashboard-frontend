@@ -1,14 +1,5 @@
 <template>
-  <div>
-    <ButtonElement
-      translation-path="shoppingLists.edit"
-      is-hovered-green
-      has-gray-theme
-      is-inline
-      is-small
-      @onClick="isEditing = !isEditing"
-    />
-
+  <div :class="[$style['wrapper']]">
     <TitleElement
       tag="h2"
       :translated-text="currentShoppingList.title"
@@ -16,8 +7,26 @@
       is-black
     />
 
+    <ButtonElement
+      :translation-path="isEditing ? 'general.back' : 'shoppingLists.edit'"
+      has-previous-theme
+      is-inline
+      :is-arrow-hidden="!isEditing"
+      @onClick="isEditing=!isEditing"
+    />
+
+    <div :class="[$style['remove-all-button-wrapper']]">
+      <ButtonElement
+        translation-path="general.remove"
+        is-hovered-red
+        has-gray-theme
+        is-inline
+        @onClick="onRemove"
+      />
+    </div>
+
     <div v-if="isEditing">
-      <EditShoppingListForm :current-shopping-list="currentShoppingList"/>
+      <ShoppingListForm :current-shopping-list="currentShoppingList"/>
     </div>
 
     <template v-else>
@@ -55,6 +64,8 @@
 import { mapGetters, mapActions } from 'vuex';
 import { isEmpty } from 'lodash';
 
+import { apiDeleteShoppingList } from '@/api';
+import { SHOPPING_LISTS_ROUTE } from '@/constants/routesNames';
 import { shoppingListById } from '@/store/shoppingLists/getters';
 import { getShoppingLists } from '@/store/shoppingLists/actions';
 import { getFullDeadline, getDate } from '@/helpers/date';
@@ -65,7 +76,7 @@ import TextElement from '@/components/atoms/TextElement/TextElement.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import ItemUsersDetails from '@/components/molecules/ItemUsersDetails/ItemUsersDetails.vue';
 import ShoppingListItems from '@/components/molecules/ShoppingListItems/ShoppingListItems.vue';
-import EditShoppingListForm from '@/components/organisms/EditShoppingListForm.vue/EditShoppingListForm.vue';
+import ShoppingListForm from '@/components/organisms/ShoppingListForm/ShoppingListForm.vue';
 
 export default {
   components: {
@@ -74,7 +85,7 @@ export default {
     ButtonElement,
     ItemUsersDetails,
     ShoppingListItems,
-    EditShoppingListForm,
+    ShoppingListForm,
   },
   computed: {
     ...mapGetters({ shoppingListById }),
@@ -116,6 +127,13 @@ export default {
     ...mapActions({ getShoppingLists }),
     onUpdateShoppingList() {
       this.getShoppingLists();
+    },
+    async onRemove() {
+      const response = await apiDeleteShoppingList(this.currentShoppingList.id);
+
+      if (response.status === 200) {
+        this.$router.push({ name: SHOPPING_LISTS_ROUTE });
+      }
     },
   },
 };

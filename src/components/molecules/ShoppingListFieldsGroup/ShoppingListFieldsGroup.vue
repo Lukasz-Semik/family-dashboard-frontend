@@ -49,6 +49,8 @@
       </div>
     </div>
 
+    <TitleElement translation-path="shoppingLists.items" is-black/>
+
     <ul>
       <ErrorMsg v-if="hasEmptyListError || hasExistingItemError" :translation-path="itemsError"/>
 
@@ -73,6 +75,7 @@ import InputElement from '@/components/atoms/InputElement/InputElement.vue';
 import DatePicker from '@/components/atoms/DatePicker/DatePicker.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import TextElement from '@/components/atoms/TextElement/TextElement.vue';
+import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 
 export default {
   components: {
@@ -81,6 +84,7 @@ export default {
     DatePicker,
     ButtonElement,
     TextElement,
+    TitleElement,
   },
   props: {
     title: {

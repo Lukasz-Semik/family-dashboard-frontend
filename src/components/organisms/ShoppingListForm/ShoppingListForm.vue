@@ -1,11 +1,12 @@
 <template>
   <div>
-    <ButtonElement translation-path="shoppingLists.create" has-blue-theme @onClick="onSubmit"/>
+    <ButtonElement translation-path="general.save" has-blue-theme @onClick="onSubmit"/>
 
     <ShoppingListFieldsGroup
       :title="title"
       :deadline="deadline"
       :items="items"
+      :item="item"
       :is-submission-failed="isSubmissionFailed"
       :has-empty-list-error="hasEmptyListError"
       :has-existing-item-error="hasExistingItemError"
@@ -18,10 +19,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import uuid from 'uuid/v1';
 import { isEmpty, find } from 'lodash';
 
-import { apiCreteShoppingList } from '@/api';
+import { apiCreteShoppingList, apiPatchShoppingList } from '@/api';
+import { showToast } from '@/store/toast/actions';
+import { getShoppingLists } from '@/store/shoppingLists/actions';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import ShoppingListFieldsGroup from '@/components/molecules/ShoppingListFieldsGroup/ShoppingListFieldsGroup.vue';
 
@@ -29,6 +33,12 @@ export default {
   components: {
     ButtonElement,
     ShoppingListFieldsGroup,
+  },
+  props: {
+    currentShoppingList: {
+      type: Object,
+      default: () => {},
+    },
   },
   data() {
     return {
@@ -54,7 +64,20 @@ export default {
       return '';
     },
   },
+  created() {
+    if (isEmpty(this.currentShoppingList)) return;
+
+    const { title, item, deadline, items } = this.currentShoppingList;
+
+    Object.assign(this, {
+      title,
+      item,
+      deadline: new Date(deadline),
+      items,
+    });
+  },
   methods: {
+    ...mapActions({ showToast, getShoppingLists }),
     onChange(payload) {
       const { value, name } = payload;
 
@@ -103,20 +126,35 @@ export default {
 
       if (!isValid) return;
 
-      const response = await apiCreteShoppingList({ title, deadline, items });
+      if (isEmpty(this.currentShoppingList)) {
+        const response = await apiCreteShoppingList({ title, deadline, items });
 
-      if (response.status === 200) {
-        Object.assign(this, {
-          title: '',
-          item: '',
-          deadline: null,
-          items: [],
-          hasEmptyListError: false,
-          isSubmissionFailed: false,
-        });
+        if (response.status === 200) {
+          Object.assign(this, {
+            title: '',
+            item: '',
+            deadline: null,
+            items: [],
+            hasEmptyListError: false,
+            isSubmissionFailed: false,
+          });
+        }
+      } else {
+        const payload = {};
 
-        this.$emit('finishCreating');
+        if (!isEmpty(title)) payload.title = title;
+        if (!isEmpty(deadline)) payload.deadline = deadline;
+        if (!isEmpty(items)) payload.items = items;
+
+        const response = await apiPatchShoppingList(this.currentShoppingList.id, payload);
+
+        if (response.status === 200) {
+          await this.getShoppingLists();
+          this.showToast({ text: 'shoppingLists.saved' });
+        }
       }
+
+      this.$emit('finishCreating');
     },
   },
 };
