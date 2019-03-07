@@ -1,6 +1,10 @@
 <template>
   <div :class="[$style['wrapper']]">
-    <TitleElement translation-path="shoppingLists.title" is-black is-big/>
+    <TitleElement
+      translation-path="shoppingLists.title"
+      is-black
+      is-big
+    />
 
     <ButtonElement
       :translation-path="isCreating ? 'general.back' : 'shoppingLists.create'"
@@ -10,7 +14,10 @@
       @onClick="isCreating=!isCreating"
     />
 
-    <div v-if="canRemoveAll" :class="[$style['remove-all-button-wrapper']]">
+    <div
+      v-if="canRemoveAll"
+      :class="[$style['remove-all-button-wrapper']]"
+    >
       <ButtonElement
         translation-path="shoppingLists.removeAll"
         is-hovered-red
@@ -20,9 +27,12 @@
       />
     </div>
 
-    <ShoppingListForm v-if="isCreating" @finishCreating="isCreating = false"/>
+    <ShoppingListForm
+      v-if="isCreating"
+      @finishCreating="isCreating = false"
+    />
 
-    <ShoppingLists v-else/>
+    <ShoppingLists v-else />
 
     <ModalElement
       v-if="isRemoveAllModalOpen"

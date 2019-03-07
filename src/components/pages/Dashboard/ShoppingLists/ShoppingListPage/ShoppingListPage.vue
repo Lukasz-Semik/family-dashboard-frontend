@@ -26,7 +26,7 @@
     </div>
 
     <div v-if="isEditing">
-      <ShoppingListForm :current-shopping-list="currentShoppingList"/>
+      <ShoppingListForm :current-shopping-list="currentShoppingList" />
     </div>
 
     <template v-else>
@@ -39,8 +39,17 @@
         </div>
 
         <div>
-          <TextElement translation-path="general.deadline" is-bold is-green/>
-          <TextElement :translated-text="deadline" is-medium is-bold is-black/>
+          <TextElement
+            translation-path="general.deadline"
+            is-bold
+            is-green
+          />
+          <TextElement
+            :translated-text="deadline"
+            is-medium
+            is-bold
+            is-black
+          />
 
           <div>
             <ItemUsersDetails
@@ -87,6 +96,11 @@ export default {
     ShoppingListItems,
     ShoppingListForm,
   },
+  data() {
+    return {
+      isEditing: false,
+    };
+  },
   computed: {
     ...mapGetters({ shoppingListById }),
     shoppingListId() {
@@ -114,11 +128,6 @@ export default {
     executorName() {
       return this.currentShoppingList.isDone ? getName('executor', this.currentShoppingList) : '';
     },
-  },
-  data() {
-    return {
-      isEditing: false,
-    };
   },
   created() {
     this.getShoppingLists();

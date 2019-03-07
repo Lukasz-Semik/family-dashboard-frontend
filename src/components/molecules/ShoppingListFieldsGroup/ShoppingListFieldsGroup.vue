@@ -49,13 +49,27 @@
       </div>
     </div>
 
-    <TitleElement translation-path="shoppingLists.items" is-black/>
+    <TitleElement
+      translation-path="shoppingLists.items"
+      is-black
+    />
 
     <ul>
-      <ErrorMsg v-if="hasEmptyListError || hasExistingItemError" :translation-path="itemsError"/>
+      <ErrorMsg
+        v-if="hasEmptyListError || hasExistingItemError"
+        :translation-path="itemsError"
+      />
 
-      <li v-for="shoppingItem in items" :key="shoppingItem.id" :class="[$style['item']]">
-        <TextElement :translated-text="shoppingItem.name" is-black is-medium/>
+      <li
+        v-for="shoppingItem in items"
+        :key="shoppingItem.id"
+        :class="[$style['item']]"
+      >
+        <TextElement
+          :translated-text="shoppingItem.name"
+          is-black
+          is-medium
+        />
         <ButtonElement
           translation-path="general.remove"
           has-gray-theme
@@ -117,7 +131,7 @@ export default {
     },
     itemsError: {
       type: String,
-      default: false,
+      default: '',
     },
   },
   methods: {

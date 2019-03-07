@@ -1,6 +1,10 @@
 <template>
   <div>
-    <ButtonElement translation-path="general.save" has-blue-theme @onClick="onSubmit"/>
+    <ButtonElement
+      translation-path="general.save"
+      has-blue-theme
+      @onClick="onSubmit"
+    />
 
     <ShoppingListFieldsGroup
       :title="title"
