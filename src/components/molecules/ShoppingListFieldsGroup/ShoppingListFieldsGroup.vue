@@ -1,11 +1,5 @@
 <template>
   <div>
-    <ButtonElement
-      translation-path="shoppingLists.create"
-      has-blue-theme
-      @onClick="onSubmit"
-    />
-
     <div :class="[$style['wrapper']]">
       <div :class="[$style['field']]">
         <InputElement
@@ -50,10 +44,15 @@
         <ButtonElement
           translation-path="shoppingLists.addItem"
           has-gray-theme
-          @onClick="onAddItem"
+          @onClick="$emit('onAddItem')"
         />
       </div>
     </div>
+
+    <TitleElement
+      translation-path="shoppingLists.items"
+      is-black
+    />
 
     <ul>
       <ErrorMsg
@@ -85,15 +84,12 @@
 </template>
 
 <script>
-import uuid from 'uuid/v1';
-import { isEmpty, find } from 'lodash';
-
-import { apiCreteShoppingList } from '@/api';
 import ErrorMsg from '@/components/atoms/ErrorMsg/ErrorMsg.vue';
 import InputElement from '@/components/atoms/InputElement/InputElement.vue';
 import DatePicker from '@/components/atoms/DatePicker/DatePicker.vue';
 import ButtonElement from '@/components/atoms/ButtonElement/ButtonElement.vue';
 import TextElement from '@/components/atoms/TextElement/TextElement.vue';
+import TitleElement from '@/components/atoms/TitleElement/TitleElement.vue';
 
 export default {
   components: {
@@ -102,97 +98,51 @@ export default {
     DatePicker,
     ButtonElement,
     TextElement,
+    TitleElement,
   },
-  data() {
-    return {
-      title: '',
-      item: '',
-      deadline: null,
-      items: [],
-      hasEmptyListError: false,
-      hasExistingItemError: false,
-      isSubmissionFailed: false,
-    };
-  },
-  computed: {
-    itemsError() {
-      if (this.hasExistingItemError) {
-        return 'errors.itemExist';
-      }
-
-      if (this.hasEmptyListError) {
-        return 'errors.emptyList';
-      }
-
-      return '';
+  props: {
+    title: {
+      type: String,
+      default: '',
+    },
+    deadline: {
+      type: Date,
+      default: null,
+    },
+    item: {
+      type: String,
+      default: '',
+    },
+    items: {
+      type: Array,
+      default: () => [],
+    },
+    isSubmissionFailed: {
+      type: Boolean,
+      default: false,
+    },
+    hasEmptyListError: {
+      type: Boolean,
+      default: false,
+    },
+    hasExistingItemError: {
+      type: Boolean,
+      default: false,
+    },
+    itemsError: {
+      type: String,
+      default: '',
     },
   },
   methods: {
     onChange(payload) {
-      const { value, name } = payload;
-
-      this[name] = value;
-    },
-    onAddItem() {
-      this.hasExistingItemError = false;
-
-      if (isEmpty(this.item)) return;
-
-      if (!isEmpty(find(this.items, item => item.name === this.item))) {
-        this.hasExistingItemError = true;
-        return;
-      }
-
-      this.items.push({
-        name: this.item,
-        isDone: false,
-        deadline: this.deadline,
-        id: uuid(),
-      });
-
-      this.hasEmptyListError = false;
-
-      this.item = '';
+      this.$emit('onChange', payload);
     },
     onRemove(id) {
-      const filteredItems = this.items.filter(item => item.id !== id);
-      this.items = filteredItems;
-    },
-    async onSubmit() {
-      this.isSubmissionFailed = false;
-
-      const { title, deadline, items } = this;
-      let isValid = true;
-
-      if (isEmpty(title)) {
-        this.isSubmissionFailed = true;
-        isValid = false;
-      }
-
-      if (isEmpty(items)) {
-        this.hasEmptyListError = true;
-        isValid = false;
-      }
-
-      if (!isValid) return;
-
-      const response = await apiCreteShoppingList({ title, deadline, items });
-
-      if (response.status === 200) {
-        Object.assign(this, {
-          title: '',
-          item: '',
-          deadline: null,
-          items: [],
-          hasEmptyListError: false,
-          isSubmissionFailed: false,
-        });
-
-        this.$emit('finishCreating');
-      }
+      this.$emit('onRemove', id);
     },
   },
 };
 </script>
 
-<style lang="scss" module src="./CreateShoppingListForm.scss" />
+<style lang="scss" module src="./ShoppingListFieldsGroup.scss" />

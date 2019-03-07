@@ -87,6 +87,7 @@ export default {
     return {
       currentShopingList: {},
       isShoppinListDone: false,
+      isEditing: false,
     };
   },
   computed: {

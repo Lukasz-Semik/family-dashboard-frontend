@@ -29,4 +29,5 @@ export default {
   undone: 'Undone',
   confirm: 'Confirm',
   back: 'Back',
+  save: 'Save',
 };
